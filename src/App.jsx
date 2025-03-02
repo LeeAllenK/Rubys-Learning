@@ -8,32 +8,34 @@ function App() {
   const [btnLetters, setBtnLetters] = useState(alphabet);
   const [letter,setLetter] = useState(ALPHABET);
   const [compLetters, setCompLetters] = useState([]);
-  const [letterValue, setLetterValue] = useState('')
+  const [letterValue, setLetterValue] = useState(null)
   useEffect(() => {
     let nextIndex = letter.length + 1;
     if(compLetters.length > 0) {
       const nextLetter = setInterval(() => {
          setLetter((prev) => {
           nextIndex--;
-          // if(nextIndex < 0) 
+          let value = prev.slice(nextIndex)[0]?.value;
+          if(value !== null && value !== undefined){
             setLetterValue(prev.slice(nextIndex)[0]?.value)
-
-        setCompLetters([...compLetters,letterValue]);
-            return prev.slice(0, nextIndex);
+            setCompLetters([...compLetters,value]);
+            console.log('VALUE',value)
+          }
+        
+          return prev.slice(0, nextIndex)
         });
       }, 1000);
-
-          if(compLetters.includes('z')){
-            console.log('STOPPPPP!!!')
-                return clearInterval(nextLetter)
+          if(compLetters[0] === compLetters[1]){
+          setCompLetters([])
+          return clearInterval(nextLetter)
           }
+      console.log('LV',letterValue)
+      console.log('CL',compLetters[1])
       return () => clearInterval(nextLetter);
     }
   }, [compLetters,letterValue,letter]);
 
-    console.log('comp',compLetters)
   const handleClick =(letter)=>{
-    console.log(letter,'clicked')
     setCompLetters([...compLetters,letter])
   }
   return (
