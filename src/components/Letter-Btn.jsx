@@ -1,7 +1,7 @@
 
-export function Letterbtn({letter,onClick}){
+export function Letterbtn({letter,onClick,disabled,compare}){
 	
 	return(
-		<button onClick={onClick}>{letter}</button>
+		<button onClick={onClick} disabled={disabled}>{letter}</button>
 	)
 }

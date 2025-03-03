@@ -2,42 +2,61 @@ import { useState,useEffect} from 'react';
 import {Letterbtn} from './components/Letter-Btn'
 // import {Letter} from './components/Letter'
 
-// compare button with letter
+// BOTH VALUES ARE ADDED INTO COMPLETTER AND COMPARED
 import './App.css'
 function App() {
   const [btnLetters, setBtnLetters] = useState(alphabet);
   const [letter,setLetter] = useState(ALPHABET);
   const [compLetters, setCompLetters] = useState([]);
   const [letterValue, setLetterValue] = useState(null)
+  const [compare, setCompare] = useState(false);
+  const [match,setMatch]= useState(false)
   useEffect(() => {
-    let nextIndex = letter.length + 1;
-    if(compLetters.length > 0) {
+    let nextIndex = letter.length + 1; 
+          console.log(nextIndex)
+    if(compLetters.length === 0) {
       const nextLetter = setInterval(() => {
-         setLetter((prev) => {
+        setLetter((prev) => {
           nextIndex--;
-          let value = prev.slice(nextIndex)[0]?.value;
-          if(value !== null && value !== undefined){
-            setLetterValue(prev.slice(nextIndex)[0]?.value)
-            setCompLetters([...compLetters,value]);
-            console.log('VALUE',value)
+          let value = prev[nextIndex + 1]?.value;
+          if(value !== null && value !== undefined) {
+            setLetterValue(value);
+            setCompLetters([...compLetters, value]);
+            // console.log('VALUE', value);
           }
-        
-          return prev.slice(0, nextIndex)
+
+          if(match) {
+            setMatch(false);
+            return prev.slice(0,nextIndex);
+          }
+          return prev;
         });
-      }, 1000);
-          if(compLetters[0] === compLetters[1]){
-          setCompLetters([])
-          return clearInterval(nextLetter)
-          }
-      console.log('LV',letterValue)
-      console.log('CL',compLetters[1])
+      }, 100);
+      console.log('LV', letterValue);
       return () => clearInterval(nextLetter);
     }
-  }, [compLetters,letterValue,letter]);
+  }, [compLetters, letterValue, letter, match]);
 
+
+      console.log('CL',compLetters)
   const handleClick =(letter)=>{
     setCompLetters([...compLetters,letter])
+    setCompare(true)
   }
+  useEffect(()=>{
+  if(compare && compLetters.length > 1){
+    if(compLetters[0] === compLetters[1]){
+        console.log('MATCH');
+        setMatch(true)
+        setCompLetters([]);
+        setCompare(false)
+    }else{
+      console.log('NO MATCH')
+      setCompLetters([])
+      setCompare(false)
+    }
+  }
+  },[compare,match])
   return (
     <>
       <h1 className='Ruby'>Ruby's Alphabet</h1>
@@ -49,7 +68,7 @@ function App() {
       </div>
       <ul className='letters-border'>
         {btnLetters.map((letter, index) => (
-          <Letterbtn key={letter} letter={letter} onClick={()=>handleClick(letter)}/>
+          <Letterbtn key={letter} letter={letter} onClick={()=>handleClick(letter)} disabled={compLetters.length < 1 }/>
         ))}
       </ul>
     </>
