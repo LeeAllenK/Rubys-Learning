@@ -1,16 +1,16 @@
 import { useState,useEffect} from 'react';
 import {Letterbtn} from './components/Letter-Btn'
-// import {Letter} from './components/Letter'
 
-// BOTH VALUES ARE ADDED INTO COMPLETTER AND COMPARED
+// ADD HOME PAGE, PLAY BTN, AND STATE TO HOLD USERNAME AFTER GAME COMPLETION
 import './App.css'
 function App() {
-  const [btnLetters, setBtnLetters] = useState(alphabet);
+  const [btnLetters, setBtnLetters] = useState(shuffledLetter);
   const [letter,setLetter] = useState(ALPHABET);
   const [compLetters, setCompLetters] = useState([]);
   const [letterValue, setLetterValue] = useState(null)
   const [compare, setCompare] = useState(false);
   const [match,setMatch]= useState(false)
+  const [winner,setWinner] = useState('')
   useEffect(() => {
     let nextIndex = letter.length + 1; 
           console.log(nextIndex)
@@ -22,7 +22,7 @@ function App() {
           if(value !== null && value !== undefined) {
             setLetterValue(value);
             setCompLetters([...compLetters, value]);
-            // console.log('VALUE', value);
+          console.log(value)
           }
 
           if(match) {
@@ -33,6 +33,7 @@ function App() {
         });
       }, 100);
       console.log('LV', letterValue);
+        if(letter.length === 0)setWinner('Good Job Ruby!')
       return () => clearInterval(nextLetter);
     }
   }, [compLetters, letterValue, letter, match]);
@@ -40,7 +41,7 @@ function App() {
 
       console.log('CL',compLetters)
   const handleClick =(letter)=>{
-    setCompLetters([...compLetters,letter])
+    setCompLetters([...compLetters,letter,winner])
     setCompare(true)
   }
   useEffect(()=>{
@@ -60,15 +61,16 @@ function App() {
   return (
     <>
       <h1 className='Ruby'>Ruby's Alphabet</h1>
+        <h2>{winner}</h2>
       <div className='letter-border'>
         {letter.map((l, index) => (
           <div className='letter' key={l.value}>
-            {l.value}</div>
+            {l.value.toUpperCase()}</div>
         ))}
       </div>
       <ul className='letters-border'>
         {btnLetters.map((letter, index) => (
-          <Letterbtn key={letter} letter={letter} onClick={()=>handleClick(letter)} disabled={compLetters.length < 1 }/>
+          <Letterbtn key={letter} letter={letter.toUpperCase()} onClick={()=>handleClick(letter)} disabled={compLetters.length < 1 }/>
         ))}
       </ul>
     </>
@@ -83,7 +85,7 @@ const ALPHABET = [
   { value: 'p' }, { value: 'q' }, { value: 'r' }, { value: 's' }, { value: 't'},
   { value: 'u' }, { value: 'v' }, { value: 'w' }, { value: 'x' }, { value: 'y'},
   { value: 'z'}
-];
+].reverse();
 // console.log(ALPHABET.map((a) => a.value))
 const alphabet = ALPHABET.map((a) => a.value)
 
@@ -95,5 +97,4 @@ function shuffleArray(array) {
   return array;
 }
 const shuffledLetter = shuffleArray(alphabet)
-// console.log('random',shuffledLetter)
-// console.log(shuffledAlphabet);
+
