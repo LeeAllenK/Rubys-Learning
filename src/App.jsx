@@ -1,6 +1,6 @@
 import { useState,useEffect} from 'react';
 import {Letterbtn} from './components/Letter-Btn'
-
+import {Homebtn} from './components/Home-Btn'
 // ADD HOME PAGE, PLAY BTN, AND STATE TO HOLD USERNAME AFTER GAME COMPLETION
 import './App.css'
 function App() {
@@ -9,12 +9,13 @@ function App() {
   const [compLetters, setCompLetters] = useState([]);
   const [letterValue, setLetterValue] = useState(null)
   const [compare, setCompare] = useState(false);
-  const [match,setMatch]= useState(false)
-  const [winner,setWinner] = useState('')
+  const [match,setMatch]= useState(false);
+  const [winner,setWinner] = useState('');
+  const [play,setPlay] = useState(false);
   useEffect(() => {
     let nextIndex = letter.length + 1; 
           console.log(nextIndex)
-    if(compLetters.length === 0) {
+    if(compLetters.length === 0 && play) {
       const nextLetter = setInterval(() => {
         setLetter((prev) => {
           nextIndex--;
@@ -50,29 +51,42 @@ function App() {
         console.log('MATCH');
         setMatch(true)
         setCompLetters([]);
-        setCompare(false)
+        setCompare(false);
     }else{
       console.log('NO MATCH')
-      setCompLetters([])
-      setCompare(false)
+      setCompLetters([]);
+      setCompare(false);
     }
   }
   },[compare,match])
+  const handlePlay = ()=>{
+    setPlay(!play)
+    console.log('playGame')
+  }
   return (
     <>
-      <h1 className='Ruby'>Ruby's Alphabet</h1>
-        <h2>{winner}</h2>
-      <div className='letter-border'>
-        {letter.map((l, index) => (
-          <div className='letter' key={l.value}>
-            {l.value.toUpperCase()}</div>
-        ))}
+      {play ? (
+      <div>
+        <h1 className='Ruby'>Ruby's Alphabet</h1>
+          <h2>{winner}</h2>
+        <div className='letter-border'>
+          {letter.map((l, index) => (
+            <div className='letter' key={l.value}>
+              {l.value.toUpperCase()}</div>
+          ))}
+        </div>
+        <ul className='letters-border'>
+          {btnLetters.map((letter, index) => (
+            <Letterbtn key={letter} letter={letter.toUpperCase()} onClick={()=>handleClick(letter)} disabled={compLetters.length < 1 }/>
+          ))}
+        </ul>
       </div>
-      <ul className='letters-border'>
-        {btnLetters.map((letter, index) => (
-          <Letterbtn key={letter} letter={letter.toUpperCase()} onClick={()=>handleClick(letter)} disabled={compLetters.length < 1 }/>
-        ))}
-      </ul>
+      ) : (
+        <div>
+          Home Screen
+          <Homebtn onPlayClick={handlePlay}/>
+        </div>
+      )}
     </>
   );
 }
