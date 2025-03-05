@@ -1,6 +1,10 @@
-
-export function Home({onHomeClick}){
+import {Playbtn} from './Play-Btn'
+export function Home({onPlayClick}){
+		
 	return(
-		<button  onClick={onHomeClick}>PLAY</button>
+		<div>
+			<h1>Learn My Alphabet</h1>
+			<Playbtn onPlayClick={onPlayClick}/>
+		</div>
 	)
 }

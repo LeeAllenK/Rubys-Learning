@@ -1,5 +1,6 @@
 import { useState,useEffect} from 'react';
 import {Letterbtn} from './components/Letter-Btn'
+import {Home} from './components/Home'
 import {Homebtn} from './components/Home-Btn'
 // ADD HOME PAGE, PLAY BTN, AND STATE TO HOLD USERNAME AFTER GAME COMPLETION
 import './App.css'
@@ -15,7 +16,8 @@ function App() {
   useEffect(() => {
     let nextIndex = letter.length + 1; 
           console.log(nextIndex)
-    if(compLetters.length === 0 && play) {
+
+    if(compLetters.length === 0) {
       const nextLetter = setInterval(() => {
         setLetter((prev) => {
           nextIndex--;
@@ -38,10 +40,9 @@ function App() {
       return () => clearInterval(nextLetter);
     }
   }, [compLetters, letterValue, letter, match]);
+    console.log('CL',compLetters)
 
-
-      console.log('CL',compLetters)
-  const handleClick =(letter)=>{
+  const handleClick =(letter,i)=>{
     setCompLetters([...compLetters,letter,winner])
     setCompare(true)
   }
@@ -60,15 +61,16 @@ function App() {
   }
   },[compare,match])
   const handlePlay = ()=>{
-    setPlay(!play)
+    setPlay(p=>!p)
     console.log('playGame')
   }
   return (
     <>
       {play ? (
       <div>
-        <h1 className='Ruby'>Ruby's Alphabet</h1>
-          <h2>{winner}</h2>
+        <Homebtn onHomeClick={()=>setPlay(p=>!p)}/>
+        <h2 className='Ruby'>Ruby's Alphabet</h2>
+          <h3>{winner}</h3>
         <div className='letter-border'>
           {letter.map((l, index) => (
             <div className='letter' key={l.value}>
@@ -77,14 +79,15 @@ function App() {
         </div>
         <ul className='letters-border'>
           {btnLetters.map((letter, index) => (
-            <Letterbtn key={letter} letter={letter.toUpperCase()} onClick={()=>handleClick(letter)} disabled={compLetters.length < 1 }/>
+            <li key={letter}>
+            <Letterbtn  letter={letter.toUpperCase()} onClick={()=>handleClick(letter,index)} disabled={compLetters.length < 1 }/>
+            </li>
           ))}
         </ul>
       </div>
       ) : (
         <div>
-          Home Screen
-          <Homebtn onPlayClick={handlePlay}/>
+          <Home onPlayClick={handlePlay}/>
         </div>
       )}
     </>

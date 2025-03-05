@@ -1,6 +1,9 @@
-import '../App.css'
-export function Homebtn({onPlayClick,}){
+
+export function Homebtn({onHomeClick}){
+
 	return(
-		<button className='play-Btn' onClick={onPlayClick}>PLAY</button>
+		<div className='homeBtn-border'>
+			<button className='home-btn' onClick={onHomeClick}>Home</button>
+		</div>
 	)
 }
