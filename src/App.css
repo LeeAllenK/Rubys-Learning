@@ -4,6 +4,357 @@
   padding: 2rem;
   text-align: center;
 }
+body{
+  background-color: rgb(164, 214, 255);
+}
+h1{
+  color: blue;
+  font-size: 50px;
+}
+ul{
+  list-style: none;
+}
+.home-border{
+  display: flex;
+  flex-direction: column; 
+  align-items: center;  
+  justify-content: flex-start;
+  height: 50vh;
+}
+.home-list{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+li{
+  font-size: 100px;
+  font-weight: bolder;
+  padding: 10px;
+  margin: 10px;
+  height: 100px;
+  /* animation: rainbow 3s infinite; */
+}
+.home-A {
+  animation: rainbow-A 4s infinite;
+}
+.home-B {
+  animation: rainbow-B 4.2s infinite;
+}
+.home-C {
+  animation: rainbow-C 4.4s infinite;
+}
+.home-D {
+  animation: rainbow-D 4.6s infinite;
+}
+.home-E {
+  animation: rainbow-E 4.8s infinite;
+}
+.home-F {
+  animation: rainbow-F 5s infinite;
+}
+.home-G {
+  animation: rainbow-G 5.2s infinite;
+}
+.home-H {
+  animation: rainbow-H 5.4s infinite;
+}
+.home-I {
+  animation: rainbow-I 5.6s infinite;
+}
+.home-J {
+  animation: rainbow-J 5.8s infinite;
+}
+.home-K {
+  animation: rainbow-K 6s infinite;
+}
+.home-L {
+  animation: rainbow-L 6.2s infinite;
+}
+.home-M {
+  animation: rainbow-M 6.4s infinite;
+}
+.home-N {
+  animation: rainbow-N 6.6s infinite;
+}
+.home-O {
+  animation: rainbow-O 6.8s infinite;
+}
+.home-P {
+  animation: rainbow-P 7s infinite;
+}
+.home-Q {
+  animation: rainbow-Q 7.2s infinite;
+}
+.home-R {
+  animation: rainbow-R 7.4s infinite;
+}
+.home-S {
+  animation: rainbow-S 7.6s infinite;
+}
+.home-T {
+  animation: rainbow-T 7.8s infinite;
+}
+.home-U {
+  animation: rainbow-U 8s infinite;
+}
+.home-V {
+  animation: rainbow-V 8.2s infinite;
+}
+.home-W {
+  animation: rainbow-W 8.4s infinite;
+}
+.home-X {
+  animation: rainbow-X 8.6s infinite;
+}
+.home-Y {
+  animation: rainbow-Y 8.8s infinite;
+}
+.home-Z {
+  animation: rainbow-Z 9s infinite;
+}
+@keyframes rainbow-A {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-B {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-C {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-D {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-E {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-F {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-G {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-H {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-I {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-J {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-K {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-L {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-M {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-N {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-O {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-P {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-Q {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-R {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-S {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-T {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-U {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-V {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-W {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-X {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-Y {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-Z {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+/* @keyframes rainbow-Z {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+} */
 button{
   cursor:pointer;
 }
@@ -14,16 +365,15 @@ button{
   font-size: 50px;
   font-weight: bolder;
 }
+
 .letter-border {
   display: flex;
   justify-content:center;
   align-content: center;
-
   left: 50%;
 }
-
 .letter {
-  background-color: black;
+  background-color: white;
   display: flex;
   justify-content: center;
   font-size: 250px;
@@ -32,7 +382,7 @@ button{
   border: 1px solid black;
   border-radius: 10px;
   position: absolute;
-  color: red;
+  color: black;
 }
 .letters-border{
   display:flex;
@@ -41,7 +391,6 @@ button{
   position: relative;
   top: 400px;
   width:100%;
-  list-style: none;
 }
 .letter-btns{
   font-size: 40px;
@@ -50,16 +399,6 @@ button{
   height: 90px;
   margin: 4px;
   margin-top: 10px;
-}
-.scale-up{
-  font-size: 40px;
-  border-radius: 10px;
-  width: 90px;
-  height: 90px;
-  margin: 4px;
-  margin-top: 10px;
-  cursor: pointer;
-  color: red;
 }
 .homeBtn-border{
   display: flex;

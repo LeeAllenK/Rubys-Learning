@@ -104,7 +104,7 @@ const ALPHABET = [
   { value: 'z'}
 ].reverse();
 // console.log(ALPHABET.map((a) => a.value))
-const alphabet = ALPHABET.map((a) => a.value)
+export const alphabet = ALPHABET.map((a) => a.value)
 
 function shuffleArray(array) {
   for(let i = array.length - 1; i >= 1; i--) {
