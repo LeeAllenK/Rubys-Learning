@@ -1,5 +1,6 @@
+import {useState} from 'react';
 import {Playbtn} from './Play-Btn'
-export function Home({onPlayClick}){
+export function Home({onPlayClick,onChange,value}){
 	return(
 		<>
 		<div className='home-border'>
@@ -10,6 +11,14 @@ export function Home({onPlayClick}){
 						<span className='title-alpha'><p style={{ color: 'red' }}>A</p><p style={{ color: 'orange' }}>L</p><p style={{ color: 'blue' }}>P</p><p style={{ color: 'yellow' }}>H</p><p style={{ color: 'green' }}>A</p><p style={{ color: 'orange' }}>B</p><p style={{ color: 'indigo' }}>E</p><p style={{ color: 'violet' }}>T</p></span>
 					</div>
 				</h1>
+					<div>
+						<input 
+						type='text'
+						placeholder="Enter Name"
+						value={value.charAt(0).toUpperCase() + value.slice(1)}
+						onChange={onChange}
+						/>
+					</div>
 			<Playbtn onPlayClick={onPlayClick}/>
 		</div>
 			<ul className='home-list'>

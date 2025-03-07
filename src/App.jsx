@@ -14,6 +14,7 @@ function App() {
   const [match,setMatch]= useState(false);
   const [winner,setWinner] = useState('');
   const [play,setPlay] = useState(false);
+  const [text,setText]= useState('');
   useEffect(() => {
     let nextIndex = letter.length + 1; 
           console.log(nextIndex)
@@ -37,7 +38,7 @@ function App() {
         });
       }, 100);
       console.log('LV', letterValue);
-        if(letter.length === 0 )setWinner('Good Job Ruby!')
+        if(letter.length === 0 )setWinner(`Good Job ${text}!`)
       return () => clearInterval(nextLetter);
     }
   }, [compLetters, letterValue, letter, match]);
@@ -73,6 +74,7 @@ function App() {
     setCompLetters([]);
     setLetter(ALPHABET)
     setWinner('');
+    setText('');
   }
   const handleRestartClick =()=>{
     const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
@@ -87,7 +89,8 @@ function App() {
         {letter.length === 0 && <h2>{winner}</h2>}
           <div className='homeBtn-border'>
             <Homebtn onHomeClick={handleHomeClick}/>
-            <Restartbtn onRestartClick={handleRestartClick}/>
+            {letter.length === 0 && <Restartbtn onRestartClick={handleRestartClick}/>}
+            
           </div>
         <div className='letter-border'>
           {letter.map((l) => (
@@ -105,7 +108,8 @@ function App() {
       </>
       ) : (
         <>
-          <Home onPlayClick={handlePlay}/>
+          <Home onPlayClick={handlePlay} value={text} onChange={(e)=> setText(e.target.value)} />
+          
         </>
       )}
     </div>
@@ -115,11 +119,11 @@ function App() {
 export default App;
 const ALPHABET = [
   { value: 'a' }, { value: 'b' }, { value: 'c' }, { value: 'd' }, { value: 'e'},
-  { value: 'f' }, { value: 'g' }, { value: 'h' }, { value: 'i' }, { value: 'j'},
-  { value: 'k' }, { value: 'l' }, { value: 'm' }, { value: 'n' }, { value: 'o'},
-  { value: 'p' }, { value: 'q' }, { value: 'r' }, { value: 's' }, { value: 't'},
-  { value: 'u' }, { value: 'v' }, { value: 'w' }, { value: 'x' }, { value: 'y'},
-  { value: 'z'}
+  // { value: 'f' }, { value: 'g' }, { value: 'h' }, { value: 'i' }, { value: 'j'},
+  // { value: 'k' }, { value: 'l' }, { value: 'm' }, { value: 'n' }, { value: 'o'},
+  // { value: 'p' }, { value: 'q' }, { value: 'r' }, { value: 's' }, { value: 't'},
+  // { value: 'u' }, { value: 'v' }, { value: 'w' }, { value: 'x' }, { value: 'y'},
+  // { value: 'z'}
 ].reverse();
 export const alphabet = ALPHABET.map((a) => a.value)
 
