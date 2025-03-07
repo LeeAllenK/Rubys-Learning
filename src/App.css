@@ -1,15 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
 }
 body{
-  background-color: rgb(164, 214, 255);
+  background-color: rgb(116, 163, 201);
+}
+.App{
+  margin: 0;
+  padding:0;
+  border: 1px solid red;
 }
 h1{
+  display: flex;
   color: blue;
+  font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  font-weight:900;
+  font-style: normal;
+  font-variation-settings:100px;
+  font-size: 75px;
+}
+h2{
   font-size: 50px;
+}
+.title{
+  display: flex;
+  margin: 3px;
+}
+.title-learn{
+  display:flex;
+  margin: 15px;
+}
+.title-my{
+  display: flex;
+  margin: 15px;
+}
+.title-alpha{
+  display: flex;
+  margin: 15px;
 }
 ul{
   list-style: none;
@@ -19,12 +50,16 @@ ul{
   flex-direction: column; 
   align-items: center;  
   justify-content: flex-start;
-  height: 50vh;
 }
 .home-list{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-variation-settings: 100px;
 }
 li{
   font-size: 100px;
@@ -32,7 +67,6 @@ li{
   padding: 10px;
   margin: 10px;
   height: 100px;
-  /* animation: rainbow 3s infinite; */
 }
 .home-A {
   animation: rainbow-A 4s infinite;
@@ -112,7 +146,7 @@ li{
 .home-Z {
   animation: rainbow-Z 9s infinite;
 }
-@keyframes rainbow-A {
+/* @keyframes rainbow-A {
 0% { color: red; }
   16% { color: orange; }
   32% { color: yellow; }
@@ -345,27 +379,42 @@ li{
   64% { color: blue; }
   80% { color: indigo; }
   100% { color: violet; }
-}
-/* @keyframes rainbow-Z {
-0% { color: red; }
-  16% { color: orange; }
-  32% { color: yellow; }
-  48% { color: green; }
-  64% { color: blue; }
-  80% { color: indigo; }
-  100% { color: violet; }
 } */
+
 button{
   cursor:pointer;
 }
 .play-Btn{
-  width:50vw;
+  width:25vw;
   height:75px;
   border-radius: 30px;
-  font-size: 50px;
-  font-weight: bolder;
+  font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-variation-settings: 100px;
+  font-size: 60px;
 }
-
+.play-Btn:hover{
+    animation: rainbow-btn 3s infinite;
+    color: black
+}
+@keyframes rainbow-btn{
+  0% { background-color: red; }
+  16% { background-color: orange; }
+  32% { background-color: yellow; }
+  48% { background-color: green; }
+  64% { background-color: blue; }
+  80% { background-color: indigo; }
+  100% { background-color: violet; }
+  0% { color: green; }
+  16% { color: blue; }
+  32% { color: indigo; }
+  48% { color: violet; }
+  64% { color: red; }
+  80% { color: yellow; }
+  100% { color: orange; }
+}
 .letter-border {
   display: flex;
   justify-content:center;
@@ -376,14 +425,15 @@ button{
   background-color: white;
   display: flex;
   justify-content: center;
-  font-size: 250px;
-  height: 300px;
-  width: 300px;
+  font-size: 200px;
+  height: 250px;
+  width: 250px;
   border: 1px solid black;
   border-radius: 10px;
   position: absolute;
   color: black;
 }
+
 .letters-border{
   display:flex;
   justify-content: center;
@@ -393,18 +443,24 @@ button{
   width:100%;
 }
 .letter-btns{
-  font-size: 40px;
-  border-radius: 10px;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  font-size: 70px;
+  font-weight: 800;
+  border-radius: 50px;
   width: 90px;
   height: 90px;
-  margin: 4px;
-  margin-top: 10px;
+  margin: 2px;
+}
+.letter-btns:active{
+  background-color: green;
 }
 .homeBtn-border{
   display: flex;
-  justify-content: flex-start;
-  margin: 0;
+  justify-content: space-evenly;
+  
 }
-.home-btn{
+.home-btn,.restart-btn{
   font-size: 40px;
 }

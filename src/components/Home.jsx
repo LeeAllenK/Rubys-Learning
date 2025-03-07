@@ -3,7 +3,13 @@ export function Home({onPlayClick}){
 	return(
 		<>
 		<div className='home-border'>
-			<h1>Learn My Alphabet</h1>
+				<h1>
+					<div className='title'>
+						<span className='title-learn'><p style={{ color: 'red' }}>L</p><p style={{ color: 'blue' }}>E</p><p style={{ color: 'green' }}>A</p><p style={{ color: 'orange' }}>R</p><p style={{ color: 'yellow' }}>N</p></span>
+						<span className='title-my'> <p style={{ color: 'indigo' }}>M </p> <p style={{ color: 'violet' }}>Y</p> </span>
+						<span className='title-alpha'><p style={{ color: 'red' }}>A</p><p style={{ color: 'orange' }}>L</p><p style={{ color: 'blue' }}>P</p><p style={{ color: 'yellow' }}>H</p><p style={{ color: 'green' }}>A</p><p style={{ color: 'orange' }}>B</p><p style={{ color: 'indigo' }}>E</p><p style={{ color: 'violet' }}>T</p></span>
+					</div>
+				</h1>
 			<Playbtn onPlayClick={onPlayClick}/>
 		</div>
 			<ul className='home-list'>
@@ -37,3 +43,4 @@ export function Home({onPlayClick}){
 		</>
 	)
 }
+

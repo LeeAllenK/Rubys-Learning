@@ -2,6 +2,7 @@ import { useState,useEffect} from 'react';
 import {Letterbtn} from './components/Letter-Btn'
 import {Home} from './components/Home'
 import {Homebtn} from './components/Home-Btn'
+import {Restartbtn} from './components/Restart-Btn'
 // ADD HOME PAGE, PLAY BTN, AND STATE TO HOLD USERNAME AFTER GAME COMPLETION
 import './App.css'
 function App() {
@@ -36,43 +37,60 @@ function App() {
         });
       }, 100);
       console.log('LV', letterValue);
-        if(letter.length === 0)setWinner('Good Job Ruby!')
+        if(letter.length === 0 )setWinner('Good Job Ruby!')
       return () => clearInterval(nextLetter);
     }
   }, [compLetters, letterValue, letter, match]);
     console.log('CL',compLetters)
 
   const handleClick =(letter,i)=>{
-    setCompLetters([...compLetters,letter,winner])
-    setCompare(true)
+    setCompLetters([...compLetters,letter,winner]);
+    setCompare(true);
   }
   useEffect(()=>{
   if(compare && compLetters.length > 1){
     if(compLetters[0] === compLetters[1]){
         console.log('MATCH');
-        setMatch(true)
+        setMatch(true);
         setCompLetters([]);
         setCompare(false);
     }else{
-      console.log('NO MATCH')
+      console.log('NO MATCH');
       setCompLetters([]);
       setCompare(false);
     }
   }
   },[compare,match])
   const handlePlay = ()=>{
+    const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
+    setPlay(p=>!p);
+    setLetter(ALPHABET);
+    setBtnLetters(shuffled);
+    console.log('playGame');
+  }
+  const handleHomeClick = ()=>{
     setPlay(p=>!p)
-    console.log('playGame')
+    setCompLetters([]);
+    setLetter(ALPHABET)
+    setWinner('');
+  }
+  const handleRestartClick =()=>{
+    const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
+    setLetter(ALPHABET);
+    setBtnLetters(shuffled);
+    setCompLetters([]);
   }
   return (
-    <>
+    <div className='App'>
       {play ? (
-      <div>
-        <Homebtn onHomeClick={()=>setPlay(p=>!p)}/>
-        <h2 className='Ruby'>Ruby's Alphabet</h2>
-          <h3>{winner}</h3>
+      <>
+        {letter.length === 0 && <h2>{winner}</h2>}
+          <div className='homeBtn-border'>
+            <Homebtn onHomeClick={handleHomeClick}/>
+            <Restartbtn onRestartClick={handleRestartClick}/>
+          </div>
         <div className='letter-border'>
-          {letter.map((l, index) => (
+          {letter.map((l) => (
             <div className='letter' key={l.value}>
               {l.value.toUpperCase()}</div>
           ))}
@@ -84,13 +102,13 @@ function App() {
             </li>
           ))}
         </ul>
-      </div>
+      </>
       ) : (
-        <div>
+        <>
           <Home onPlayClick={handlePlay}/>
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 }
 
@@ -103,7 +121,6 @@ const ALPHABET = [
   { value: 'u' }, { value: 'v' }, { value: 'w' }, { value: 'x' }, { value: 'y'},
   { value: 'z'}
 ].reverse();
-// console.log(ALPHABET.map((a) => a.value))
 export const alphabet = ALPHABET.map((a) => a.value)
 
 function shuffleArray(array) {
