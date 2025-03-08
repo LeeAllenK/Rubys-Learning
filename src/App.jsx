@@ -3,7 +3,7 @@ import {Letterbtn} from './components/Letter-Btn'
 import {Home} from './components/Home'
 import {Homebtn} from './components/Home-Btn'
 import {Restartbtn} from './components/Restart-Btn'
-// ADD HOME PAGE, PLAY BTN, AND STATE TO HOLD USERNAME AFTER GAME COMPLETION
+
 import './App.css'
 function App() {
   const [btnLetters, setBtnLetters] = useState(shuffledLetter);
@@ -72,7 +72,7 @@ function App() {
   const handleHomeClick = ()=>{
     setPlay(p=>!p)
     setCompLetters([]);
-    setLetter(ALPHABET)
+    setLetter(ALPHABET);
     setWinner('');
     setText('');
   }
@@ -119,11 +119,11 @@ function App() {
 export default App;
 const ALPHABET = [
   { value: 'a' }, { value: 'b' }, { value: 'c' }, { value: 'd' }, { value: 'e'},
-  // { value: 'f' }, { value: 'g' }, { value: 'h' }, { value: 'i' }, { value: 'j'},
-  // { value: 'k' }, { value: 'l' }, { value: 'm' }, { value: 'n' }, { value: 'o'},
-  // { value: 'p' }, { value: 'q' }, { value: 'r' }, { value: 's' }, { value: 't'},
-  // { value: 'u' }, { value: 'v' }, { value: 'w' }, { value: 'x' }, { value: 'y'},
-  // { value: 'z'}
+  { value: 'f' }, { value: 'g' }, { value: 'h' }, { value: 'i' }, { value: 'j'},
+  { value: 'k' }, { value: 'l' }, { value: 'm' }, { value: 'n' }, { value: 'o'},
+  { value: 'p' }, { value: 'q' }, { value: 'r' }, { value: 's' }, { value: 't'},
+  { value: 'u' }, { value: 'v' }, { value: 'w' }, { value: 'x' }, { value: 'y'},
+  { value: 'z'}
 ].reverse();
 export const alphabet = ALPHABET.map((a) => a.value)
 

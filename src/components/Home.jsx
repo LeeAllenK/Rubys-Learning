@@ -14,7 +14,7 @@ export function Home({onPlayClick,onChange,value}){
 					<div>
 						<input 
 						type='text'
-						placeholder="Enter Name"
+						placeholder="Enter Your Name"
 						value={value.charAt(0).toUpperCase() + value.slice(1)}
 						onChange={onChange}
 						/>
