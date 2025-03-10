@@ -1,0 +1,613 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+}
+body{
+  background-color: rgb(116, 163, 201);
+}
+.App{
+  margin: 0;
+  padding:0;
+}
+h1{
+  display: flex;
+  color: blue;
+  font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  font-weight:900;
+  font-style: normal;
+  font-variation-settings:100px;
+  font-size: 3.5em;
+}
+input{
+  color: black;
+  font-size: 2em;
+  font-weight: bolder;
+  margin:0.1em;
+  width: 12em;
+}
+h2{
+  font-size: 3em;
+  animation: rainbow-winner-grow 3s infinite;
+}
+@keyframes rainbow-winner-grow{
+  0% { color: green; transform: scale(1)}
+  16% { color: blue; }
+  32% { color: indigo; }
+  48% { color: violet; }
+  64% { color: red; }
+  80% { color: orange; }
+  100% { color: yellow; transform: scale(2)  }
+}
+.title{
+  display: flex;
+  margin: 0.1em;
+}
+.title-learn{
+  display:flex;
+  margin: 0.25em;
+}
+.title-my{
+  display: flex;
+  margin: 0.25em;
+}
+.title-alpha{
+  display: flex;
+  margin: 0.25em;
+}
+ul{
+  list-style: none;
+}
+.home-border{
+  display: flex;
+  flex-direction: column; 
+  align-items: center;  
+  justify-content: flex-start;
+}
+.home-list{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-variation-settings:"wdth" 100;
+}
+li{
+  font-size: 5em;
+  font-weight: bolder;
+  padding: 0.1em;
+  margin: 0.1em;
+  height: 1em;
+}
+.home-A {
+  animation: rainbow-A 4s infinite;
+}
+.home-B {
+  animation: rainbow-B 4.2s infinite;
+}
+.home-C {
+  animation: rainbow-C 4.4s infinite;
+}
+.home-D {
+  animation: rainbow-D 4.6s infinite;
+}
+.home-E {
+  animation: rainbow-E 4.8s infinite;
+}
+.home-F {
+  animation: rainbow-F 5s infinite;
+}
+.home-G {
+  animation: rainbow-G 5.2s infinite;
+}
+.home-H {
+  animation: rainbow-H 5.4s infinite;
+}
+.home-I {
+  animation: rainbow-I 5.6s infinite;
+}
+.home-J {
+  animation: rainbow-J 5.8s infinite;
+}
+.home-K {
+  animation: rainbow-K 6s infinite;
+}
+.home-L {
+  animation: rainbow-L 6.2s infinite;
+}
+.home-M {
+  animation: rainbow-M 6.4s infinite;
+}
+.home-N {
+  animation: rainbow-N 6.6s infinite;
+}
+.home-O {
+  animation: rainbow-O 6.8s infinite;
+}
+.home-P {
+  animation: rainbow-P 7s infinite;
+}
+.home-Q {
+  animation: rainbow-Q 7.2s infinite;
+}
+.home-R {
+  animation: rainbow-R 7.4s infinite;
+}
+.home-S {
+  animation: rainbow-S 7.6s infinite;
+}
+.home-T {
+  animation: rainbow-T 7.8s infinite;
+}
+.home-U {
+  animation: rainbow-U 8s infinite;
+}
+.home-V {
+  animation: rainbow-V 8.2s infinite;
+}
+.home-W {
+  animation: rainbow-W 8.4s infinite;
+}
+.home-X {
+  animation: rainbow-X 8.6s infinite;
+}
+.home-Y {
+  animation: rainbow-Y 8.8s infinite;
+}
+.home-Z {
+  animation: rainbow-Z 9s infinite;
+}
+@keyframes rainbow-A {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-B {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-C {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-D {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-E {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-F {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-G {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-H {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-I {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-J {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-K {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-L {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-M {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-N {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-O {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-P {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-Q {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-R {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-S {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-T {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-U {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-V {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-W {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-X {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-Y {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes rainbow-Z {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+
+button{
+  cursor:pointer;
+}
+.play-Btn{
+  color: black;
+  width:10em;
+  height:75px;
+  border: 0.1em solid black;
+  border-radius: 1em;
+  font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  font-size: 3em;
+}
+.play-Btn:hover{
+    animation: rainbow-btn 3s infinite;
+    color: black
+}
+@keyframes rainbow-btn{
+  0% { background-color: red; }
+  16% { background-color: orange; }
+  32% { background-color: yellow; }
+  48% { background-color: green; }
+  64% { background-color: blue; }
+  80% { background-color: indigo; }
+  100% { background-color: violet; }
+  0% { color: green; }
+  16% { color: blue; }
+  32% { color: indigo; }
+  48% { color: violet; }
+  64% { color: red; }
+  80% { color: orange; }
+  100% { color: yellow; }
+  0% { border-color: green; }
+  16% { border-color: blue; }
+  32% { border-color: indigo; }
+  48% { border-color: violet; }
+  64% { border-color: red; }
+  80% { border-color: orange; }
+  100% { border-color: yellow; }
+}
+.letter-border {
+  display: flex;
+  justify-content:center;
+  align-content: center;
+  left: 50%;
+}
+.letter {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  font-size: 12.5em;
+  height: 250px;
+  width: 250px;
+  border: 4px solid black;
+  border-radius: 10px;
+  position: absolute;
+  color: black;
+  animation: rainbow-border 3s infinite;
+}
+@keyframes rainbow-border {
+    0% { border-color: red; }
+  16% { border-color: orange; }
+  32% { border-color: yellow; }
+  48% { border-color: green; }
+  64% { border-color: blue; }
+  80% { border-color: indigo; }
+  100% { border-color: violet; }
+}
+.letters-border{
+  display:flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  top: 300px;
+  width:100%;
+}
+.letter-btns{
+  display: flex;
+  border: 0.08em solid black;
+  justify-content:center;
+  align-items: center;
+  font-size: 0.8em;
+  font-weight: 800;
+  border-radius: 50px;
+  width: 1.5em;
+  height: 1.5em;
+  margin: 0.1em;
+}
+.letter-btns:hover{
+  animation: rainbow-border 3s infinite;
+}
+
+.letter-btns:active{
+  transform: translateY(2px);
+ 
+}
+.homeBtn-border{
+  display: flex;
+  justify-content: space-between;
+  width: 100%
+  
+}
+.home-btn,.restart-btn{
+  color: black;
+  font-size: 2.5em;
+  font-weight: bolder;
+  border-radius: 1em;
+  border: 0.1em solid black;
+}
+.home-btn:hover,.restart-btn:hover{
+  animation: rainbow 3s infinite;
+}
+@keyframes rainbow{
+    0% { background-color: red; }
+  16% { background-color: orange; }
+  32% { background-color: yellow; }
+  48% { background-color: green; }
+  64% { background-color: blue; }
+  80% { background-color: indigo; }
+  100% { background-color: violet; }
+  0% { color: green; }
+  16% { color: blue; }
+  32% { color: indigo; }
+  48% { color: violet; }
+  64% { color: red; }
+  80% { color: orange; }
+  100% { color: yellow; }
+}
+button:active{
+    transform: translateY(2px)
+}
+
+@media(max-width:740px){
+  p{
+    font-size: 0.7em;
+  }
+  li{
+    font-size:2.5em
+  }
+  .title {
+    display: flex;
+    margin: 3px;
+    }
+  .title-learn {
+    display: flex;
+    margin: 0.2em;
+    width: 50%;
+  }
+  .title-my {
+    display: flex;
+    margin: 0.2em;
+    width: 50%;
+  }
+  .title-alpha {
+    display: flex;
+    margin: 0.2em;
+  }
+  input{
+    font-size: 1.5em;
+    margin: 0.1em;
+    width: 10em;
+  }
+  .play-Btn {
+    width: 7em;
+    height: 1.3em;
+    font-size: 2.8em;
+  }
+  .home-btn,.restart-btn{
+    font-size: 2em;
+    font-weight: bolder;
+    border-radius: 1em;
+    border: 0.1em solid black;
+  }
+  .letter-border{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    left: 50%;
+    margin-top:1em;
+    
+  }
+  .letter{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 9em;
+    height: 1.2em;
+    width: 1.2em;
+    position: absolute;
+    color: black;
+  } 
+  .letters-border {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    top: 15em;
+    width: 100%;
+  }
+  .letter-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.88em;
+    font-weight: 900;
+    width: 1.39em;
+    height: 1.39em;
+    margin: 0.2em;
+    border: 0.1em solid black;
+  }
+}
