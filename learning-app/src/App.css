@@ -501,6 +501,10 @@ button:active{
     transform: translateY(2px)
 }
 @media(max-width:740px){
+h2 {
+    font-size: 1em;
+    animation: rainbow-winner-grow 3s infinite;
+  }
   p{
     font-size: 0.7em;
   }
@@ -508,6 +512,7 @@ button:active{
     font-size:2.5em
   }
   .title {
+    font-size: 0.9em;
     display: flex;
     margin: 3px;
     }
@@ -536,7 +541,7 @@ button:active{
     font-size: 2.8em;
   }
   .home-btn,.restart-btn{
-    font-size: 2em;
+    font-size: 1em;
     font-weight: bolder;
     border-radius: 1em;
     border: 0.1em solid black;
