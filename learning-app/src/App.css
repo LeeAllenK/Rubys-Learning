@@ -14,7 +14,7 @@ body{
 }
 h1{
   display: flex;
-  color: blue;
+  color:black;
   font-family: "DynaPuff", system-ui;
   font-optical-sizing: auto;
   font-weight:900;
@@ -416,7 +416,7 @@ button{
 }
 .play-Btn:hover{
     animation: rainbow-A 5s infinite;
-    color: black
+    color: black;
 }
 .letter-border {
   display: flex;
@@ -468,6 +468,7 @@ button{
   margin: 0.1em;
   background: linear-gradient(180deg, #ffffff, #9f9f9f);
   box-shadow: 0 4px 6px black;
+  color: black;
 }
 .letter-btns:hover{
   animation: rainbow-border 3s infinite;
@@ -534,11 +535,13 @@ h2 {
     font-size: 1.5em;
     margin: 0.1em;
     width: 10em;
+    color:black;
   }
   .play-Btn {
     width: 7em;
     height: 1.3em;
     font-size: 2.8em;
+    color:black;
   }
   .home-btn,.restart-btn{
     font-size: 1em;
@@ -566,22 +569,208 @@ h2 {
   } 
   .letters-border {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: space-between;
     position: relative;
-    top: 15em;
-    width: 100%;
+    top: 12em;
+    right: 2em;
+    width:100%;
   }
   .letter-btns {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.88em;
+    font-size: 0.6em;
     font-weight: 900;
-    width: 1.39em;
-    height: 1.39em;
+    width: 2.1em;
+    height: 2.1em;
     margin: 0.2em;
     border: 0.1em solid black;
+    color: black;
+  }
+}
 
+@media screen and (max-width: 1280px) and (orientation: landscape) {
+
+   h2 {
+    font-size: 1em;
+    animation: rainbow-winner-grow 3s infinite;
+  }
+  p{
+    font-size: 0.8em;
+  }
+  li{
+    display: flex;
+    align-items: center;
+    font-size:2.2em
+  }
+  .title {
+    font-size: 0.7em;
+    display: flex;
+    margin: 3px;
+    }
+  .title-learn {
+    display: flex;
+    margin: 0.07em;
+    width: 50%;
+  }
+  .title-my {
+    display: flex;
+    margin: 0.07em;
+    width: 50%;
+  }
+  .title-alpha {
+    display: flex;
+    margin: 0.07em;
+  }
+  input{
+    font-size: 1.2em;
+    margin: 0.1em;
+    width: 9em;
+    color: black;
+  }
+  .play-Btn {
+    width: 7em;
+    height: 1.3em;
+    font-size: 2em;
+    color: black;
+  }
+  .home-btn,.restart-btn{
+    font-size: 2em;
+    font-weight: bolder;
+    border-radius: 1em;
+    border: 0.1em solid #8b8989;
+    background: linear-gradient(180deg, #efebeb,#8b8989);
+    box-shadow: 0 2px 9px #8b8989;
+    color: black;
+  }
+  .letter-border{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    left: 50%;
+    margin-top:1em;
+  }
+  .letter{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 9em;
+    height: 1.2em;
+    width: 1.2em;
+    position: absolute;
+    color: black;
+  } 
+  .letters-border {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 12em;
+    /* right: 2em; */
+    width:90%;
+    height: 30vh;
+  }
+  .letter-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.6em;
+    font-weight: 900;
+    width: 2.1em;
+    height: 2.1em;
+    margin: 0.5em;
+    border: 0.1em solid black;
+    color: black;
+  }
+}
+
+@media screen and (max-width: 1018px) and (orientation: landscape) {
+
+   h2 {
+    font-size: 1em;
+    animation: rainbow-winner-grow 3s infinite;
+  }
+  p{
+    font-size: 0.8em;
+  }
+  li{
+    display: flex;
+    align-items: center;
+    font-size:2.2em
+  }
+  .title {
+    font-size: 0.7em;
+    display: flex;
+    margin: 3px;
+    }
+  .title-learn {
+    display: flex;
+    margin: 0.07em;
+    width: 50%;
+  }
+  .title-my {
+    display: flex;
+    margin: 0.07em;
+    width: 50%;
+  }
+  .title-alpha {
+    display: flex;
+    margin: 0.07em;
+  }
+  input{
+    font-size: 1.2em;
+    margin: 0.1em;
+    width: 9em;
+    color: black;
+  }
+  .play-Btn {
+    width: 7em;
+    height: 1.3em;
+    font-size: 2em;
+    color: black;
+  }
+  .home-btn,.restart-btn{
+    font-size: 1.5em;
+    font-weight: bolder;
+    border-radius: 1em;
+    border: 0.1em solid #8b8989;
+    background: linear-gradient(180deg, #efebeb,#8b8989);
+    box-shadow: 0 2px 9px #8b8989;
+    color: black;
+  }
+  .letter-border{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 0;
+  }
+  .letter{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 6em;
+    height: 1.1em;
+    width: 1.1em;
+    position: absolute;
+    color: black;
+  } 
+  .letters-border {
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    width:90%;
+    height: 100vh;
+    margin:0;
+  }
+  .letter-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.6em;
+    font-weight: 900;
+    width: 2.1em;
+    height: 2.1em;
+    margin: 0.5em;
+    border: 0.1em solid black;
+    color: black;
   }
 }
