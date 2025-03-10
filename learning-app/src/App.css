@@ -403,7 +403,7 @@ button{
   color: black;
   width:10em;
   height:75px;
-  border: 0.1em solid black;
+  border: 0.05em solid #b3b3b3;
   border-radius: 1em;
   font-family: "DynaPuff", system-ui;
   font-optical-sizing: auto;
@@ -411,33 +411,12 @@ button{
   font-style: normal;
   font-variation-settings: "wdth" 100;
   font-size: 3em;
+  background: linear-gradient(180deg, #efebeb,#8b8989);
+  box-shadow: 0 2px 9px #8b8989;
 }
 .play-Btn:hover{
-    animation: rainbow-btn 3s infinite;
+    animation: rainbow-A 5s infinite;
     color: black
-}
-@keyframes rainbow-btn{
-  0% { background-color: red; }
-  16% { background-color: orange; }
-  32% { background-color: yellow; }
-  48% { background-color: green; }
-  64% { background-color: blue; }
-  80% { background-color: indigo; }
-  100% { background-color: violet; }
-  0% { color: green; }
-  16% { color: blue; }
-  32% { color: indigo; }
-  48% { color: violet; }
-  64% { color: red; }
-  80% { color: orange; }
-  100% { color: yellow; }
-  0% { border-color: green; }
-  16% { border-color: blue; }
-  32% { border-color: indigo; }
-  48% { border-color: violet; }
-  64% { border-color: red; }
-  80% { border-color: orange; }
-  100% { border-color: yellow; }
 }
 .letter-border {
   display: flex;
