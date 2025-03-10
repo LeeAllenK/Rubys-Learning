@@ -111,6 +111,7 @@ function App() {
                 <Letterbtn
                   letter={letter.toUpperCase()}
                   onClick={() => handleClick(letter, index)}
+                  disabled={compLetters.length < 1}
                 />
               </li>
             ))}

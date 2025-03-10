@@ -1,6 +1,8 @@
 import '../App.css';
-export function Letterbtn({letter,onClick}){
+
+export function Letterbtn({letter,onClick,disabled,className}){
+	
 	return(
-		<button className='letter-btns' onClick={onClick} >{letter}</button>
+		<button className='letter-btns' onClick={onClick} disabled={disabled}>{letter}</button>
 	)
 }
