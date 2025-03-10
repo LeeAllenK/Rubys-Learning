@@ -453,20 +453,22 @@ button{
   font-size: 12.5em;
   height: 250px;
   width: 250px;
-  border: 4px solid black;
+  /* border: 4px solid black; */
   border-radius: 10px;
   position: absolute;
   color: black;
+  background: linear-gradient(180deg, #b3b3b3, #fdfcfc);
+  box-shadow: 0 4px 6px #0000004d;
   animation: rainbow-border 3s infinite;
 }
 @keyframes rainbow-border {
-    0% { border-color: red; }
-  16% { border-color: orange; }
-  32% { border-color: yellow; }
-  48% { border-color: green; }
-  64% { border-color: blue; }
-  80% { border-color: indigo; }
-  100% { border-color: violet; }
+    0% {box-shadow: 0 4px 6px red; }
+  16% { box-shadow: 0 4px 6px orange; }
+  32% { box-shadow: 0 4px 6px yellow; }
+  48% { box-shadow: 0 4px 6px green; }
+  64% { box-shadow: 0 4px 6px blue; }
+  80% { box-shadow: 0 4px 6px indigo; }
+  100% { box-shadow: 0 4px 6px violet; }
 }
 .letters-border{
   display:flex;
@@ -487,6 +489,8 @@ button{
   width: 1.5em;
   height: 1.5em;
   margin: 0.1em;
+  background: linear-gradient(180deg, #ffffff, #9f9f9f);
+  box-shadow: 0 4px 6px black;
 }
 .letter-btns:hover{
   animation: rainbow-border 3s infinite;
@@ -507,27 +511,19 @@ button{
   font-size: 2.5em;
   font-weight: bolder;
   border-radius: 1em;
-  border: 0.1em solid black;
+  border: 0.09em solid black;
+  background: linear-gradient(180deg, #f0f0f0, #cfcfcf);
+  box-shadow: 0 4px 3px black;
+  transition: all 0.2s ease;
+
 }
 .home-btn:hover,.restart-btn:hover{
-  animation: rainbow 3s infinite;
+box-shadow: 0 0px 8px green;
+background: linear-gradient(180deg, rgb(165, 235, 165), green);
+border-color:green;
+color: white;
 }
-@keyframes rainbow{
-    0% { background-color: red; }
-  16% { background-color: orange; }
-  32% { background-color: yellow; }
-  48% { background-color: green; }
-  64% { background-color: blue; }
-  80% { background-color: indigo; }
-  100% { background-color: violet; }
-  0% { color: green; }
-  16% { color: blue; }
-  32% { color: indigo; }
-  48% { color: violet; }
-  64% { color: red; }
-  80% { color: orange; }
-  100% { color: yellow; }
-}
+
 button:active{
     transform: translateY(2px)
 }
@@ -609,5 +605,6 @@ button:active{
     height: 1.39em;
     margin: 0.2em;
     border: 0.1em solid black;
+
   }
 }
