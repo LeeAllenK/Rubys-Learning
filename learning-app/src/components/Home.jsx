@@ -1,8 +1,9 @@
 import {Playbtn} from './Play-Btn'
-export function Home({onPlayClick,onChange,value}){
+export function Home({onPlayClick,onBackClick,onChange,value}){
 	return(
 		<>
 		<div className='home-border'>
+					<button className='back-btn' onClick={onBackClick}>BACK</button>
 				<h1>
 					<div className='title'>
 						<span className='title-learn'><p style={{ color: 'red' }}>L</p><p style={{ color: 'blue' }}>E</p><p style={{ color: 'green' }}>A</p><p style={{ color: 'orange' }}>R</p><p style={{ color: 'yellow' }}>N</p></span>

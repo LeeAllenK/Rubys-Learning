@@ -3,6 +3,9 @@ import { Letterbtn } from './components/Letter-Btn';
 import { Home } from './components/Home';
 import { Homebtn } from './components/Home-Btn';
 import { Restartbtn } from './components/Restart-Btn';
+import { Main } from './components/Main-page';
+import { Number } from './components/Number-Home';
+import {NumberApp } from './components/Number-App'
 import './App.css';
 
 function App() {
@@ -15,6 +18,9 @@ function App() {
   const [winner, setWinner] = useState('');
   const [play, setPlay] = useState(false);
   const [text, setText] = useState('');
+  const [getNumbers, setGetNumbers] = useState(false);
+  const [getAlphabet, setGetAlphabet] = useState(false);
+  const [getNumberPlay,setGetNumberPlay] = useState(false)
   // Use a ref to persist the "nextIndex" value across renders and effects.
   const nextIndexRef = useRef(letter.length);
   // This effect automatically selects letters from the letter array.
@@ -29,7 +35,7 @@ function App() {
           if(value) {
             setLetterValue(value);
             // Use updater syntax to ensure consistency across state updates.
-            setCompLetters([...compLetters, value]);
+            setCompLetters((prevComp) => [...prevComp, value]);
           }
           return prev;
         });
@@ -41,8 +47,8 @@ function App() {
       return () => clearInterval(nextIntervalId);
     }
   }, [compLetters, letter, text]);
-  console.log('COMPLETTER',compLetters)
-  // effect compares the automatically picked letter with the user’s pick.
+  console.log('COMPLETTER', compLetters);
+  // Effect compares the automatically picked letter with the user’s pick.
   useEffect(() => {
     if(compare && compLetters.length > 1) {
       if(compLetters[0] === compLetters[1]) {
@@ -59,12 +65,12 @@ function App() {
       setCompare(false);
     }
   }, [compare, compLetters]);
-// Event to add to compLetters array to compare
+  // Event to add to compLetters array to compare
   const handleClick = (letter, i) => {
     setCompLetters((prevComp) => [...prevComp, letter]);
     setCompare(true);
   };
-//Event used to start application and set arrays for lletters and btnLetters
+  // Event used to start application and set arrays for letters and btnLetters
   const handlePlay = () => {
     const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
     setPlay((p) => !p);
@@ -72,7 +78,7 @@ function App() {
     setBtnLetters(shuffled);
     console.log('playGame');
   };
-//Event used to go back to home screen
+  // Event used to go back to home screen
   const handleHomeClick = () => {
     setPlay((p) => !p);
     setCompLetters([]);
@@ -80,15 +86,44 @@ function App() {
     setWinner('');
     setText('');
   };
-//Event used to reset letter and btnLetters arrays.
+  // Event used to reset letter and btnLetters arrays.
   const handleRestartClick = () => {
     const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
     setLetter(ALPHABET);
     setBtnLetters(shuffled);
     setCompLetters([]);
   };
+  const handleNumberClick = () => {
+    console.log('number');
+    setGetNumbers(gn=>!gn)
+  };
+
+  const handleAlphabetClick = () => {
+    console.log('alphabet');
+    setGetAlphabet(ga=>!ga)
+  };
+  const handleBackClick = ()=>{
+    setGetAlphabet(ga=>!ga)
+  }
+  const handleNumberBackClick = ()=>{
+    setGetNumbers(gn=>!gn)
+  }
+  const handlePlayClick = ()=>{
+    console.log('playNumbes')
+    setGetNumberPlay(np=>!np);
+  }
+
   return (
     <div className='App'>
+      {!(getNumbers || getAlphabet) && (
+        <Main onNumberClick={handleNumberClick} onAlphabetClick={handleAlphabetClick} />
+      )}
+      {getNumbers && 
+        <Number onBackNumberClick={handleNumberBackClick} onNumberPlayClick={handlePlayClick}/>
+      }
+      {getNumberPlay &&
+          <NumberApp/>
+      }
       {play ? (
         <>
           {letter.length === 0 && <h2>{winner}</h2>}
@@ -118,16 +153,20 @@ function App() {
           </ul>
         </>
       ) : (
-        <Home
-          onPlayClick={handlePlay}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
+        getAlphabet && (
+          <Home
+            onPlayClick={handlePlay}
+            onBackClick={handleBackClick}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+        )
       )}
     </div>
   );
 }
 export default App;
+
 const ALPHABET = [
   { value: 'a' }, { value: 'b' }, { value: 'c' }, { value: 'd' }, { value: 'e' },
   { value: 'f' }, { value: 'g' }, { value: 'h' }, { value: 'i' }, { value: 'j' },

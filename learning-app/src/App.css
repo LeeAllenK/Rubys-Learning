@@ -22,6 +22,9 @@ h1{
   font-variation-settings:100px;
   font-size: 3.5em;
 }
+.number-header{
+  justify-content: center;
+}
 input{
   color: black;
   font-size: 2em;
@@ -58,6 +61,7 @@ h2{
   display: flex;
   margin: 0.25em;
 }
+
 ul{
   list-style: none;
 }
@@ -67,7 +71,7 @@ ul{
   align-items: center;  
   justify-content: flex-start;
 }
-.home-list{
+.home-list,.number-list{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -482,7 +486,7 @@ button{
   justify-content: space-between;
   width: 100%
 }
-.home-btn,.restart-btn{
+.home-btn,.restart-btn,.back-btn{
   color: black;
   font-size: 2.5em;
   font-weight: bolder;
@@ -500,6 +504,32 @@ color: white;
 }
 button:active{
     transform: translateY(2px)
+}
+.main-pageBtns{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.main-alphabetbtn,.main-numberbtn{
+  display: flex;
+  justify-content: center;
+  color: black;
+  font-size: 3em;
+  font-weight: bolder;
+  width: 7em;
+  border-radius: 1em;
+  border: 0.09em solid #a8a6a6, ;
+  background: linear-gradient(180deg, #f0f0f0, #a8a6a6);
+  box-shadow: 0 4px 3px #a8a6a6, ;
+  transition: all 0.2s ease;
+  margin: 0.5em;
+}
+.main-alphabetbtn:hover,.main-numberbtn:hover {
+  background: linear-gradient(180deg, rgb(169, 226, 169), green);
+  box-shadow: 0 4px 3px green;
+  border: 0.09em solid green, 
 }
 @media(max-width:740px){
 h2 {
