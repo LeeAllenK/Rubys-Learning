@@ -22,6 +22,7 @@ function App() {
   const [getNumbers, setGetNumbers] = useState(false);
   const [getAlphabet, setGetAlphabet] = useState(false);
   const [getNumberPlay,setGetNumberPlay] = useState(false)
+  const [getNumberTwo, setGetNumberTwo] = useState(false);
   // Use a ref to persist the "nextIndex" value across renders and effects.
   const nextIndexRef = useRef(letter.length);
   // This effect automatically selects letters from the letter array.
@@ -83,7 +84,7 @@ function App() {
   const handleHomeClick = () => {
     
     if(getNumbers){
-      setLetter(NUMBERS)
+      setLetter(numbersOne)
       setTextNumber('')
       setGetNumberPlay(np=>!np)
       setCompLetters([]);
@@ -100,21 +101,25 @@ function App() {
   // Event used to reset letter and btnLetters arrays.
   const handleRestartClick = () => {
     const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
-    const shuffledNumber = shuffleArray(NUMBERS.map((l) => l.value));
+    const shuffledNumber = shuffleArray(numbersOne.map((l) => l.value));
     setLetter(ALPHABET);
     setBtnLetters(shuffled);
     setCompLetters([]);
     if(getNumbers) {
-      setLetter(NUMBERS);
+      setLetter(numbersOne);
       setBtnLetters(shuffledNumber);
       setCompLetters([]);
     }
   };
-  const handleNumberClick = () => {
+  const handleNumberOneClick = () => {
     setGetNumbers(gn=>!gn)
     console.log('playGame');
   };
-  
+  const handleNumberTwoClick = ()=>{
+    setGetNumbers(gn => !gn);
+    setGetNumberTwo(nt=> !nt);
+    console.log('11-20')
+  }
   const handleAlphabetClick = () => {
     console.log('alphabet');
     setGetAlphabet(ga=>!ga)
@@ -126,17 +131,24 @@ function App() {
     setGetNumbers(gn=>!gn)
   }
   const handleNumberPlayClick = ()=>{
-    const shuffledNumber = shuffleArray(NUMBERS.map((l) => l.value));
-    setGetNumberPlay(np=>!np);
-    setLetter(NUMBERS);
-    setBtnLetters(shuffledNumber);
-    console.log('playNumbers')
+    if(getNumberTwo){
+      const shuffledNumber = shuffleArray(numbersTwo.map((l) => l.value));
+      setGetNumberPlay(np => !np);
+      setLetter(numbersTwo);
+      setBtnLetters(shuffledNumber);
+    }else{
+      const shuffledNumber = shuffleArray(numbersOne.map((l) => l.value));
+      setGetNumberPlay(np=>!np);
+      setLetter(numbersOne);
+      setBtnLetters(shuffledNumber);
+      console.log('playNumbers')
+    }
   }
   console.log(letter)
   return (
     <div className='App'>
       {!(getNumbers || getAlphabet) && (
-        <Main onNumberClick={handleNumberClick} onAlphabetClick={handleAlphabetClick} />
+        <Main onNumberOneClick={handleNumberOneClick} onAlphabetClick={handleAlphabetClick} onNumberTwoClick={handleNumberTwoClick}/>
       )}
       {(getNumbers &&!getNumberPlay) &&(
         <Number
@@ -186,9 +198,11 @@ function App() {
   );
 }
 export default App;
-const NUMBERS = [
+const numbersOne = [
   { value: '1' }, { value: '2' }, { value: '3' }, { value: '4' }, { value: '5' },
-  { value: '6' }, { value: '7' }, { value: '8' }, { value: '9' }, { value: '10' },
+  { value: '6' }, { value: '7' }, { value: '8' }, { value: '9' }, { value: '10' }
+].reverse();
+const numbersTwo = [
   { value: '11' }, { value: '12' }, { value: '13' }, { value: '14' }, { value: '15' },
   { value: '16' }, { value: '17' }, { value: '18' }, { value: '19' }, { value: '20' },
 ].reverse();
@@ -202,7 +216,7 @@ const ALPHABET = [
 ].reverse();
 
 export const alphabet = ALPHABET.map((a) => a.value);
-export const numbers = NUMBERS.map((a) => a.value);
+export const numbers = numbersOne.map((a) => a.value);
 
 function shuffleArray(array) {
   for(let i = array.length - 1; i >= 1; i--) {

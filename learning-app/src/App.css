@@ -515,10 +515,12 @@ button:active{
 .main-alphabetbtn,.main-numberbtn{
   display: flex;
   justify-content: center;
+  align-items: center;
   color: black;
   font-size: 3em;
   font-weight: bolder;
-  width: 7em;
+  height: 2em;
+  width: 8em;
   border-radius: 1em;
   border: 0.09em solid #a8a6a6, ;
   background: linear-gradient(180deg, #f0f0f0, #a8a6a6);
