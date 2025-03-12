@@ -5,12 +5,12 @@ import { Homebtn } from './components/Home-Btn';
 import { Restartbtn } from './components/Restart-Btn';
 import { Main } from './components/Main-page';
 import { Number } from './components/Number-Home';
-import {NumberApp } from './components/Number-App'
+// import {NumberApp } from './components/Number-App'
 import './App.css';
 
 function App() {
-  const [btnLetters, setBtnLetters] = useState(shuffledLetter);
-  const [letter, setLetter] = useState(ALPHABET);
+  const [btnLetters, setBtnLetters] = useState(shuffledLetter );
+  const [letter, setLetter] = useState([]);
   const [compLetters, setCompLetters] = useState([]);
   const [letterValue, setLetterValue] = useState('');
   const [compare, setCompare] = useState(false);
@@ -18,6 +18,7 @@ function App() {
   const [winner, setWinner] = useState('');
   const [play, setPlay] = useState(false);
   const [text, setText] = useState('');
+  const [textNumber, setTextNumber] = useState('');
   const [getNumbers, setGetNumbers] = useState(false);
   const [getAlphabet, setGetAlphabet] = useState(false);
   const [getNumberPlay,setGetNumberPlay] = useState(false)
@@ -25,7 +26,7 @@ function App() {
   const nextIndexRef = useRef(letter.length);
   // This effect automatically selects letters from the letter array.
   useEffect(() => {
-    if(compLetters.length === 0) {
+    if((compLetters.length === 0 && play) || (compLetters.length === 0 && getNumberPlay)) {
       nextIndexRef.current = letter.length;
       const nextIntervalId = setInterval(() => {
         // Decrement the value stored in the ref.
@@ -35,18 +36,18 @@ function App() {
           if(value) {
             setLetterValue(value);
             // Use updater syntax to ensure consistency across state updates.
-            setCompLetters((prevComp) => [...prevComp, value]);
+            setCompLetters([...compLetters, value]);
           }
           return prev;
         });
         if(nextIndexRef.current <= 0) {
           clearInterval(nextIntervalId);
-          setWinner(`Good Job ${text}!`);
+          setWinner(`Good Job ${text ? text : textNumber}!`);
         }
       }, 500);
       return () => clearInterval(nextIntervalId);
     }
-  }, [compLetters, letter, text]);
+  }, [compLetters, letter, text,textNumber,play,getNumberPlay]);
   console.log('COMPLETTER', compLetters);
   // Effect compares the automatically picked letter with the user’s pick.
   useEffect(() => {
@@ -80,24 +81,40 @@ function App() {
   };
   // Event used to go back to home screen
   const handleHomeClick = () => {
+    
+    if(getNumbers){
+      setLetter(NUMBERS)
+      setTextNumber('')
+      setGetNumberPlay(np=>!np)
+      setCompLetters([]);
+    }
+    if(getAlphabet){
     setPlay((p) => !p);
     setCompLetters([]);
     setLetter(ALPHABET);
     setWinner('');
     setText('');
+    }
+    console.log('HOME',letter)
   };
   // Event used to reset letter and btnLetters arrays.
   const handleRestartClick = () => {
     const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
+    const shuffledNumber = shuffleArray(NUMBERS.map((l) => l.value));
     setLetter(ALPHABET);
     setBtnLetters(shuffled);
     setCompLetters([]);
+    if(getNumbers) {
+      setLetter(NUMBERS);
+      setBtnLetters(shuffledNumber);
+      setCompLetters([]);
+    }
   };
   const handleNumberClick = () => {
-    console.log('number');
     setGetNumbers(gn=>!gn)
+    console.log('playGame');
   };
-
+  
   const handleAlphabetClick = () => {
     console.log('alphabet');
     setGetAlphabet(ga=>!ga)
@@ -108,30 +125,33 @@ function App() {
   const handleNumberBackClick = ()=>{
     setGetNumbers(gn=>!gn)
   }
-  const handlePlayClick = ()=>{
-    console.log('playNumbes')
+  const handleNumberPlayClick = ()=>{
+    const shuffledNumber = shuffleArray(NUMBERS.map((l) => l.value));
     setGetNumberPlay(np=>!np);
+    setLetter(NUMBERS);
+    setBtnLetters(shuffledNumber);
+    console.log('playNumbers')
   }
-
+  console.log(letter)
   return (
     <div className='App'>
       {!(getNumbers || getAlphabet) && (
         <Main onNumberClick={handleNumberClick} onAlphabetClick={handleAlphabetClick} />
       )}
-      {getNumbers && 
-        <Number onBackNumberClick={handleNumberBackClick} onNumberPlayClick={handlePlayClick}/>
-      }
-      {getNumberPlay &&
-          <NumberApp/>
-      }
-      {play ? (
+      {(getNumbers &&!getNumberPlay) &&(
+        <Number
+          onNumberPlayClick={handleNumberPlayClick} 
+          onBackNumberClick={handleNumberBackClick} 
+          value={textNumber}
+          onChange={(e)=> setTextNumber(e.target.value)}
+          />
+      )}
+      { play || getNumberPlay? (
         <>
           {letter.length === 0 && <h2>{winner}</h2>}
           <div className='homeBtn-border'>
             <Homebtn onHomeClick={handleHomeClick} />
-            {letter.length === 0 && (
-              <Restartbtn onRestartClick={handleRestartClick} />
-            )}
+            {letter.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
           </div>
           <div className='letter-border'>
             {letter.map((l) => (
@@ -152,21 +172,26 @@ function App() {
             ))}
           </ul>
         </>
+      ) : getAlphabet ? (
+        <Home
+          onPlayClick={handlePlay}
+          onBackClick={handleBackClick}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
       ) : (
-        getAlphabet && (
-          <Home
-            onPlayClick={handlePlay}
-            onBackClick={handleBackClick}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-        )
+        <></>
       )}
     </div>
   );
 }
 export default App;
-
+const NUMBERS = [
+  { value: '1' }, { value: '2' }, { value: '3' }, { value: '4' }, { value: '5' },
+  { value: '6' }, { value: '7' }, { value: '8' }, { value: '9' }, { value: '10' },
+  { value: '11' }, { value: '12' }, { value: '13' }, { value: '14' }, { value: '15' },
+  { value: '16' }, { value: '17' }, { value: '18' }, { value: '19' }, { value: '20' },
+].reverse();
 const ALPHABET = [
   { value: 'a' }, { value: 'b' }, { value: 'c' }, { value: 'd' }, { value: 'e' },
   { value: 'f' }, { value: 'g' }, { value: 'h' }, { value: 'i' }, { value: 'j' },
@@ -177,6 +202,7 @@ const ALPHABET = [
 ].reverse();
 
 export const alphabet = ALPHABET.map((a) => a.value);
+export const numbers = NUMBERS.map((a) => a.value);
 
 function shuffleArray(array) {
   for(let i = array.length - 1; i >= 1; i--) {
@@ -187,3 +213,4 @@ function shuffleArray(array) {
 }
 
 const shuffledLetter = shuffleArray([...alphabet]);
+const shuffledNumber = shuffleArray([...numbers]);

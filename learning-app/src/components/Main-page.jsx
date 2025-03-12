@@ -1,4 +1,5 @@
 import {Number} from './Number-Home'
+import {NumberApp} from './Number-App'
 export function Main({onNumberClick,onAlphabetClick}){
 
 	return(

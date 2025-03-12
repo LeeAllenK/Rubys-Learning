@@ -11,8 +11,8 @@ export function Number({ onNumberPlayClick, onBackNumberClick,onChange,value}){
 						<input 
 						type='text'
 						placeholder="Enter Your Name"
-						// value={'value'}
-						// onChange={onChange}
+						value={value.charAt(0).toUpperCase() + value.slice(1)}
+						onChange={onChange}
 						/>
 					</div>
 			<Playbtn onPlayClick={onNumberPlayClick}/>

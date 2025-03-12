@@ -7,7 +7,7 @@ import { Main } from './Main-page';
 import { Number } from './Number-Home';
 import '../App.css';
 
-export function NumberApp() {
+export function NumberApp({numberPlay}) {
   const [btnLetters, setBtnLetters] = useState(shuffledNumbers);
   const [letter, setLetter] = useState(NUMBERS);
   const [compLetters, setCompLetters] = useState([]);
@@ -33,7 +33,7 @@ export function NumberApp() {
 		  if(value) {
 			setLetterValue(value);
 			// Use updater syntax to ensure consistency across state updates.
-			setCompLetters((prevComp) => [...prevComp, value]);
+			setCompLetters([...compLetters, value]);
 		  }
 		  return prev;
 		});
@@ -80,32 +80,26 @@ export function NumberApp() {
   const handleHomeClick = () => {
 	setPlay((p) => !p);
 	setCompLetters([]);
-	setLetter(ALPHABET);
+	setLetter(NUMBERS);
 	setWinner('');
 	setText('');
+	setGetNumbers((gn)=>!gn)
   };
   // Event used to reset letter and btnLetters arrays.
   const handleRestartClick = () => {
 	const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
-	setLetter(ALPHABET);
+	setLetter(NUMBERS);
 	setBtnLetters(shuffled);
 	setCompLetters([]);
   };
 
-  const handleBackClick = ()=>{
-	setGetAlphabet(ga=>!ga)
-  }
   const handleNumberBackClick = ()=>{
 	setGetNumbers(gn=>!gn)
   }
   return (
 	<div className='App'>
-	  
-	  {getNumbers && 
-		<Number onBackNumberClick={handleNumberBackClick}/>
-	  }
-	  {getNumbers? (
 		<>
+		{getNumbers && <Number/>}
 		  {letter.length === 0 && <h2>{winner}</h2>}
 		  <div className='homeBtn-border'>
 			<Homebtn onHomeClick={handleHomeClick} />
@@ -132,16 +126,6 @@ export function NumberApp() {
 			))}
 		  </ul>
 		</>
-	  ) : (
-		getAlphabet && (
-		  <Home
-			onPlayClick={handlePlay}
-			onBackClick={handleBackClick}
-			value={text}
-			onChange={(e) => setText(e.target.value)}
-		  />
-		)
-	  )}
 	</div>
   );
 }
@@ -149,7 +133,7 @@ export function NumberApp() {
 const NUMBERS = [
   { value: '1' }, { value: '2' }, { value: '3' }, { value: '4' }, { value: '5' },
   { value: '6' }, { value: '7' }, { value: '8' }, { value: '9' }, { value: '10' },
-  { value: '11' }, { value: '12' }, { value: '13' }, { value: '14' }, { value: '`15' },
+  { value: '11' }, { value: '12' }, { value: '13' }, { value: '14' }, { value: '15' },
   { value: '16' }, { value: '17' }, { value: '18' }, { value: '19' }, { value: '20' },
 ].reverse();
 
