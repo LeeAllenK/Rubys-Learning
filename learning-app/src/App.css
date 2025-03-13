@@ -422,13 +422,14 @@ button{
     animation: rainbow-A 5s infinite;
     color: black;
 }
-.letter-border {
+
+.letter-border,.num-border {
   display: flex;
   justify-content:center;
   align-content: center;
   left: 50%;
 }
-.letter {
+.letter,.num {
   background-color: white;
   display: flex;
   justify-content: center;
@@ -454,12 +455,24 @@ button{
 .letters-border{
   display:flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  position: relative;
-  top: 300px;
-  width:100%;
+  margin-top: 18em;
+  width: 100%;
 }
-.letter-btns{
+.nums-border{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 18em;
+  width: 100%;
+}
+.num-list{
+  display: flex; 
+  align-items: center;
+}
+.item-btns{
   display: flex;
   border: 0.08em solid black;
   justify-content:center;
@@ -467,17 +480,17 @@ button{
   font-size: 0.8em;
   font-weight: 800;
   border-radius: 50px;
-  width: 1.5em;
-  height: 1.5em;
+  width: 1.6em;
+  height: 1.6em;
   margin: 0.1em;
   background: linear-gradient(180deg, #ffffff, #9f9f9f);
   box-shadow: 0 4px 6px black;
   color: black;
 }
-.letter-btns:hover{
+.item-btns:hover{
   animation: rainbow-border 3s infinite;
 }
-.letter-btns:active{
+.item-btns:active{
   transform: translateY(2px);
 
 }
@@ -589,6 +602,10 @@ h2 {
     margin-top:1em;
     
   }
+  .number-border{
+    border: 2px solid red;
+  
+  }
   .letter{
     background-color: white;
     display: flex;
@@ -607,7 +624,7 @@ h2 {
     right: 2em;
     width:100%;
   }
-  .letter-btns {
+  .item-btns {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -701,7 +718,7 @@ h2 {
     width:90%;
     height: 30vh;
   }
-  .letter-btns {
+  .item-btns {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -793,7 +810,7 @@ h2 {
     height: 100vh;
     margin:0;
   }
-  .letter-btns {
+  .item-btns {
     display: flex;
     justify-content: center;
     align-items: center;
