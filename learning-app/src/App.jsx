@@ -1,16 +1,21 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef,useReducer } from 'react';
 import { Button } from './components/Button';
 import { Home } from './components/Home';
 import { Homebtn } from './components/Home-Btn';
 import { Restartbtn } from './components/Restart-Btn';
 import { Main } from './components/Main-page';
 import { Number } from './components/Number-Home';
-// import {NumberApp } from './components/Number-App'
+import {appReducer} from './AppReducer'
 import './App.css';
-
+const initialState = {
+    play: false,
+    items: [],
+    buttons: [],
+    getAlphabet: false,
+  }
 function App() {
   const [buttons, setButtons] = useState(shuffledLetter );
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
   const [compLetters, setCompLetters] = useState([]);
   const [letterValue, setLetterValue] = useState('');
   const [compare, setCompare] = useState(false);
@@ -23,24 +28,22 @@ function App() {
   const [getAlphabet, setGetAlphabet] = useState(false);
   const [getNumberPlay,setGetNumberPlay] = useState(false)
   const [getNumberCat, setGetNumberCat] = useState([]);
+  const [state , dispatch] = useReducer(appReducer, initialState)
   // Use a ref to persist the "nextIndex" value across renders and effects.
-  const nextIndexRef = useRef(items.length);
+  const nextIndexRef = useRef(state.items.length);
   // This effect automatically selects letters from the items array.
   useEffect(() => {
-    if((compLetters.length === 0 && play) || (compLetters.length === 0 && getNumberPlay)) {
-      nextIndexRef.current = items.length;
+    if((compLetters.length === 0 && state.play) || (compLetters.length === 0 && getNumberPlay)) {
+      nextIndexRef.current = state.items.length;
       const nextIntervalId = setInterval(() => {
         // Decrement the value stored in the ref.
         nextIndexRef.current--;
-        setItems((prev) => {
-          const value = prev[nextIndexRef.current]?.value;
+          const value = state.items[nextIndexRef.current]?.value;
           if(value) {
             setLetterValue(value);
-            // Use updater syntax to ensure consistency across state updates.
             setCompLetters([...compLetters, value]);
-          }
-          return prev;
-        });
+          }else return letterValue;
+
         if(nextIndexRef.current <= 0) {
           clearInterval(nextIntervalId);
           setWinner(`Good Job ${text ? text : textNumber}!`);
@@ -48,7 +51,7 @@ function App() {
       }, 500);
       return () => clearInterval(nextIntervalId);
     }
-  }, [compLetters, items, text,textNumber,play,getNumberPlay]);
+  }, [compLetters.length, state.items, text,textNumber,state.play,getNumberPlay]);
   console.log('COMPLETTER', compLetters);
   // Effect compares the automatically picked items with the user’s pick.
   useEffect(() => {
@@ -57,9 +60,9 @@ function App() {
         console.log('MATCH');
         setMatch(true);
         // Remove the items from the items array using the index stored in the ref.
-        setItems((prev) =>
-          prev.filter((_, index) => index !== nextIndexRef.current)
-        );
+       
+          state.items.filter((_, index) => index !== nextIndexRef.current)
+        
       } else {
         console.log('NO MATCH');
       }
@@ -69,16 +72,19 @@ function App() {
   }, [compare, compLetters]);
   // Event to add to compLetters array to compare
   const handleClick = (items, i) => {
-    setCompLetters((prevComp) => [...prevComp, items]);
+    setCompLetters([...compLetters, state.items]);
     setCompare(true);
   };
   // Event used to start application and set arrays for letters and buttons
   const handlePlay = () => {
-    const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
-    setPlay((p) => !p);
-    setItems(ALPHABET);
-    setButtons(shuffled);
-    console.log('playGame');
+    // const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
+    // setPlay((p) => !p);
+    // setItems(ALPHABET);
+    // setButtons(shuffled);
+    dispatch({
+      type: 'Toggle-Play'
+    })
+    console.log('STATE',state);
   };
   // Event used to go back to home screen
   const handleHomeClick = () => {
@@ -124,6 +130,7 @@ function App() {
   const handleAlphabetClick = () => {
     console.log('alphabet');
     setGetAlphabet(ga=>!ga)
+    // dispatch({type: 'Add-alpha'})
   };
   const handleBackClick = ()=>{
     setGetAlphabet(ga=>!ga)
@@ -146,7 +153,7 @@ function App() {
       setButtons(shuffledNumber);
     }
   }
-  console.log(items)
+  console.log(state.items)
   return (
     <div className='App'>
       {!(getNumbers || getAlphabet) && (
@@ -160,15 +167,15 @@ function App() {
           onChange={(e)=> setTextNumber(e.target.value)}
           />
       )}
-      { play ? (
+      { state.play ? (
         <>
-          {items.length === 0 && <h2>{winner}</h2>}
+          {state.items.length === 0 && <h2>{winner}</h2>}
           <div className='homeBtn-border'>
             <Homebtn onHomeClick={handleHomeClick} />
-            {items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
+            {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
           </div>
           <div className={ 'letter-border' }>
-            {items.map((l) => (
+            {state.items.map((l) => (
               <div className='letter' key={l.value}>
                 {l.value.toUpperCase()}
               </div>
@@ -235,7 +242,7 @@ const numbersTwo = [
   { value: '11' }, { value: '12' }, { value: '13' }, { value: '14' }, { value: '15' },
   { value: '16' }, { value: '17' }, { value: '18' }, { value: '19' }, { value: '20' },
 ].reverse();
-const ALPHABET = [
+export const ALPHABET = [
   { value: 'a' }, { value: 'b' }, { value: 'c' }, { value: 'd' }, { value: 'e' },
   { value: 'f' }, { value: 'g' }, { value: 'h' }, { value: 'i' }, { value: 'j' },
   { value: 'k' }, { value: 'l' }, { value: 'm' }, { value: 'n' }, { value: 'o' },
@@ -247,7 +254,7 @@ const ALPHABET = [
 export const alphabet = ALPHABET.map((a) => a.value);
 export const numbers = numbersOne.map((a) => a.value);
 
-function shuffleArray(array) {
+export function shuffleArray(array) {
   for(let i = array.length - 1; i >= 1; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
