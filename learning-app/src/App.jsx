@@ -15,7 +15,7 @@ const initialState = {
   }
 function App() {
   const [buttons, setButtons] = useState(shuffledLetter );
-  // const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]);
   const [compLetters, setCompLetters] = useState([]);
   const [letterValue, setLetterValue] = useState('');
   const [compare, setCompare] = useState(false);
@@ -27,23 +27,26 @@ function App() {
   const [getNumbers, setGetNumbers] = useState(false);
   const [getAlphabet, setGetAlphabet] = useState(false);
   const [getNumberPlay,setGetNumberPlay] = useState(false)
-  const [getNumberCat, setGetNumberCat] = useState([]);
+  const [getNumberCatOne, setGetNumberCatOne] = useState([]);
+  const [getNumberCatTwo, setGetNumberCatTwo] = useState([]);
   const [state , dispatch] = useReducer(appReducer, initialState)
-  // Use a ref to persist the "nextIndex" value across renders and effects.
-  const nextIndexRef = useRef(state.items.length);
+  // Used a ref to persist the "nextIndex" value across renders and effects.
+  const nextIndexRef = useRef(items.length);
   // This effect automatically selects letters from the items array.
   useEffect(() => {
-    if((compLetters.length === 0 && state.play) || (compLetters.length === 0 && getNumberPlay)) {
-      nextIndexRef.current = state.items.length;
+    if((compLetters.length === 0 && play) || (compLetters.length === 0 && getNumberPlay)) {
+      nextIndexRef.current = items.length;
       const nextIntervalId = setInterval(() => {
         // Decrement the value stored in the ref.
         nextIndexRef.current--;
-          const value = state.items[nextIndexRef.current]?.value;
+        setItems((prev) => {
+          const value = prev[nextIndexRef.current]?.value;
           if(value) {
             setLetterValue(value);
             setCompLetters([...compLetters, value]);
-          }else return letterValue;
-
+          }
+          return prev;
+        });
         if(nextIndexRef.current <= 0) {
           clearInterval(nextIntervalId);
           setWinner(`Good Job ${text ? text : textNumber}!`);
@@ -51,7 +54,7 @@ function App() {
       }, 500);
       return () => clearInterval(nextIntervalId);
     }
-  }, [compLetters.length, state.items, text,textNumber,state.play,getNumberPlay]);
+  }, [compLetters, items, text,textNumber,play,getNumberPlay]);
   console.log('COMPLETTER', compLetters);
   // Effect compares the automatically picked items with the user’s pick.
   useEffect(() => {
@@ -60,9 +63,9 @@ function App() {
         console.log('MATCH');
         setMatch(true);
         // Remove the items from the items array using the index stored in the ref.
-       
-          state.items.filter((_, index) => index !== nextIndexRef.current)
-        
+        setItems((prev) =>
+          prev.filter((_, index) => index !== nextIndexRef.current)
+        );
       } else {
         console.log('NO MATCH');
       }
@@ -72,23 +75,19 @@ function App() {
   }, [compare, compLetters]);
   // Event to add to compLetters array to compare
   const handleClick = (items, i) => {
-    setCompLetters([...compLetters, state.items]);
+    setCompLetters((prevComp) => [...prevComp, items]);
     setCompare(true);
   };
   // Event used to start application and set arrays for letters and buttons
   const handlePlay = () => {
-    // const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
-    // setPlay((p) => !p);
-    // setItems(ALPHABET);
-    // setButtons(shuffled);
-    dispatch({
-      type: 'Toggle-Play'
-    })
-    console.log('STATE',state);
+    const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
+    setPlay((p) => !p);
+    setItems(ALPHABET);
+    setButtons(shuffled);
+    console.log('playGame');
   };
   // Event used to go back to home screen
   const handleHomeClick = () => {
-    
     if(getNumbers){
       setItems(numbersOne)
       setTextNumber('')
@@ -119,71 +118,106 @@ function App() {
   };
   const handleNumberOneClick = () => {
     setGetNumbers(gn=>!gn)
-    setGetNumberCat(numbersOne)
+    setGetNumberCatOne(numbersOne)
     console.log('playGame');
   };
   const handleNumberTwoClick = ()=>{
     setGetNumbers(gn => !gn);
-    setGetNumberCat(numbersTwo);
+    setGetNumberCatTwo(numbersTwo);
     console.log('11-20')
   }
   const handleAlphabetClick = () => {
     console.log('alphabet');
     setGetAlphabet(ga=>!ga)
-    // dispatch({type: 'Add-alpha'})
   };
   const handleBackClick = ()=>{
-    setGetAlphabet(ga=>!ga)
+    setGetAlphabet(ga=>!ga);
+    setGetNumberCatOne([]);
+    setGetNumberCatTwo([]);
   }
   const handleNumberBackClick = ()=>{
     setGetNumbers(gn=>!gn)
+    setGetNumberCatOne([]);
+    setGetNumberCatTwo([]);
+    console.log('back')
   }
-  console.log(getNumberCat[0]?.value)
   const handleNumberPlayClick = ()=>{
-    if(getNumberCat[0]?.value.includes('20')){
+    if(getNumberCatTwo[0]?.value.includes('20')){
       const shuffledNumber = shuffleArray(numbersTwo.map((l) => l.value));
       setGetNumberPlay(np => !np);
       setItems(numbersTwo);
       setButtons(shuffledNumber);
     }
-    if(getNumberCat[0]?.value.includes('10')) {
+    if(getNumberCatOne[0]?.value.includes('10')) {
       const shuffledNumber = shuffleArray(numbersOne.map((l) => l.value));
       setGetNumberPlay(np => !np);
       setItems(numbersOne);
       setButtons(shuffledNumber);
     }
   }
-  console.log(state.items)
   return (
     <div className='App'>
       {!(getNumbers || getAlphabet) && (
         <Main onNumberOneClick={handleNumberOneClick} onAlphabetClick={handleAlphabetClick} onNumberTwoClick={handleNumberTwoClick}/>
       )}
       {(getNumbers &&!getNumberPlay) &&(
+      <>
         <Number
           onNumberPlayClick={handleNumberPlayClick} 
           onBackNumberClick={handleNumberBackClick} 
           value={textNumber}
           onChange={(e)=> setTextNumber(e.target.value)}
           />
+          <ul className='number-list'>
+            {getNumberCatOne.length > 0 ? (
+              <>
+                <li className="home-One">1</li>
+                <li className="home-Two">2</li>
+                <li className="home-Three">3</li>
+                <li className="home-Four">4</li>
+                <li className="home-Five">5</li>
+                <li className="home-Six">6</li>
+                <li className="home-Seven">7</li>
+                <li className="home-Eight">8</li>
+                <li className="home-Nine">9</li>
+                <li className="home-Ten">10</li>
+              </>
+            ) : (
+            
+            <>
+            <li className="home-Eleven">11</li>
+            <li className="home-Twelve">12</li>
+            <li className="home-Thirteen">13</li>
+            <li className="home-Fourteen">14</li>
+            <li className="home-Fifteen">15</li>
+            <li className="home-Sixteen">16</li>
+            <li className="home-Seventeen">17</li>
+            <li className="home-Eighteen">18</li>
+            <li className="home-Nineteen">19</li>
+            <li className="home-Twenty">20</li>
+            </>
+            )}
+            
+          </ul>
+      </>
       )}
-      { state.play ? (
+      {play ? (
         <>
-          {state.items.length === 0 && <h2>{winner}</h2>}
+          {items.length === 0 && <h2>{winner}</h2>}
           <div className='homeBtn-border'>
             <Homebtn onHomeClick={handleHomeClick} />
-            {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
+            {items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
           </div>
-          <div className={ 'letter-border' }>
-            {state.items.map((l) => (
+          <div className='letter-border' >
+            {items.map((l) => (
               <div className='letter' key={l.value}>
                 {l.value.toUpperCase()}
               </div>
             ))}
           </div>
-          <ul className={'letters-border'}>
+          <ul className='letters-border'>
             {buttons.map((items, index) => (
-              <li key={items}>
+              <li className='letter-list' key={items} >
                 <Button
                   items={items.toUpperCase()}
                   onClick={() => handleClick(items, index)}
@@ -203,7 +237,7 @@ function App() {
             <div className='num-border'>
               {items.map((l) => (
                 <div className='num' key={l.value}>
-                  {l.value.toUpperCase()}
+                  {l.value}
                 </div>
               ))}
             </div>
@@ -234,11 +268,11 @@ function App() {
   );
 }
 export default App;
-const numbersOne = [
+export const numbersOne = [
   { value: '1' }, { value: '2' }, { value: '3' }, { value: '4' }, { value: '5' },
   { value: '6' }, { value: '7' }, { value: '8' }, { value: '9' }, { value: '10' }
 ].reverse();
-const numbersTwo = [
+export const numbersTwo = [
   { value: '11' }, { value: '12' }, { value: '13' }, { value: '14' }, { value: '15' },
   { value: '16' }, { value: '17' }, { value: '18' }, { value: '19' }, { value: '20' },
 ].reverse();

@@ -1,14 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 1rem;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 body{
   background-color: rgb(116, 163, 201);
+  width: 100vw;
+  padding:0;
+  margin: 0;
 }
 .App{
+  display: flex;
+  flex-direction: column;
+  width:100vw;
   margin: 0;
   padding:0;
 }
@@ -26,11 +33,13 @@ h1{
   justify-content: center;
 }
 input{
+  text-align: center;
   color: black;
   font-size: 2em;
-  font-weight: bolder;
-  margin:0.1em;
-  width: 12em;
+  font-weight: 900;
+  margin-bottom:0.4em;
+  width: 100vw;
+
 }
 h2{
   font-size: 3em;
@@ -45,31 +54,31 @@ h2{
   80% { color: orange; }
   100% { color: yellow; transform: scale(2)  }
 }
+.home-border{
+  display: flex;
+  flex-direction: column; 
+  align-items: center;  
+  justify-content: flex-start;
+}
 .title{
   display: flex;
   margin: 0.1em;
 }
-.title-learn{
+.title-learn,.title-number{
   display:flex;
   margin: 0.25em;
 }
-.title-my{
+.title-my,.title-myNum{
   display: flex;
   margin: 0.25em;
 }
-.title-alpha{
+.title-alpha,.title-numbers{
   display: flex;
   margin: 0.25em;
 }
 
 ul{
   list-style: none;
-}
-.home-border{
-  display: flex;
-  flex-direction: column; 
-  align-items: center;  
-  justify-content: flex-start;
 }
 .home-list,.number-list{
   display: flex;
@@ -82,40 +91,42 @@ ul{
   font-variation-settings:"wdth" 100;
 }
 li{
+  display: flex;
+  align-items: center;
   font-size: 5em;
   font-weight: bolder;
   padding: 0.1em;
-  margin: 0.1em;
+  margin: 0.3em;
   height: 1em;
 }
-.home-A {
+.home-A,.home-One,.home-Eleven {
   animation: rainbow-A 4s infinite;
 }
-.home-B {
+.home-B,.home-Two,.home-Twelve {
   animation: rainbow-B 4.2s infinite;
 }
-.home-C {
+.home-C,.home-Three,.home-Thirteen {
   animation: rainbow-C 4.4s infinite;
 }
-.home-D {
+.home-D,.home-Four,.home-Fourteen {
   animation: rainbow-D 4.6s infinite;
 }
-.home-E {
+.home-E,.home-Five,.home-Fifteen {
   animation: rainbow-E 4.8s infinite;
 }
-.home-F {
+.home-F,.home-Six,.home-Sixteen {
   animation: rainbow-F 5s infinite;
 }
-.home-G {
+.home-G,.home-Seven,.home-Seventeen {
   animation: rainbow-G 5.2s infinite;
 }
-.home-H {
+.home-H,.home-Eight,.home-Eighteen {
   animation: rainbow-H 5.4s infinite;
 }
-.home-I {
+.home-I,.home-Nine,.home-Nineteen {
   animation: rainbow-I 5.6s infinite;
 }
-.home-J {
+.home-J,.home-Ten,.home-Twenty {
   animation: rainbow-J 5.8s infinite;
 }
 .home-K {
@@ -403,12 +414,11 @@ li{
 button{
   cursor:pointer;
 }
-.play-Btn{
+.play-Btn,.menu-btn{
   color: black;
-  width:10em;
+  width:100%;
   height:75px;
   border: 0.05em solid #b3b3b3;
-  border-radius: 1em;
   font-family: "DynaPuff", system-ui;
   font-optical-sizing: auto;
   font-weight: 900;
@@ -419,15 +429,16 @@ button{
   box-shadow: 0 2px 9px #8b8989;
 }
 .play-Btn:hover{
-    animation: rainbow-A 5s infinite;
-    color: black;
+  animation: rainbow-A 5s infinite;
+  color: black;
 }
-
+.menu-btn:hover{
+  background:linear-gradient(180deg, rgb(255, 255, 255),green)
+}
 .letter-border,.num-border {
   display: flex;
   justify-content:center;
   align-content: center;
-  left: 50%;
 }
 .letter,.num {
   background-color: white;
@@ -438,6 +449,21 @@ button{
   width: 250px;
   border-radius: 10px;
   position: absolute;
+  color: black;
+  background: linear-gradient(180deg, #b3b3b3, #fdfcfc);
+  box-shadow: 0 4px 6px #0000004d;
+  animation: rainbow-border 3s infinite;
+  margin: 0;
+}
+.num {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 9.5em;
+  height: 1.1em;
+  width: 1.1em;
+  border-radius: 10px;
   color: black;
   background: linear-gradient(180deg, #b3b3b3, #fdfcfc);
   box-shadow: 0 4px 6px #0000004d;
@@ -455,17 +481,16 @@ button{
 .letters-border{
   display:flex;
   justify-content: center;
-  align-items: center;
+  align-content: flex-start;
   flex-wrap: wrap;
-  margin-top: 18em;
   width: 100%;
+  margin-top: 300px;
+  padding: 0;
 }
 .nums-border{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 18em;
+  justify-content:flex-start;
+  margin-top: 13.5em;
   width: 100%;
 }
 .num-list{
@@ -499,15 +524,16 @@ button{
   justify-content: space-between;
   width: 100%
 }
-.home-btn,.restart-btn,.back-btn{
+.home-btn,.restart-btn{
   color: black;
   font-size: 2.5em;
-  font-weight: bolder;
+  font-weight: 900;
   border-radius: 1em;
   border: 0.09em solid #a8a6a6,;
   background: linear-gradient(180deg, #f0f0f0, #a8a6a6);
   box-shadow: 0 4px 3px #a8a6a6,;
   transition: all 0.2s ease;
+  margin: 20px;
 }
 .home-btn:hover,.restart-btn:hover{
 box-shadow: 0 0px 8px green;
@@ -529,40 +555,195 @@ button:active{
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
+  color:black;
+  font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  font-weight:900;
+  font-style: normal;
+  font-variation-settings:100px;
   font-size: 3em;
-  font-weight: bolder;
   height: 2em;
-  width: 8em;
-  border-radius: 1em;
-  border: 0.09em solid #a8a6a6, ;
+  width: 100%;
+  border: 0.09em solid #a8a6a6;
+  border-top-color: #f0f0f0;
+  border-bottom-color: #a8a6a6;
+  border-right: none;
+  border-left: none;
   background: linear-gradient(180deg, #f0f0f0, #a8a6a6);
   box-shadow: 0 4px 3px #a8a6a6, ;
-  transition: all 0.2s ease;
   margin: 0.5em;
 }
 .main-alphabetbtn:hover,.main-numberbtn:hover {
-  background: linear-gradient(180deg, rgb(169, 226, 169), green);
+  background: linear-gradient(180deg,white, green);
   box-shadow: 0 4px 3px green;
-  border: 0.09em solid green, 
+  border: 0.09em solid white;
+  border-top-color: white;
+  border-bottom-color: green;
+  border-right: none;
+  border-left: none;
+}
+@media (max-width: 1280px){
+.main-alphabetbtn,
+  .main-numberbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 2em;
+    font-weight: 700;
+    height: 1.5em;
+    width: 8.1em;
+    border: 0.09em solid #a8a6a6, ;
+    background: linear-gradient(180deg, #f0f0f0, #a8a6a6);
+    box-shadow: 0 4px 3px #a8a6a6, ;
+    transition: all 0.2s ease;
+    margin: 0.5em;
+  }
+h1 {
+    display: flex;
+    color: black;
+    font-size: 2.5em;
+  }
+   h2 {
+    font-size: 2em;
+    animation: rainbow-winner-grow 3s infinite;
+  }
+  p{
+    font-size: 0.9em;
+  }
+  .home-list{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 80%;
+  }
+  li{
+    display: flex;
+    align-items: center;
+    font-size:2.5em;
+  }
+  .title{
+  display: flex;
+  margin: 0.1em;
+}
+.title-learn{
+  display:flex;
+  margin: 0.25em;
+}
+.title-my{
+  display: flex;
+  margin: 0.25em;
+}
+.title-alpha{
+  display: flex;
+  margin: 0.25em;
+}
+  input{
+    color: black;
+    font-size: 2em;
+    font-weight: 700;
+    margin: 0.1em;
+    width: 8em;
+  }
+  .play-Btn {
+      color: black;
+      width: 10em;
+      height: 1.7em;
+      border: 0.05em solid #b3b3b3;
+      font-size: 2em;
+      background: linear-gradient(180deg, #efebeb, #8b8989);
+      box-shadow: 0 2px 9px #8b8989;
+  }
+  .home-btn,.restart-btn{
+    font-size: 2em;
+    font-weight: 900;
+    border-radius: 1em;
+    border: 0.1em solid #8b8989;
+    background: linear-gradient(180deg, #efebeb,#8b8989);
+    box-shadow: 0 2px 9px #8b8989;
+    color: black;
+  }
+  .letter-border{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top:1em;
+    height: 25vh
+  }
+  .letter{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7em;
+    height: 1em;
+    width: 1em;
+    color: black;
+  } 
+  .num{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 11em;
+    color: black;
+    background-color: white;
+    height: 1.1em;
+    width: 1.1em;
+    background: linear-gradient(180deg, #b3b3b3, #fdfcfc);
+    box-shadow: 0 4px 6px #0000004d;
+  }
+    .nums-border{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .letters-border {
+    display: flex;
+    justify-content: center;
+    align-content:flex-start;
+    align-items: center;
+    width:100%;
+    margin: 0;
+  }
+  .item-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.4em;
+    font-weight: 900;
+    width: 2.1em;
+    height: 2.1em;
+    margin: 0.5em;
+    border: 0.1em solid black;
+    color: black;
+  }
+  li{
+    display: flex;
+    padding:0;
+    margin: .3em;
+    font-size: 1.9em;
+  }
 }
 @media(max-width:740px){
 h2 {
     font-size: 1em;
     animation: rainbow-winner-grow 3s infinite;
   }
-  p{
-    font-size: 0.7em;
-  }
+  
   li{
     font-size:2.5em
   }
-  .title {
+  .menu-btn{
+    font-size: 1.5em;
+    font-weight: 700;
+  }
+  .title,.title-number  {
     font-size: 0.9em;
     display: flex;
     margin: 3px;
     }
-  .title-learn {
+  .title-learn{
     display: flex;
     margin: 0.2em;
     width: 50%;
@@ -598,25 +779,19 @@ h2 {
     display: flex;
     justify-content: center;
     align-content: center;
-    left: 50%;
     margin-top:1em;
     
   }
-  .number-border{
-    border: 2px solid red;
-  
-  }
-  .letter{
+  .letter,.num{
     background-color: white;
     display: flex;
     justify-content: center;
     font-size: 9em;
     height: 1.2em;
     width: 1.2em;
-    position: absolute;
     color: black;
   } 
-  .letters-border {
+  .letters-border{
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -638,8 +813,7 @@ h2 {
   }
 }
 
-@media screen and (max-width: 1280px) and (orientation: landscape) {
-
+@media only screen and (max-width: 1280px) and (orientation: landscape) {
    h2 {
     font-size: 1em;
     animation: rainbow-winner-grow 3s infinite;
@@ -652,7 +826,7 @@ h2 {
     align-items: center;
     font-size:2.2em
   }
-  .title {
+  .title{
     font-size: 0.7em;
     display: flex;
     margin: 3px;
@@ -679,7 +853,6 @@ h2 {
   }
   .play-Btn {
     width: 7em;
-    height: 1.3em;
     font-size: 2em;
     color: black;
   }
@@ -706,15 +879,11 @@ h2 {
     font-size: 9em;
     height: 1.2em;
     width: 1.2em;
-    position: absolute;
     color: black;
   } 
   .letters-border {
     display: flex;
     justify-content: space-between;
-    position: relative;
-    top: 12em;
-    /* right: 2em; */
     width:90%;
     height: 30vh;
   }
@@ -731,7 +900,277 @@ h2 {
     color: black;
   }
 }
+/*Edit This*/
+@media screen and (max-width: 480px) and (orientation: portrait) {
+  .App{
+      display: flex;
+  }
+.main-alphabetbtn,
+  .main-numberbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 2em;
+    font-weight: 700;
+    height: 2em;
+    width: 11em;
+    border: 0.09em solid #a8a6a6, ;
+    background: linear-gradient(180deg, #f0f0f0, #a8a6a6);
+    box-shadow: 0 4px 3px #a8a6a6, ;
+    transition: all 0.2s ease;
+    margin: 0.5em;
+  }
+  
+h1 {
+    display: flex;
+    color: black;
+    font-size: 3.5em;
+    margin: 0;
+  }
+   h2 {
+    font-size: 2em;
+    animation: rainbow-winner-grow 3s infinite;
+  }
+  p{
+    font-size: 0.7em;
+  }
+  .home-list{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 80%;
+  }
+  li{
+    display: flex;
+    align-items: center;
+    font-size:2.5em;
+  }
+  .title{
+  display: flex;
+  margin: 0.1em;
+}
+.title-learn{
+  display:flex;
+  margin: 0.1em;
+}
+.title-my{
+  display: flex;
+  margin: 0.1em;
+}
+.title-alpha{
+  display: flex;
+  margin: 0.1em;
+}
+  input{
+    color: black;
+    font-size: 2em;
+    font-weight: 900;
+    margin: 0.1em;
+    width: 10em;
+  }
+  .play-Btn {
+      color: black;
+      width: 8em;
+      height: 70px;
+      border: 0.05em solid #b3b3b3;
+      font-size: 3em;
+      background: linear-gradient(180deg, #efebeb, #8b8989);
+      box-shadow: 0 2px 9px #8b8989;
+  }
+  .home-btn,.restart-btn,.menu-btn{
+    font-size: 1.5em;
+    font-weight: 900;
+    border-radius: 1em;
+    border: 0.1em solid #8b8989;
+    background: linear-gradient(180deg, #efebeb,#8b8989);
+    box-shadow: 0 2px 9px #8b8989;
+    color: black;
+    
+  }
+.letter-border{
+    display: flex;
+    justify-content: center;
+    align-content: center;
 
+  }
+.letters-border {
+  display: flex;
+  width: 100%;
+  height: 70vh;
+
+  }
+.nums-border{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .letter {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  font-size: 6em;
+  height: 1.2em;
+  width: 1.2em;
+  color: black;
+ }
+  .num{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 11em;
+    color: black;
+    background-color: white;
+    height: 1.1em;
+    width: 1.1em;
+    background: linear-gradient(180deg, #b3b3b3, #fdfcfc);
+    box-shadow: 0 4px 6px #0000004d;
+  }
+.item-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.45em;
+  font-weight: 900;
+  width: 2.3em;
+  height: 2.3em;
+  margin: 0px;
+  border: 0.1em solid black;
+  color: black;
+}
+  li{
+    display: flex;
+    padding:0;
+    margin: .2em;
+  }
+}
+
+
+/* @media only screen and (max-width: 1280px) and (orientation:portrait){
+h1 {
+    display: flex;
+    color: black;
+    font-size: 5.5em;
+  }
+   h2 {
+    font-size: 2em;
+    animation: rainbow-winner-grow 3s infinite;
+  }
+  p{
+    font-size: 0.8em;
+  }
+  .home-list{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+  }
+  li{
+    display: flex;
+    align-items: center;
+    font-size:4.5em;
+  }
+  .title{
+  display: flex;
+  margin: 0.1em;
+}
+.title-learn{
+  display:flex;
+  margin: 0.25em;
+}
+.title-my{
+  display: flex;
+  margin: 0.25em;
+}
+.title-alpha{
+  display: flex;
+  margin: 0.25em;
+}
+  input{
+    color: black;
+    font-size: 2em;
+    font-weight: 900;
+    margin: 0.1em;
+    width: 12em;
+  }
+  .play-Btn {
+      color: black;
+      width: 10em;
+      height: 75px;
+      border: 0.05em solid #b3b3b3;
+      font-size: 3em;
+      background: linear-gradient(180deg, #efebeb, #8b8989);
+      box-shadow: 0 2px 9px #8b8989;
+  }
+  .home-btn,.restart-btn{
+    font-size: 2em;
+    font-weight: 900;
+    border-radius: 1em;
+    border: 0.1em solid #8b8989;
+    background: linear-gradient(180deg, #efebeb,#8b8989);
+    box-shadow: 0 2px 9px #8b8989;
+    color: black;
+  }
+  .letter-border{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top:1em;
+  }
+  .letter{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 12.5em;
+    height: 1.2em;
+    width: 1.2em;
+    color: black;
+  } 
+  .num{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 11em;
+    color: black;
+    background-color: white;
+    height: 1.1em;
+    width: 1.1em;
+    background: linear-gradient(180deg, #b3b3b3, #fdfcfc);
+    box-shadow: 0 4px 6px #0000004d;
+  }
+    .nums-border{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .letters-border {
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: center;
+    width:100%;
+    height: 35em;
+    margin-top: 5em;
+  }
+  .item-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.6em;
+    font-weight: 900;
+    width: 2.1em;
+    height: 2.1em;
+    margin: 0.5em;
+    border: 0.1em solid black;
+    color: black;
+  }
+  li{
+    display: flex;
+    padding:0;
+    margin: .2em;
+  }
+} */
 @media screen and (max-width: 1018px) and (orientation: landscape) {
 
    h2 {
