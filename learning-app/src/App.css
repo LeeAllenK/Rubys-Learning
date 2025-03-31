@@ -42,7 +42,7 @@ body{
   font-weight:900;
   font-style: normal;
   font-variation-settings:100px;
-  font-size: 3.5em;
+  font-size: 5em;
 }
 h1{
   display: flex;
@@ -79,7 +79,7 @@ h2{
   80% { color: orange; }
   100% { color: yellow; transform: scale(2)  }
 }
-.home-border{
+.home-border,.number-border{
   display: flex;
   flex-direction: column; 
   align-items: center;  
@@ -439,7 +439,7 @@ li{
 button{
   cursor:pointer;
 }
-.play-Btn,.menu-btn{
+.play-Btn,.menu-btn,.back-btn{
   color: black;
   width:100%;
   height:75px;
@@ -480,20 +480,7 @@ button{
   animation: rainbow-border 3s infinite;
   margin: 0;
 }
-.num {
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 9.5em;
-  height: 1.1em;
-  width: 1.1em;
-  border-radius: 10px;
-  color: black;
-  background: linear-gradient(180deg, #b3b3b3, #fdfcfc);
-  box-shadow: 0 4px 6px #0000004d;
-  animation: rainbow-border 3s infinite;
-}
+
 @keyframes rainbow-border {
     0% {box-shadow: 0 4px 6px red; }
   16% { box-shadow: 0 4px 6px orange; }
@@ -503,7 +490,7 @@ button{
   80% { box-shadow: 0 4px 6px indigo; }
   100% { box-shadow: 0 4px 6px violet; }
 }
-.letters-border{
+.letters-border,.nums-border{
   display:flex;
   justify-content: center;
   align-content: flex-start;
@@ -511,12 +498,6 @@ button{
   width: 100%;
   margin-top: 300px;
   padding: 0;
-}
-.nums-border{
-  display: flex;
-  justify-content:flex-start;
-  margin-top: 13.5em;
-  width: 100%;
 }
 .num-list{
   display: flex; 
@@ -573,7 +554,7 @@ button:active{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100vh;
 }
 .main-alphabetbtn,.main-numberbtn{
@@ -599,13 +580,14 @@ button:active{
   margin: 0.5em;
 }
 .main-alphabetbtn:hover,.main-numberbtn:hover {
-  background: linear-gradient(180deg,white, green);
-  box-shadow: 0 4px 3px green;
-  border: 0.09em solid white;
-  border-top-color: white;
-  border-bottom-color: green;
+  background: linear-gradient(180deg,#f0f0f0, rgb(179, 166, 166));
+  box-shadow: 0 4px 3px rgb(179, 166, 166);
+  border: 0.09em solid rgb(176, 217, 176);
+  border-top-color: #f0f0f0;
+  border-bottom-color: rgb(179, 166, 166);
   border-right: none;
   border-left: none;
+ animation: rainbow-A 5s infinite;
 }
 @media (max-width: 1280px){
 .main-alphabetbtn,
@@ -925,8 +907,8 @@ h2 {
     color: black;
   }
 }
-/*Edit This*/
-@media screen and (max-width: 480px) and (orientation: portrait) {
+/*Edit This Safari */
+@media  screen and (max-width: 768px) and (orientation: portrait) {
   .App{
       display: flex;
   }
@@ -939,7 +921,7 @@ h2 {
     font-size: 2em;
     font-weight: 700;
     height: 2em;
-    width: 11em;
+    width: 100%;
     border: 0.09em solid #a8a6a6, ;
     background: linear-gradient(180deg, #f0f0f0, #a8a6a6);
     box-shadow: 0 4px 3px #a8a6a6, ;
@@ -954,24 +936,19 @@ h1 {
     margin: 0;
   }
    h2 {
-    font-size: 2em;
+    font-size: 1.5em;
     animation: rainbow-winner-grow 3s infinite;
   }
   p{
     font-size: 0.7em;
   }
-  .home-list{
+  .home-list,.number-list{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 80%;
   }
-  li{
-    display: flex;
-    align-items: center;
-    font-size:2.5em;
-  }
-  .title{
+  .title,.title-number{
   display: flex;
   margin: 0.1em;
 }
@@ -983,27 +960,32 @@ h1 {
   display: flex;
   margin: 0.1em;
 }
-.title-alpha{
+.title-alpha,.title-numbers{
   display: flex;
   margin: 0.1em;
+}
+.input{
+ display: flex;
+  width: 100vh;
 }
   input{
     color: black;
     font-size: 2em;
     font-weight: 900;
-    margin: 0.1em;
-    width: 10em;
+    width: 100%;
   }
   .play-Btn {
+    display: flex;
+    justify-content: center;
       color: black;
-      width: 8em;
+      width: 100vh;
       height: 70px;
       border: 0.05em solid #b3b3b3;
       font-size: 3em;
       background: linear-gradient(180deg, #efebeb, #8b8989);
       box-shadow: 0 2px 9px #8b8989;
   }
-  .home-btn,.restart-btn,.menu-btn{
+  .home-btn,.restart-btn{
     font-size: 1.5em;
     font-weight: 900;
     border-radius: 1em;
@@ -1013,6 +995,15 @@ h1 {
     color: black;
     
   }
+  .menu-btn{
+    font-size: 1.5em;
+    font-weight: 900;
+    border: 0.1em solid #8b8989;
+    background: linear-gradient(180deg, #efebeb,#8b8989);
+    box-shadow: 0 2px 9px #8b8989;
+    color: black;
+    width: 100%;
+  }
 .letter-border{
     display: flex;
     justify-content: center;
@@ -1021,28 +1012,31 @@ h1 {
   }
 .letters-border {
   display: flex;
+  justify-content: center;
+  margin: 50px 0 0 20px;
+  padding: 10px;
   width: 100%;
-  height: 70vh;
-
+  height: 100%;
   }
 .nums-border{
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
+    margin: 250px 0 0 20px;
+    width: 90%;
   }
   .letter {
   background-color: white;
   display: flex;
   justify-content: center;
-  font-size: 6em;
+  font-size: 8em;
   height: 1.2em;
   width: 1.2em;
   color: black;
- }
+  }
   .num{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     font-size: 11em;
     color: black;
@@ -1058,16 +1052,16 @@ h1 {
   align-items: center;
   font-size: 0.45em;
   font-weight: 900;
-  width: 2.3em;
-  height: 2.3em;
-  margin: 0px;
+  width: 3em;
+  height: 3em;
+  margin: 0px 10px 400px 2px;
+  padding:0;
   border: 0.1em solid black;
   color: black;
 }
-  li{
-    display: flex;
-    padding:0;
-    margin: .2em;
+  .num-list{
+    flex-wrap: wrap;
+
   }
 }
 

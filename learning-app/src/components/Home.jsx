@@ -1,9 +1,10 @@
 import {Playbtn} from './Play-Btn'
+import {MenuBtn} from './Menu-Btn'
 export function Home({onPlayClick,onBackClick,onChange,value}){
 	return(
 		<>
 		<div className='home-border'>
-					<button className='menu-btn' onClick={onBackClick}>LEARNING MENU</button>
+					<MenuBtn onClick={onBackClick}/>
 				<h1>
 					<div className='title'>
 						<span className='title-learn'><p style={{ color: 'red' }}>L</p><p style={{ color: 'blue' }}>E</p><p style={{ color: 'green' }}>A</p><p style={{ color: 'orange' }}>R</p><p style={{ color: 'yellow' }}>N</p></span>
@@ -11,7 +12,7 @@ export function Home({onPlayClick,onBackClick,onChange,value}){
 						<span className='title-alpha'><p style={{ color: 'red' }}>A</p><p style={{ color: 'orange' }}>L</p><p style={{ color: 'blue' }}>P</p><p style={{ color: 'yellow' }}>H</p><p style={{ color: 'green' }}>A</p><p style={{ color: 'orange' }}>B</p><p style={{ color: 'indigo' }}>E</p><p style={{ color: 'violet' }}>T</p></span>
 					</div>
 				</h1>
-					<div>
+					<div className='input'>
 						<input 
 						type='text'
 						placeholder="Enter Your Name"
