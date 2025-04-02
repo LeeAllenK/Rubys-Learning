@@ -1,21 +1,23 @@
-import { useState, useEffect, useRef} from 'react';
+import { useState, useEffect, useRef,useReducer} from 'react';
 import { Button } from './components/Button';
 import { Home } from './components/Home';
 import { Homebtn } from './components/Home-Btn';
 import { Restartbtn } from './components/Restart-Btn';
 import { Main } from './components/Main-page';
 import { Number } from './components/Number-Home';
+import { appReducer, alphabetState } from './LearnReducer'
+
 import './App.css';
 
 function App() {
-  const [buttons, setButtons] = useState(shuffledLetter );
-  const [items, setItems] = useState([]);
+  const [buttons, setButtons] = useState(alphabetState );
+  const [items, setItems] = useState(alphabetState);
   const [compLetters, setCompLetters] = useState([]);
   const [letterValue, setLetterValue] = useState('');
   const [compare, setCompare] = useState(false);
   const [match, setMatch] = useState(false);
   const [winner, setWinner] = useState('');
-  const [play, setPlay] = useState(false);
+  const [play, setPlay] = useState(alphabetState);
   const [text, setText] = useState('');
   const [textNumber, setTextNumber] = useState('');
   const [getNumbers, setGetNumbers] = useState(false);
@@ -23,6 +25,7 @@ function App() {
   const [getNumberPlay,setGetNumberPlay] = useState(false)
   const [getNumberCatOne, setGetNumberCatOne] = useState([]);
   const [getNumberCatTwo, setGetNumberCatTwo] = useState([]);
+  const [state, dispatch] = useReducer(appReducer, alphabetState);
   // Used a ref to persist the "nextIndex" value across renders and effects.
   const nextIndexRef = useRef(items.length);
   // This effect automatically selects letters from the items array.
@@ -68,12 +71,19 @@ function App() {
     setCompLetters((prevComp) => [...prevComp, items]);
     setCompare(true);
   };
-  // Event used to start application and set arrays for letters and buttons
+  // Reducer implemented to better optimize events used to start application and set arrays for letters and buttons
   const handlePlay = () => {
-    const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
-    setPlay((p) => !p);
-    setItems(ALPHABET);
-    setButtons(shuffled);
+    // const shuffled = shuffleArray(ALPHABET.map((l) => l.value));
+    // setPlay((p) => !p);
+    // setItems(ALPHABET);
+    // setButtons(shuffled);
+    dispatch({
+      type:'Toggle-Play',
+      play: !state.play,
+      items: state.items,
+      buttons: state.buttons
+    })
+      console.log('state',state)
   };
   // Event used to go back to home screen
   const handleHomeClick = () => {
@@ -84,11 +94,19 @@ function App() {
       setCompLetters([]);
     }
     if(getAlphabet){
-    setPlay((p) => !p);
-    setCompLetters([]);
-    setItems(ALPHABET);
-    setWinner('');
-    setText('');
+    // setPlay((p) => !p);
+    // setCompLetters([]);
+    // setItems(ALPHABET);
+    // setWinner('');
+    // setText('');
+      dispatch({
+        type: 'Home',
+        play: !state.play,
+        compLetters: state.compLetters,
+        items: state.items,
+        winner: state.winner,
+        text: state.text
+      })
     }
   };
   // Event used to reset items and buttons arrays.
@@ -184,22 +202,22 @@ function App() {
           </ul>
       </>
       )}
-      {play ? (
+      {state.play ? (
         <>
           <div className='homeBtn-border'>
             <Homebtn onHomeClick={handleHomeClick} />
             {items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
           </div>
-          {items.length === 0 && <h2>{winner}</h2>}
+          {state.items.length === 0 && <h2>{winner}</h2>}
           <div className='letter-border' >
-            {items.map((l) => (
+            {state.items.map((l) => (
               <div className='letter' key={l.value}>
                 {l.value.toUpperCase()}
               </div>
             ))}
           </div>
           <ul className='letters-border'>
-            {buttons.map((items, index) => (
+            {state.buttons.map((items, index) => (
               <li className='letter-list' key={items} >
                 <Button
                   items={items.toUpperCase()}
@@ -212,7 +230,7 @@ function App() {
         </>
       ) : getNumberPlay ? (
           <>
-            {items.length === 0 && <h2>{winner}</h2>}
+            {state.items.length === 0 && <h2>{winner}</h2>}
             <div className='homeBtn-border'>
               <Homebtn onHomeClick={handleHomeClick} />
               {items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
