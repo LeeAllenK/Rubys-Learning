@@ -5,32 +5,32 @@ import { Homebtn } from './components/Home-Btn';
 import { Restartbtn } from './components/Restart-Btn';
 import { Main } from './components/Main-page';
 import { Number } from './components/Number-Home';
-import { appReducer, alphabetState } from './LearnReducer'
+import { appReducer, initialState} from './LearnReducer'
 
 import './App.css';
 
 function App() {
-  const [buttons, setButtons] = useState(alphabetState );
-  const [items, setItems] = useState(alphabetState);
+  const [buttons, setButtons] = useState(initialState );
+  const [items, setItems] = useState(initialState);
   const [compLetters, setCompLetters] = useState([]);
   const [letterValue, setLetterValue] = useState('');
   const [compare, setCompare] = useState(false);
   const [match, setMatch] = useState(false);
   const [winner, setWinner] = useState('');
-  const [play, setPlay] = useState(alphabetState);
+  const [play, setPlay] = useState(initialState);
   const [text, setText] = useState('');
   const [textNumber, setTextNumber] = useState('');
-  const [getNumbers, setGetNumbers] = useState(false);
-  const [getAlphabet, setGetAlphabet] = useState(false);
-  const [getNumberPlay,setGetNumberPlay] = useState(false)
-  const [getNumberCatOne, setGetNumberCatOne] = useState([]);
-  const [getNumberCatTwo, setGetNumberCatTwo] = useState([]);
-  const [state, dispatch] = useReducer(appReducer, alphabetState);
+  const [getNumbers, setGetNumbers] = useState(initialState);
+  const [getAlphabet, setGetAlphabet] = useState(initialState);
+  const [getNumberPlay,setGetNumberPlay] = useState(initialState)
+  const [getNumberCatOne, setGetNumberCatOne] = useState(initialState);
+  const [getNumberCatTwo, setGetNumberCatTwo] = useState(initialState);
+  const [state, dispatch] = useReducer(appReducer, initialState);
   // Used a ref to persist the "nextIndex" value across renders and effects.
   const nextIndexRef = useRef(items.length);
   // This effect automatically selects letters from the items array.
   useEffect(() => {
-    if((compLetters.length === 0 && play) || (compLetters.length === 0 && getNumberPlay)) {
+    if((compLetters.length === 0 && state.play) || (compLetters.length === 0 && state.getNumberPlay)) {
       nextIndexRef.current = items.length;
       const nextIntervalId = setInterval(() => {
         // Decrement the value stored in the ref.
@@ -50,7 +50,7 @@ function App() {
       }, 500);
       return () => clearInterval(nextIntervalId);
     }
-  }, [compLetters, items, text,textNumber,play,getNumberPlay]);
+  }, [state.compLetters, state.items, state.text,state.textNumber,state.play,state.getNumberPlay]);
   // Effect compares the automatically picked items with the user’s pick.
   useEffect(() => {
     if(compare && compLetters.length > 1) {
@@ -78,7 +78,7 @@ function App() {
     // setItems(ALPHABET);
     // setButtons(shuffled);
     dispatch({
-      type:'Toggle-Play',
+      type:'toggle-Play',
       play: !state.play,
       items: state.items,
       buttons: state.buttons
@@ -87,13 +87,19 @@ function App() {
   };
   // Event used to go back to home screen
   const handleHomeClick = () => {
-    if(getNumbers){
-      setItems(numbersOne)
-      setTextNumber('')
-      setGetNumberPlay(np=>!np)
-      setCompLetters([]);
+    if(state.getNumbers){
+      // setItems(numbersOne)
+      // setTextNumber('')
+      // setGetNumberPlay(np=>!np)
+      // setCompLetters([]);
+      dispatch({
+        type: 'Home',
+        getNumberPlay: false,
+        items: state.items,
+        textNumber: state.textNumber
+      })
     }
-    if(getAlphabet){
+    if(state.getAlphabet){
     // setPlay((p) => !p);
     // setCompLetters([]);
     // setItems(ALPHABET);
@@ -123,46 +129,82 @@ function App() {
     }
   };
   const handleNumberOneClick = () => {
-    setGetNumbers(gn=>!gn)
-    setGetNumberCatOne(numbersOne)
+    dispatch({
+      type: 'select-NumbersCatOne',
+      getNumbers: !state.getNumbers,
+      getNumberCatOne: state.getNumberCatOne
+
+    })
   };
   const handleNumberTwoClick = ()=>{
-    setGetNumbers(gn => !gn);
-    setGetNumberCatTwo(numbersTwo);
+    // setGetNumbers(gn => !gn);
+    // setGetNumberCatTwo(numbersTwo);
+    dispatch({
+      type: 'select-NumbersCatTwo',
+      getNumbers: !state.getNumbers,
+      getNumberCatTwo: state.getNumberCatTwo
+
+    })
   }
   const handleAlphabetClick = () => {
-    setGetAlphabet(ga=>!ga)
+    // setGetAlphabet(ga=>!ga)
+    dispatch({
+      type: 'select-Alphabet',
+      getAlphabet: !state.getAlphabet
+    })
   };
   const handleBackClick = ()=>{
-    setGetAlphabet(ga=>!ga);
-    setGetNumberCatOne([]);
-    setGetNumberCatTwo([]);
+    // setGetAlphabet(ga=>!ga);
+    // setGetNumberCatOne([]);
+    // setGetNumberCatTwo([]);
+    dispatch({
+      type: 'Menu',
+      getAlphabet: !state.getAlphabet
+    })
   }
   const handleNumberBackClick = ()=>{
-    setGetNumbers(gn=>!gn)
-    setGetNumberCatOne([]);
-    setGetNumberCatTwo([]);
+    // setGetNumbers(gn=>!gn)
+    // setGetNumberCatOne([]);
+    // setGetNumberCatTwo([]);
+    dispatch({
+      type: 'Menu',
+      getNumbers: !state.getNumbers,
+      getNumberCatOne: state.getNumberCatOne,
+      getNumberCatTwo: state.getNumberCatTwo
+    })
   }
   const handleNumberPlayClick = ()=>{
-    if(getNumberCatTwo[0]?.value.includes('20')){
-      const shuffledNumber = shuffleArray(numbersTwo.map((l) => l.value));
-      setGetNumberPlay(np => !np);
-      setItems(numbersTwo);
-      setButtons(shuffledNumber);
+    if(state.getNumberCatOne[0]?.value.includes('10')) {
+      // const shuffledNumber = shuffleArray(numbersOne.map((l) => l.value));
+      // setGetNumberPlay(np => !np);
+      // setItems(numbersOne);
+      // setButtons(shuffledNumber);
+      dispatch({
+        type: 'toggle-Numberplay',
+        getNumberPlay: !state.getNumberPlay,
+        items: state.getNumberCatOne,
+        buttons: state.buttons
+      })
     }
-    if(getNumberCatOne[0]?.value.includes('10')) {
-      const shuffledNumber = shuffleArray(numbersOne.map((l) => l.value));
-      setGetNumberPlay(np => !np);
-      setItems(numbersOne);
-      setButtons(shuffledNumber);
+    if(state.getNumberCatTwo[0]?.value.includes('20')){
+      // const shuffledNumber = shuffleArray(numbersTwo.map((l) => l.value));
+      // setGetNumberPlay(np => !np);
+      // setItems(numbersTwo);
+      // setButtons(shuffledNumber);
+      dispatch({
+        type: 'toggle-Numberplay',
+        getNumberPlay: !state.getNumberPlay,
+        items: state.getNumberCatTwo,
+        buttons: state.buttons
+      })
     }
   }
   return (
     <div className='App'>
-      {!(getNumbers || getAlphabet) && (
+      {!(state.getNumbers || state.getAlphabet) && (
         <Main onNumberOneClick={handleNumberOneClick} onAlphabetClick={handleAlphabetClick} onNumberTwoClick={handleNumberTwoClick}/>
       )}
-      {(getNumbers &&!getNumberPlay) &&(
+      {(state.getNumbers && !state.getNumberPlay) &&(
       <>
         <Number
           onNumberPlayClick={handleNumberPlayClick} 
@@ -171,7 +213,7 @@ function App() {
           onChange={(e)=> setTextNumber(e.target.value)}
           />
           <ul className='number-list'>
-            {getNumberCatOne.length > 0 ? (
+            {state.getNumberCatOne.length > 0 ? (
               <>
                 <li className="home-One">1</li>
                 <li className="home-Two">2</li>
@@ -206,7 +248,7 @@ function App() {
         <>
           <div className='homeBtn-border'>
             <Homebtn onHomeClick={handleHomeClick} />
-            {items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
+            {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
           </div>
           {state.items.length === 0 && <h2>{winner}</h2>}
           <div className='letter-border' >
@@ -228,22 +270,22 @@ function App() {
             ))}
           </ul>
         </>
-      ) : getNumberPlay ? (
+      ) : state.getNumberPlay ? (
           <>
             {state.items.length === 0 && <h2>{winner}</h2>}
             <div className='homeBtn-border'>
               <Homebtn onHomeClick={handleHomeClick} />
-              {items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
+              {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
             </div>
             <div className='num-border'>
-              {items.map((l) => (
+              {state.items.map((l) => (
                 <div className='num' key={l.value}>
                   {l.value}
                 </div>
               ))}
             </div>
             <ul className='nums-border'>
-              {buttons.map((items, index) => (
+              {state.buttons.map((items, index) => (
                 <li className='num-list' key={items} >
                   <Button
                     items={items.toUpperCase()}
@@ -254,7 +296,7 @@ function App() {
               ))}
             </ul>
           </>
-      ) : getAlphabet ?(
+      ) : state.getAlphabet ?(
         <Home
           onPlayClick={handlePlay}
           onBackClick={handleBackClick}
