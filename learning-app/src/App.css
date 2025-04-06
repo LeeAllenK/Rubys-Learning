@@ -475,21 +475,12 @@ button{
   border-radius: 10px;
   position: absolute;
   color: black;
-  background: linear-gradient(180deg, #b3b3b3, #fdfcfc);
-  box-shadow: 0 4px 6px #0000004d;
-  animation: rainbow-border 3s infinite;
+  background: linear-gradient(180deg, #999898, #bdb6b6);
+  box-shadow: 0 2px 6px #0000004d;
+  animation: rainbow-letter 3s infinite;
   margin: 0;
 }
 
-@keyframes rainbow-border {
-    0% {box-shadow: 0 4px 6px red; }
-  16% { box-shadow: 0 4px 6px orange; }
-  32% { box-shadow: 0 4px 6px yellow; }
-  48% { box-shadow: 0 4px 6px green; }
-  64% { box-shadow: 0 4px 6px blue; }
-  80% { box-shadow: 0 4px 6px indigo; }
-  100% { box-shadow: 0 4px 6px violet; }
-}
 .letters-border,.nums-border{
   display:flex;
   justify-content: center;
@@ -499,14 +490,67 @@ button{
   margin-top: 300px;
   padding: 0;
 }
+@keyframes rainbow-border {
+    0% {box-shadow: 0 4px 6px red;
+      background: linear-gradient(180deg, #ffffff, #d9d9d9);
+      box-shadow: 0.05em 0.1em red;
+      color: black;
+      transition: transform 0.2s ease;
+      border-color: red; }
+  16% { box-shadow: 0 4px 6px orange;
+    background: linear-gradient(180deg, #ffffff, #d9d9d9);
+    box-shadow: 0.05em 0.1em orange;
+    color: black;
+    transition: transform 0.2s ease;
+    border-color: orange; }
+  32% { box-shadow: 0 4px 6px yellow;
+    background: linear-gradient(180deg, #ffffff, #d9d9d9);
+    box-shadow: 0.05em 0.1em yellow;
+    color: black;
+    transition: transform 0.2s ease;
+    border-color: yellow;}
+  48% { box-shadow: 0 4px 6px green;
+    background: linear-gradient(180deg, #ffffff, #d9d9d9);
+    box-shadow: 0.05em 0.1em green;
+    color: black;
+    transition: transform 0.2s ease;
+    border-color: green;}
+  64% { box-shadow: 0 4px 6px blue;
+    background: linear-gradient(180deg, #ffffff, #d9d9d9);
+    box-shadow: 0.05em 0.1em blue;
+    color: black;
+    transition: transform 0.2s ease;
+    border-color: blue;}
+  80% { box-shadow: 0 4px 6px indigo;
+    background: linear-gradient(180deg, #ffffff, #d9d9d9);
+    box-shadow: 0.05em 0.1em indigo;
+    color: black;
+    transition: transform 0.2s ease;
+    border-color: indigo;}
+  100% { box-shadow: 0 4px 6px violet;
+    background: linear-gradient(180deg, #ffffff, #d9d9d9);
+    box-shadow: 0.05em 0.1em violet;
+    color: black;
+    transition: transform 0.2s ease;
+    border-color: violet;}
+}
+@keyframes rainbow-letter {
+    0% {box-shadow: 0 4px 4px red;}
+  16% { box-shadow: 0 4px 4px orange;}
+  32% { box-shadow: 0 4px 4px yellow;}
+  48% { box-shadow: 0 4px 4px green;}
+  64% { box-shadow: 0 4px 4px blue;}
+  80% { box-shadow: 0 4px 4px indigo;}
+  100% { box-shadow: 0 4px 4px violet;}
+}
 .num-list{
   display: flex; 
   align-items: center;
 }
-.item-btns{
+.item-btns {
   display: flex;
-  border: 0.08em solid black;
-  justify-content:center;
+  border: 0.05em solid black;
+  justify-content: center;
   align-items: center;
   font-size: 0.8em;
   font-weight: 800;
@@ -514,15 +558,18 @@ button{
   width: 1.6em;
   height: 1.6em;
   margin: 0.1em;
-  background: linear-gradient(180deg, #ffffff, #9f9f9f);
-  box-shadow: 0 4px 6px black;
+  background: linear-gradient(180deg, #ffffff, #d9d9d9);
+  box-shadow: 0.05em 0.1em black;
   color: black;
+  transition: transform 0.2s ease;
+  border-color: black;
 }
-.item-btns:hover{
+.item-btns:hover {
   animation: rainbow-border 3s infinite;
+
 }
 .item-btns:active{
-  transform: translateY(2px);
+  transform: translateY(3px);
 
 }
 .homeBtn-border{
