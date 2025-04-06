@@ -475,12 +475,21 @@ button{
   border-radius: 10px;
   position: absolute;
   color: black;
-  background: linear-gradient(180deg, #b3b3b3, #fdfcfc);
-  box-shadow: 0 24px 6px #0000004d;
+  background: linear-gradient(180deg, #999898, #bdb6b6);
+  box-shadow: 0 2px 6px #0000004d;
   animation: rainbow-letter 3s infinite;
   margin: 0;
 }
 
+.letters-border,.nums-border{
+  display:flex;
+  justify-content: center;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 300px;
+  padding: 0;
+}
 @keyframes rainbow-border {
     0% {box-shadow: 0 4px 6px red;
       background: linear-gradient(180deg, #ffffff, #d9d9d9);
@@ -526,22 +535,13 @@ button{
     border-color: violet;}
 }
 @keyframes rainbow-letter {
-    0% {box-shadow: 0 4px 6px red;}
-  16% { box-shadow: 0 4px 6px orange;}
-  32% { box-shadow: 0 4px 6px yellow;}
-  48% { box-shadow: 0 4px 6px green;}
-  64% { box-shadow: 0 4px 6px blue;}
-  80% { box-shadow: 0 4px 6px indigo;}
-  100% { box-shadow: 0 4px 6px violet;}
-}
-.letters-border,.nums-border{
-  display:flex;
-  justify-content: center;
-  align-content: flex-start;
-  flex-wrap: wrap;
-  width: 100%;
-  margin-top: 300px;
-  padding: 0;
+    0% {box-shadow: 0 4px 4px red;}
+  16% { box-shadow: 0 4px 4px orange;}
+  32% { box-shadow: 0 4px 4px yellow;}
+  48% { box-shadow: 0 4px 4px green;}
+  64% { box-shadow: 0 4px 4px blue;}
+  80% { box-shadow: 0 4px 4px indigo;}
+  100% { box-shadow: 0 4px 4px violet;}
 }
 .num-list{
   display: flex; 
