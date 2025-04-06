@@ -1,8 +1,7 @@
 import '../App.css';
 
-export function Button({items,onClick,disabled}){
-	
+export function Button({items,onClick,disabled,className,style}){
 	return(
-		<button className='item-btns' onClick={onClick} disabled={disabled}>{items}</button>
+		<button className='item-btns' style={style} onClick={onClick} disabled={disabled}>{items}</button>
 	)
 }

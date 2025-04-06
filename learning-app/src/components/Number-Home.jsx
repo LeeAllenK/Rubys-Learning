@@ -11,7 +11,7 @@ export function Number({ onNumberPlayClick, onBackNumberClick,onChange,value}){
 				<span className='title-numbers'><p style={{ color: 'red' }}>N</p><p style={{ color: 'orange' }}>U</p><p style={{ color: 'blue' }}>M</p><p style={{ color: 'yellow' }}>B</p><p style={{ color: 'green' }}>E</p><p style={{ color: 'orange' }}>R</p><p style={{ color: 'indigo' }}>S</p></span>
 				</div>
 				</h1>
-					<div>
+					<div className='input'>
 						<input 
 						type='text'
 						placeholder="Enter Your Name"
