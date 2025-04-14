@@ -1,8 +1,8 @@
 <div id="header" >
  <h1  class="heading-element" dir="auto">Ruby's Learning<a href="https://fladev-alphabet.netlify.app/">:Play</a></h1>
- <img src="https://i.imgur.com/q7wTr6W.gif" alt="Rubys Learning">
+ <img src="https://i.imgur.com/rFn4BYp.gif" alt="Rubys Learning">
   Ruby's Learning was inspired by the remarkable growth of my niece, Ruby. It was designed to enhance her academic development through an engaging application 
- focused on teaching the Alphabet.
+ focused on teaching the Alphabet and Numbers 1-20.
 </div>
 
 <div id="header" >
