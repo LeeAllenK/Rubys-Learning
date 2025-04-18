@@ -440,7 +440,7 @@ button{
   /* cursor:pointer; */
 }
 .play-Btn,.menu-btn,.back-btn{
-  color: black;
+  color: #008000;
   width:100%;
   height:75px;
   border: 0.05em solid #b3b3b3;
