@@ -4,16 +4,16 @@ export function Home({onPlayClick,onBackClick,onChange,value}){
 	return(
 //Md implement
 		<>
-			<div className='flex flex-col items-center  '>
+			<div className='flex flex-col items-center'>
 					<MenuBtn onClick={onBackClick}/>
-				<div className='flex text-6xl font-bold' style={{ fontFamily: '"DynaPuff", system-ui' }}>
+				<div className='flex md:text-6xl text-5xl font-bold m-10' style={{ fontFamily: '"DynaPuff", system-ui' }}>
 						<span className='flex m-1.5'><p className='text-red-600'>L</p><p className='text-orange-400'>E</p><p className='text-[#ffff00]'>A</p><p className='text-green-700'>R</p><p className='text-blue-700'>N</p></span>
 						<span className='flex m-1.5'> <p className='text-[#4b0082]'>M </p> <p className='text-[#ee82ee]'>Y</p> </span>
 						<span className='flex m-1.5'><p className='text-red-600'>A</p><p className='text-orange-400'>L</p><p className='text-[#ffff00]'>P</p><p className='text-green-700'>H</p><p className='text-green-700'>A</p><p className='text-blue-700'>B</p><p className='text-[#4b0082]'>E</p><p className='text-[#ee82ee]'>T</p></span>
 					</div>
 					<div className='flex text-4xl font-bold'>
 						<input 
-						className='flex border-2 border-black-700 place-items-center w-screen'
+						className='flex place-items-center bg-white text-black border-2 border-black-700 w-screen'
 						type='text'
 						placeholder="Enter Your Name"
 						value={value.charAt(0).toUpperCase() + value.slice(1)}
@@ -22,33 +22,33 @@ export function Home({onPlayClick,onBackClick,onChange,value}){
 					</div>
 			<Playbtn onPlayClick={onPlayClick}/>
 		</div>
-			<ul className='flex justify-center text-7xl font-bold' style={{ fontFamily: '"DynaPuff", system-ui' }}>
-					<li className="m-1">A</li>
-					<li  className="m-1">B</li>
-					<li  className="m-1">C</li>
-					<li  className="m-1">D</li>
-					<li  className="m-1">E</li>
-					<li  className="m-1">F</li>
-					<li  className="m-1">G</li>
-					<li  className="m-1">H</li>
-					<li  className="m-1">I</li>
-					<li  className="m-1">J</li>
-					<li  className="m-1">K</li>
-					<li  className="m-1">L</li>
-					<li  className="m-1">M</li>
-					<li  className="m-1">N</li>
-					<li  className="m-1">O</li>
-					<li  className="m-1">P</li>
-					<li  className="m-1">Q</li>
-					<li  className="m-1">R</li>
-					<li  className="m-1">S</li>
-					<li  className="m-1">T</li>
-					<li  className="m-1">U</li>
-					<li  className="m-1">V</li>
-					<li  className="m-1">W</li>
-					<li  className="m-1">X</li>
-					<li  className="m-1">Y</li>
-					<li  className="m-1">Z</li>
+			<ul className='flex flex-wrap justify-center md:text-8xl text-7xl font-bold w-screen m-10' style={{ fontFamily: '"DynaPuff", system-ui' }}>
+				<li className="m-1 home-A">A</li>
+				<li  className="m-1 home-B">B</li>
+				<li  className="m-1 home-C">C</li>
+				<li  className="m-1 home-D">D</li>
+				<li  className="m-1 home-E">E</li>
+				<li  className="m-1 home-F">F</li>
+				<li  className="m-1 home-G">G</li>
+				<li  className="m-1 home-H">H</li>
+				<li  className="m-1 home-I">I</li>
+				<li  className="m-1 home-J">J</li>
+				<li  className="m-1 home-K">K</li>
+				<li  className="m-1 home-L">L</li>
+				<li  className="m-1 home-M">M</li>
+				<li  className="m-1 home-N">N</li>
+				<li  className="m-1 home-O">O</li>
+				<li  className="m-1 home-P">P</li>
+				<li  className="m-1 home-Q">Q</li>
+				<li  className="m-1 home-R">R</li>
+				<li  className="m-1 home-S">S</li>
+				<li  className="m-1 home-T">T</li>
+				<li  className="m-1 home-U">U</li>
+				<li  className="m-1 home-V">V</li>
+				<li  className="m-1 home-W">W</li>
+				<li  className="m-1 home-X">X</li>
+				<li  className="m-1 home-Y">Y</li>
+				<li  className="m-1 home-Z">Z</li>
 			</ul>
 		</>
 	)

@@ -1,5 +1,318 @@
 @import "tailwindcss";
 
+@keyframes home-A {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-B {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-C {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-D {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-E {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-F {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-G {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-H {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-I {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-J {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-K {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-L {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-M {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-N {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-O {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-P {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-Q {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-R {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-S {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-T {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-U {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-V {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-W {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-X {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-Y {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+@keyframes home-Z {
+0% { color: red; }
+  16% { color: orange; }
+  32% { color: yellow; }
+  48% { color: green; }
+  64% { color: blue; }
+  80% { color: indigo; }
+  100% { color: violet; }
+}
+.home-A,.home-One,.home-Eleven {
+  animation: home-A 4s infinite;
+}
+.home-B,.home-Two,.home-Twelve {
+  animation: home-B 4.2s infinite;
+}
+.home-C,.home-Three,.home-Thirteen {
+  animation: home-C 4.4s infinite;
+}
+.home-D,.home-Four,.home-Fourteen {
+  animation: home-D 4.6s infinite;
+}
+.home-E,.home-Five,.home-Fifteen {
+  animation: home-E 4.8s infinite;
+}
+.home-F,.home-Six,.home-Sixteen {
+  animation: home-F 5s infinite;
+}
+.home-G,.home-Seven,.home-Seventeen {
+  animation: home-G 5.2s infinite;
+}
+.home-H,.home-Eight,.home-Eighteen {
+  animation: home-H 5.4s infinite;
+}
+.home-I,.home-Nine,.home-Nineteen {
+  animation: home-I 5.6s infinite;
+}
+.home-J,.home-Ten,.home-Twenty {
+  animation: home-J 5.8s infinite;
+}
+.home-K {
+  animation: home-K 6s infinite;
+}
+.home-L {
+  animation: home-L 6.2s infinite;
+}
+.home-M {
+  animation: home-M 6.4s infinite;
+}
+.home-N {
+  animation: home-N 6.6s infinite;
+}
+.home-O {
+  animation: home-O 6.8s infinite;
+}
+.home-P {
+  animation: home-P 7s infinite;
+}
+.home-Q {
+  animation: home-Q 7.2s infinite;
+}
+.home-R {
+  animation: home-R 7.4s infinite;
+}
+.home-S {
+  animation: home-S 7.6s infinite;
+}
+.home-T {
+  animation: home-T 7.8s infinite;
+}
+.home-U {
+  animation: home-U 8s infinite;
+}
+.home-V {
+  animation: home-V 8.2s infinite;
+}
+.home-W {
+  animation: home-W 8.4s infinite;
+}
+.home-X {
+  animation: home-X 8.6s infinite;
+}
+.home-Y {
+  animation: home-Y 8.8s infinite;
+}
+.home-Z {
+  animation: home-Z 9s infinite;
+}
+
 
 @font-face {
   font-family: "DynaPuff";
