@@ -6,7 +6,7 @@ import { Restartbtn } from './components/Restart-Btn';
 import { Main } from './components/Main-page';
 import { Number } from './components/Number-Home';
 import { appReducer, initialState} from './AppReducer';
-import './App.css';
+// import './App.css';
 
 function App() {
   const [buttons, setButtons] = useState(initialState );
@@ -206,7 +206,7 @@ const handleButtonStyle = (item) => {
 };
 
   return (
-    <div className='App'>
+    <div className=''>
       {!(state.getNumbers || state.getAlphabet) && (
         <Main onNumberOneClick={handleNumberOneClick} onAlphabetClick={handleAlphabetClick} onNumberTwoClick={handleNumberTwoClick}/>
       )}

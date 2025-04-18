@@ -7,9 +7,9 @@ export function Home({onPlayClick,onBackClick,onChange,value}){
 					<MenuBtn onClick={onBackClick}/>
 				<h1>
 					<div className='title'>
-						<span className='title-learn'><p style={{ color: 'red' }}>L</p><p style={{ color: 'blue' }}>E</p><p style={{ color: 'green' }}>A</p><p style={{ color: 'orange' }}>R</p><p style={{ color: 'yellow' }}>N</p></span>
-						<span className='title-my'> <p style={{ color: 'indigo' }}>M </p> <p style={{ color: 'violet' }}>Y</p> </span>
-						<span className='title-alpha'><p style={{ color: 'red' }}>A</p><p style={{ color: 'orange' }}>L</p><p style={{ color: 'blue' }}>P</p><p style={{ color: 'yellow' }}>H</p><p style={{ color: 'green' }}>A</p><p style={{ color: 'orange' }}>B</p><p style={{ color: 'indigo' }}>E</p><p style={{ color: 'violet' }}>T</p></span>
+						<span className='title-learn'><p className='text-red-600'>L</p><p className='text-orange-400'>E</p><p className='text-[#ffff00]'>A</p><p className='text-green-700'>R</p><p className='text-blue-700'>N</p></span>
+						<span className='title-my'> <p className='text-[#4b0082]'>M </p> <p className='text-[#ee82ee]'>Y</p> </span>
+						<span className='title-alpha'><p className='text-red-600'>A</p><p className='text-orange-400'>L</p><p className='text-[#ffff00]'>P</p><p className='text-green-700'>H</p><p className='text-green-700'>A</p><p className='text-blue-700'>B</p><p className='text-[#4b0082]'>E</p><p className='text-[#ee82ee]'>T</p></span>
 					</div>
 				</h1>
 					<div className='input'>

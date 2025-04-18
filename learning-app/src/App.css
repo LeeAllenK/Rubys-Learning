@@ -7,7 +7,7 @@
   text-align: center;
 }
 body{
-  background-color: rgb(116, 163, 201);
+  background-color: #74a3c9;
   width: 100vw;
   padding:0;
   margin: 0;
@@ -19,7 +19,7 @@ body{
   margin: 0;
   padding:0;
 }
-.title-page{
+/* .title-page{
   color:black;
   font-family: "DynaPuff", system-ui;
   font-optical-sizing: auto;
@@ -27,7 +27,7 @@ body{
   font-style: normal;
   font-variation-settings:100px;
   font-size: 3em;
-}
+} */
 .title-main{
   display: flex;
   justify-content: center;
