@@ -1,7 +1,7 @@
 
 export function Button({items,onClick,disabled,style}){
 	return(
-		<button className=' flex items-center justify-center border-1 border-black text-8xl font-bold w-40 h-40 m-0 p-0 cursor-pointer' style={style} onClick={onClick} disabled={disabled}>{items}</button>
+		<button className=' flex items-center justify-center border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] text-8xl font-bold w-40 h-40 m-0.5 cursor-pointer active:translate-y-0.5 rainbow-border' style={style} onClick={onClick} disabled={disabled}>{items}</button>
 	)
 }
 

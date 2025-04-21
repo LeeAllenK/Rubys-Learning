@@ -24,8 +24,8 @@ function App() {
   const [getNumberPlay,setGetNumberPlay] = useState(initialState)
   const [getNumberCatOne, setGetNumberCatOne] = useState(initialState);
   const [getNumberCatTwo, setGetNumberCatTwo] = useState(initialState);
-  const [getColor,setGetColor] = useState('white');
-  const [getBackgroundColor, setGetBackgroundColor] = useState('linear-gradient(180deg, green, green)');
+  const [getColor,setGetColor] = useState('black');
+  const [getBackgroundColor, setGetBackgroundColor] = useState('linear-gradient(180deg, lightgreen, lightgreen)');
   const [state, dispatch] = useReducer(appReducer, initialState);
   // Used a ref to persist the "nextIndex" value across renders and effects.
   const nextIndexRef = useRef(state.items.length);
@@ -221,7 +221,7 @@ const handleButtonStyle = (item) => {
           <ul className='flex  md:justify-center justify-center md:mt-10 md:text-9xl text-5xl font-bold m-0 p-0 ' style={{ fontFamily: '"DynaPuff", system-ui' }}>
             {state.getNumberCatOne.length > 0 ? (
               <>
-                <li className=" m-5 mb-10 home-One">1</li>
+                <li className="m-5 mb-10 home-One">1</li>
                 <li className="m-5 mt-10 home-Two">2</li>
                 <li className="m-5 mb-10 home-Three">3</li>
                 <li className="m-5 mt-10 home-Four">4</li>
@@ -252,19 +252,19 @@ const handleButtonStyle = (item) => {
       )}
       {state.play ? (
         <>
-          <div className='flex flex-row justify-between m-1'>
+          <div className='flex flex-row justify-between m-4'>
             <Homebtn onHomeClick={handleHomeClick}/>
             {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick}/>}
           </div>
-          {state.items.length === 0 && <h2 className='flex justify-center text-6xl font-bold'>{state.winner}</h2>}
+          {state.items.length === 0 && <h2 className='flex justify-center text-6xl font-bold' style={{ fontFamily: '"DynaPuff", system-ui' }}>{state.winner}</h2>}
           <div className='flex justify-center ' >
             {state.items.map((l) => (
-              <div className='flex justify-center items-center bg-white border-4 w-50 h-50 absolute text-9xl' key={l.value}>
+              <div className='flex justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 w-80 h-80 absolute text-[18em] font-bold rounded rainbow-border' key={l.value}>
                 {l.value.toUpperCase()}
               </div>
             ))}
           </div>
-          <ul className='flex justify-center flex-wrap mt-75 p-1 w-full'>
+          <ul className='flex justify-center flex-wrap mt-90 p-1 w-full'>
             {state.buttons.map((items, index) => (
               <li className='flex' key={items}>
                 <Button
@@ -279,25 +279,21 @@ const handleButtonStyle = (item) => {
         </>
       ) : state.getNumberPlay ? (
           <>
-            <div className='flex flex-row justify-between m-1'>
+            <div className='flex flex-row justify-between m-4'>
               <Homebtn onHomeClick={handleHomeClick} />
               {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
             </div>
-            {state.items.length === 0 && <h2 className='flex justify-center text-6xl font-bold winner-grow'>{state.winner}</h2>}
+            {state.items.length === 0 && <h2 className='flex justify-center text-6xl font-bold winner-grow' style={{ fontFamily: '"DynaPuff", system-ui' }}>{state.winner}</h2>}
             <div className='flex justify-center' >
-              {/* h2 {
-                font - size: 2em;
-              animation: rainbow-winner-grow 3s infinite;
-  } */}
               {state.items.map((l) => (
-                <div className='flex justify-center items-center bg-white border-4 w-50 h-50 absolute text-9xl' key={l.value}>
+                <div className='flex justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 w-90 h-90 absolute text-[18em] font-bold rounded rainbow-border' key={l.value}>
                   {l.value}
                 </div>
               ))}
             </div>
-            <ul className='flex justify-center flex-wrap mt-75 p-1 w-full'>
+            <ul className='flex flex-wrap gap-50 mt-90 p-1 w-full'>
               {state.buttons.map((items, index) => (
-                <li className='flex' key={items} >
+                <li className='flex flex-1 justify-end -mb-50 -mr-1 pr-5' key={items} >
                   <Button
                     items={items.toUpperCase()}
                     onClick={() => handleClick(items, index)}
@@ -333,11 +329,11 @@ export const numbersTwo = [
 ].reverse();
 export const ALPHABET = [
   { value: 'a' }, { value: 'b' }, { value: 'c' }, { value: 'd' }, { value: 'e' },
-  // { value: 'f' }, { value: 'g' }, { value: 'h' }, { value: 'i' }, { value: 'j' },
-  // { value: 'k' }, { value: 'l' }, { value: 'm' }, { value: 'n' }, { value: 'o' },
-  // { value: 'p' }, { value: 'q' }, { value: 'r' }, { value: 's' }, { value: 't' },
-  // { value: 'u' }, { value: 'v' }, { value: 'w' }, { value: 'x' }, { value: 'y' },
-  // { value: 'z' }
+  { value: 'f' }, { value: 'g' }, { value: 'h' }, { value: 'i' }, { value: 'j' },
+  { value: 'k' }, { value: 'l' }, { value: 'm' }, { value: 'n' }, { value: 'o' },
+  { value: 'p' }, { value: 'q' }, { value: 'r' }, { value: 's' }, { value: 't' },
+  { value: 'u' }, { value: 'v' }, { value: 'w' }, { value: 'x' }, { value: 'y' },
+  { value: 'z' }
 ].reverse();
 export const alphabet = ALPHABET.map((a) => a.value);
 export const numbers = numbersOne.map((a) => a.value);
