@@ -218,32 +218,32 @@ const handleButtonStyle = (item) => {
             value={state.textNumber || ''}
             onChange={(e) => dispatch({ type: 'updateTextNumber', textNumber: e.target.value || ''})}
           />
-          <ul className='number-list'>
+          <ul className='flex  md:justify-center justify-center md:mt-10 md:text-9xl text-5xl font-bold m-0 p-0 ' style={{ fontFamily: '"DynaPuff", system-ui' }}>
             {state.getNumberCatOne.length > 0 ? (
               <>
-                <li className="home-One">1</li>
-                <li className="home-Two">2</li>
-                <li className="home-Three">3</li>
-                <li className="home-Four">4</li>
-                <li className="home-Five">5</li>
-                <li className="home-Six">6</li>
-                <li className="home-Seven">7</li>
-                <li className="home-Eight">8</li>
-                <li className="home-Nine">9</li>
-                <li className="home-Ten">10</li>
+                <li className=" m-5 mb-10 home-One">1</li>
+                <li className="m-5 mt-10 home-Two">2</li>
+                <li className="m-5 mb-10 home-Three">3</li>
+                <li className="m-5 mt-10 home-Four">4</li>
+                <li className="m-5 mb-10 home-Five">5</li>
+                <li className="m-5 mt-10 home-Six">6</li>
+                <li className="m-5 mb-10 home-Seven">7</li>
+                <li className="m-5 mt-10 home-Eight">8</li>
+                <li className="m-5 mb-10 home-Nine">9</li>
+                <li className="m-5 mt-10 home-Ten">10</li>
               </>
             ) : (
             <>
-            <li className="home-Eleven">11</li>
-            <li className="home-Twelve">12</li>
-            <li className="home-Thirteen">13</li>
-            <li className="home-Fourteen">14</li>
-            <li className="home-Fifteen">15</li>
-            <li className="home-Sixteen">16</li>
-            <li className="home-Seventeen">17</li>
-            <li className="home-Eighteen">18</li>
-            <li className="home-Nineteen">19</li>
-            <li className="home-Twenty">20</li>
+            <li className="m-5 mb-10 home-Eleven">11</li>
+            <li className="m-5 mt-10 home-Twelve">12</li>
+            <li className="m-5 mb-10 home-Thirteen">13</li>
+            <li className="m-5 mt-10 home-Fourteen">14</li>
+            <li className="m-5 mb-10 home-Fifteen">15</li>
+            <li className="m-5 mt-10 home-Sixteen">16</li>
+            <li className="m-5 mb-10 home-Seventeen">17</li>
+            <li className="m-5 mt-10 home-Eighteen">18</li>
+            <li className="m-5 mb-10 home-Nineteen">19</li>
+            <li className="m-5 mt-10 home-Twenty">20</li>
             </>
             )}
             
@@ -251,57 +251,21 @@ const handleButtonStyle = (item) => {
       </>
       )}
       {state.play ? (
-  // background-color: white;
-  // display: flex;
-  // justify-content: center;
-  // font-size: 12.5em;
-  // height: 250px;
-  // width: 250px;
-  // border-radius: 10px;
-  // position: absolute;
-  // color: black;
-  // background: linear-gradient(180deg, #999898, #bdb6b6);
-  // box-shadow: 0 2px 6px #0000004d;
-  // animation: rainbow-letter 3s infinite;
-  // margin: 0;
         <>
-          <div className='flex flex-row justify-between m-1 '>
+          <div className='flex flex-row justify-between m-1'>
             <Homebtn onHomeClick={handleHomeClick}/>
             {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick}/>}
           </div>
-          {state.items.length === 0 && <h2>{state.winner}</h2>}
-          {/* .letter-border,.num-border {
-            display: flex;
-          justify-content:center;
-          align-content: center;
-} */}
+          {state.items.length === 0 && <h2 className='flex justify-center text-6xl font-bold'>{state.winner}</h2>}
           <div className='flex justify-center ' >
             {state.items.map((l) => (
-              <div className='flex justify-center items-center bg-white border-4 w-50 h-50 absolute text-9xl ' key={l.value}>
+              <div className='flex justify-center items-center bg-white border-4 w-50 h-50 absolute text-9xl' key={l.value}>
                 {l.value.toUpperCase()}
               </div>
             ))}
           </div>
-          {/* .letters-border,.nums-border{
-            display:flex;
-          justify-content: center;
-          align-content: flex-start;
-          flex-wrap: wrap;
-          width: 100%;
-          margin-top: 300px;
-          padding: 0;
-} */}
           <ul className='flex justify-center flex-wrap mt-75 p-1 w-full'>
             {state.buttons.map((items, index) => (
-
-            //   display: flex;
-            // justify-content: center;
-            // flex-wrap: wrap;
-            // font-family: "DynaPuff", system-ui;
-            // font-optical-sizing: auto;
-            // font-weight: 900;
-            // font-style: normal;
-            // font-variation-settings:"wdth" 100;
               <li className='flex' key={items}>
                 <Button
                   items={items.toUpperCase()}
@@ -315,21 +279,25 @@ const handleButtonStyle = (item) => {
         </>
       ) : state.getNumberPlay ? (
           <>
-            {state.items.length === 0 && <h2>{state.winner}</h2>}
-            <div className='homeBtn-border'>
+            <div className='flex flex-row justify-between m-1'>
               <Homebtn onHomeClick={handleHomeClick} />
               {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
             </div>
-            <div className='num-border'>
+            {state.items.length === 0 && <h2 className='flex justify-center text-6xl font-bold winner-grow'>{state.winner}</h2>}
+            <div className='flex justify-center' >
+              {/* h2 {
+                font - size: 2em;
+              animation: rainbow-winner-grow 3s infinite;
+  } */}
               {state.items.map((l) => (
-                <div className='num' key={l.value}>
+                <div className='flex justify-center items-center bg-white border-4 w-50 h-50 absolute text-9xl' key={l.value}>
                   {l.value}
                 </div>
               ))}
             </div>
-            <ul className='nums-border'>
+            <ul className='flex justify-center flex-wrap mt-75 p-1 w-full'>
               {state.buttons.map((items, index) => (
-                <li className='num-list' key={items} >
+                <li className='flex' key={items} >
                   <Button
                     items={items.toUpperCase()}
                     onClick={() => handleClick(items, index)}
@@ -365,11 +333,11 @@ export const numbersTwo = [
 ].reverse();
 export const ALPHABET = [
   { value: 'a' }, { value: 'b' }, { value: 'c' }, { value: 'd' }, { value: 'e' },
-  { value: 'f' }, { value: 'g' }, { value: 'h' }, { value: 'i' }, { value: 'j' },
-  { value: 'k' }, { value: 'l' }, { value: 'm' }, { value: 'n' }, { value: 'o' },
-  { value: 'p' }, { value: 'q' }, { value: 'r' }, { value: 's' }, { value: 't' },
-  { value: 'u' }, { value: 'v' }, { value: 'w' }, { value: 'x' }, { value: 'y' },
-  { value: 'z' }
+  // { value: 'f' }, { value: 'g' }, { value: 'h' }, { value: 'i' }, { value: 'j' },
+  // { value: 'k' }, { value: 'l' }, { value: 'm' }, { value: 'n' }, { value: 'o' },
+  // { value: 'p' }, { value: 'q' }, { value: 'r' }, { value: 's' }, { value: 't' },
+  // { value: 'u' }, { value: 'v' }, { value: 'w' }, { value: 'x' }, { value: 'y' },
+  // { value: 'z' }
 ].reverse();
 export const alphabet = ALPHABET.map((a) => a.value);
 export const numbers = numbersOne.map((a) => a.value);
