@@ -206,7 +206,7 @@ const handleButtonStyle = (item) => {
 };
 
   return (
-    <div className=''>
+    <div className='md:w-full w-full'>
       {!(state.getNumbers || state.getAlphabet) && (
         <Main onNumberOneClick={handleNumberOneClick} onAlphabetClick={handleAlphabetClick} onNumberTwoClick={handleNumberTwoClick}/>
       )}
@@ -251,22 +251,58 @@ const handleButtonStyle = (item) => {
       </>
       )}
       {state.play ? (
+  // background-color: white;
+  // display: flex;
+  // justify-content: center;
+  // font-size: 12.5em;
+  // height: 250px;
+  // width: 250px;
+  // border-radius: 10px;
+  // position: absolute;
+  // color: black;
+  // background: linear-gradient(180deg, #999898, #bdb6b6);
+  // box-shadow: 0 2px 6px #0000004d;
+  // animation: rainbow-letter 3s infinite;
+  // margin: 0;
         <>
-          <div className='homeBtn-border'>
+          <div className='flex flex-row justify-between m-1 '>
             <Homebtn onHomeClick={handleHomeClick}/>
             {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick}/>}
           </div>
           {state.items.length === 0 && <h2>{state.winner}</h2>}
-          <div className='letter-border' >
+          {/* .letter-border,.num-border {
+            display: flex;
+          justify-content:center;
+          align-content: center;
+} */}
+          <div className='flex justify-center ' >
             {state.items.map((l) => (
-              <div className='letter' key={l.value}>
+              <div className='flex justify-center items-center bg-white border-4 w-50 h-50 absolute text-9xl ' key={l.value}>
                 {l.value.toUpperCase()}
               </div>
             ))}
           </div>
-          <ul className='letters-border'>
+          {/* .letters-border,.nums-border{
+            display:flex;
+          justify-content: center;
+          align-content: flex-start;
+          flex-wrap: wrap;
+          width: 100%;
+          margin-top: 300px;
+          padding: 0;
+} */}
+          <ul className='flex justify-center flex-wrap mt-75 p-1 w-full'>
             {state.buttons.map((items, index) => (
-              <li className='letter-list' key={items}>
+
+            //   display: flex;
+            // justify-content: center;
+            // flex-wrap: wrap;
+            // font-family: "DynaPuff", system-ui;
+            // font-optical-sizing: auto;
+            // font-weight: 900;
+            // font-style: normal;
+            // font-variation-settings:"wdth" 100;
+              <li className='flex' key={items}>
                 <Button
                   items={items.toUpperCase()}
                   onClick={() => handleClick(items, index)}
