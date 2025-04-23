@@ -259,16 +259,16 @@ const handleButtonStyle = (item) => {
           {state.items.length === 0 && <h2 className='flex md:justify-center justify-center md:text-6xl text-lg font-bold winner-grow' style={{ fontFamily: '"DynaPuff", system-ui' }}>{state.winner}</h2>}
           <div className='flex justify-center ' >
             {state.items.map((l) => (
-              <div className='flex md:justify-center md:items-center justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 md:w-85 md:h-85 w-45 h-45 absolute md:text-[18em] text-9xl font-bold rounded rainbow-border' key={l.value}>
+              <div className='flex md:justify-center md:items-center justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 lg:w-85 lg:h-85 md:w-45 md:h-45 w-45 h-45 absolute lg:text-[18em] md:text-9xl text-9xl font-bold rounded rainbow-border ' key={l.value}>
                 {l.value.toUpperCase()}
               </div>
             ))}
           </div>
-          <ul className='flex justify-center flex-wrap md:mt-90 mt-50 p-1 w-full'>
+          <ul className='flex justify-center flex-wrap md:justify-center lg:mt-90 md:mt-50 mt-50 p-1 md:p-10 w-full'>
             {state.buttons.map((items, index) => (
               <li className='flex' key={items}>
                 <Button
-                  className=' flex items-center justify-center border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] md:text-8xl text-2xl font-bold md:w-40 md:h-40 w-15 h-15 m-0.5 cursor-pointer active:translate-y-0.5 rainbow-border'
+                  className=' flex items-center justify-center border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] lg:text-8xl md:text-5xl text-2xl font-bold lg:w-40 lg:h-40 md:w-20 md:h-20 w-15 h-15 m-0.5 cursor-pointer active:translate-y-0.5 rainbow-border'
                   items={items.toUpperCase()}
                   onClick={() => handleClick(items, index)}
                   style={handleButtonStyle(items)}
