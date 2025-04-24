@@ -206,7 +206,7 @@ const handleButtonStyle = (item) => {
 };
 
   return (
-    <div className='md:w-full w-full'>
+    <div className='md:w-screen w-screen ' >
       {!(state.getNumbers || state.getAlphabet) && (
         <Main onNumberOneClick={handleNumberOneClick} onAlphabetClick={handleAlphabetClick} onNumberTwoClick={handleNumberTwoClick}/>
       )}
@@ -252,11 +252,11 @@ const handleButtonStyle = (item) => {
       )}
       {state.play ? (
         <>
-          <div className='flex flex-row justify-between m-4'>
+          <div className='flex lg:flex-row lg:justify-between md:flex-row md:justify-between flex-row justify-between m-4'>
             <Homebtn onHomeClick={handleHomeClick}/>
             {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick}/>}
           </div>
-          {state.items.length === 0 && <h2 className='flex md:justify-center justify-center md:text-6xl text-lg font-bold winner-grow' style={{ fontFamily: '"DynaPuff", system-ui' }}>{state.winner}</h2>}
+          {state.items.length === 0 && <h2 className='flex lg:flex-col md:whitespace-normal md:break-words md:overflow-hidden flex-col whitespace-normal break-words overflow-hidden lg:ml-100 text-wrap lg:h-full lg:w-250  md:w-100 w-50 md:ml-50 ml-35 justify-center lg:justify-center md:justify-center   lg:text-6xl md:text-4xl text-lg font-bold winner-grow' style={{ fontFamily: '"DynaPuff", system-ui' }}>{state.winner}</h2>}
           <div className='flex justify-center ' >
             {state.items.map((l) => (
               <div className='flex md:justify-center md:items-center justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 lg:w-85 lg:h-85 md:w-45 md:h-45 w-45 h-45 absolute lg:text-[18em] md:text-9xl text-9xl font-bold rounded rainbow-border ' key={l.value}>
@@ -284,7 +284,7 @@ const handleButtonStyle = (item) => {
               <Homebtn onHomeClick={handleHomeClick} />
               {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
             </div>
-            {state.items.length === 0 && <h2 className='flex md:justify-center justify-center md:text-6xl text-lg font-bold winner-grow' style={{ fontFamily: '"DynaPuff", system-ui' }}>{state.winner}</h2>}
+            {state.items.length === 0 && <h2 className='flex lg:flex-col md:whitespace-normal md:break-words md:overflow-hidden flex-col whitespace-normal break-words overflow-hidden lg:ml-100 text-wrap lg:h-full lg:w-250  md:w-100 w-50 md:ml-50 ml-35 justify-center lg:justify-center md:justify-center   lg:text-6xl md:text-4xl text-lg font-bold winner-grow' style={{ fontFamily: '"DynaPuff", system-ui' }}>{state.winner}</h2>}
             <div className='flex justify-center' >
               {state.items.map((l) => (
                 <div className='flex justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 w-50 h-50 md:w-90 md:h-90 absolute md:text-[18em] text-9xl font-bold rounded rainbow-border' key={l.value}>
