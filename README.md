@@ -4,7 +4,7 @@
   Ruby's Learning was inspired by the remarkable growth of my niece, Ruby. It was designed to enhance her academic development through an engaging application 
  focused on teaching the Alphabet and Numbers 1-20.
 </div>
-<!-- https://i.imgur.com/rFn4BYp.gif -->
+
 <div id="header" >
  <h1 class="heading-element" dir="auto">How It's Made:</h1>
 
