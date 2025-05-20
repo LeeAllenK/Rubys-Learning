@@ -9,21 +9,6 @@ import { appReducer, initialState} from './AppReducer';
 // import './App.css';
 
 function App() {
-  const [buttons, setButtons] = useState(initialState );
-  const [items, setItems] = useState(initialState);
-  const [compLetters, setCompLetters] = useState(initialState);
-  const [letterValue, setLetterValue] = useState(initialState);
-  const [compare, setCompare] = useState(initialState);
-  const [match, setMatch] = useState(initialState);
-  const [winner, setWinner] = useState(initialState);
-  const [play, setPlay] = useState(initialState);
-  const [text, setText] = useState(initialState);
-  const [textNumber, setTextNumber] = useState(initialState);
-  const [getNumbers, setGetNumbers] = useState(initialState);
-  const [getAlphabet, setGetAlphabet] = useState(initialState);
-  const [getNumberPlay,setGetNumberPlay] = useState(initialState)
-  const [getNumberCatOne, setGetNumberCatOne] = useState(initialState);
-  const [getNumberCatTwo, setGetNumberCatTwo] = useState(initialState);
   const [getColor,setGetColor] = useState('black');
   const [getBackgroundColor, setGetBackgroundColor] = useState('linear-gradient(180deg, lightgreen, lightgreen)');
   const [state, dispatch] = useReducer(appReducer, initialState);

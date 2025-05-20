@@ -146,6 +146,4 @@ export const initialState = {
 	compare: false,	
 	winner: '',
 	text: '',
-	getColor: '',
-	getBackgroundColor: ''
 }
