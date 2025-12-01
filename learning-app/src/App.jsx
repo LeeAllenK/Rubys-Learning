@@ -5,13 +5,19 @@ import { Homebtn } from './components/Home-Btn';
 import { Restartbtn } from './components/Restart-Btn';
 import { Main } from './components/Main-page';
 import { Number } from './components/Number-Home';
-import { appReducer, initialState} from './AppReducer';
-// import './App.css';
+import { appReducer} from './AppReducer/reducer';
+import { initialState} from './AppReducer/appInitialState';
+
+const speak = (text) => {
+  if(!text) return;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'en-US'; // adjust language if needed
+  window.speechSynthesis.speak(utterance);
+};
 
 function App() {
-
-  const [getColor,setGetColor] = useState('black');
-  const [getBackgroundColor, setGetBackgroundColor] = useState('linear-gradient(180deg, lightgreen, lightgreen)');
+  const [getColor,setGetColor] = useState('green');
+  const [getBackgroundColor, setGetBackgroundColor] = useState('linear-gradient(180deg, black, black)');
   const [state, dispatch] = useReducer(appReducer, initialState);
   // Used a ref to persist the "nextIndex" value across renders and effects.
   const nextIndexRef = useRef(state.items.length);
@@ -27,6 +33,7 @@ function App() {
         nextIndexRef.current--;
         const value = state.items[nextIndexRef.current]?.value;
         if(value) {
+          speak(value);
           dispatch({
             type: 'update-State',
               letterValue: value,
@@ -41,6 +48,10 @@ function App() {
           });
         }
       }, 500);
+        if(state.winner.length > 0){
+          speak(state.winner)
+        }
+
       return () => clearInterval(nextIntervalId);
     }
   }, [state.compLetters, state.items, state.text,state.letterValue, state.textNumber, state.play, state.getNumberPlay]);
@@ -60,7 +71,6 @@ function App() {
         type: 'clear-Comparison',
         compLetters: state.compLetters,
         compare: !state.compare,
-        color: state.color
        });
     }
   }, [state.compare, state.compLetters]);
@@ -71,6 +81,9 @@ function App() {
       type: 'compare-Letters',
         compLetters: [...state.compLetters, items],
         compare: !state.compare,
+        getColor: 'green',
+        getBackgroundColor: 'black'
+
     });
   };
   // Reducer implemented to better optimize events used to start application and set arrays for letters and buttons
@@ -113,7 +126,8 @@ function App() {
         type: 'restart-NumCatOne',
         items:state.items,
         buttons: state.buttons,
-        compLetters: state.compLetters
+        compLetters: state.compLetters,
+        winner: state.winner,
       })
     }
     if(state.getNumberCatTwo.length > 0){
@@ -188,11 +202,10 @@ function App() {
     }
   }
 const handleButtonStyle = (item) => {
-  return state.compLetters.includes(item) ? { color: getColor, background: getBackgroundColor} : {};
+  return state.compLetters.includes(item) ? { color: state.getColor, background: state.getBackgroundColor} : {};
 };
-
   return (
-    <div className='md:w-screen w-screen ' >
+    <div className='grid md:w-screen w-screen ' >
       {!(state.getNumbers || state.getAlphabet) && (
         <Main onNumberOneClick={handleNumberOneClick} onAlphabetClick={handleAlphabetClick} onNumberTwoClick={handleNumberTwoClick}/>
       )}
@@ -265,33 +278,56 @@ const handleButtonStyle = (item) => {
           </ul>
         </section>
       ) : state.getNumberPlay ? (
-          <>
-            <div className='flex flex-row justify-between m-4'>
+          <section className="grid grid-rows-1 place-items-center w-screen h-fit gap-2">
+            <section className="flex flex-col lg:w-screen lg:h-full md:w-screen sm:w-screen h-full w-screen">
+              {/* Controls */}
+              <section className="flex justify-between w-screen h-fit">
               <Homebtn onHomeClick={handleHomeClick} />
-              {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
-            </div>
-            {state.items.length === 0 && <h2 className='flex lg:flex-col md:whitespace-normal md:break-words md:overflow-hidden flex-col whitespace-normal break-words overflow-hidden lg:ml-100 text-wrap lg:h-full lg:w-250  md:w-100 w-50 md:ml-50 ml-35 justify-center lg:justify-center md:justify-center   lg:text-6xl md:text-4xl text-lg font-bold winner-grow' style={{ fontFamily: '"DynaPuff", system-ui' }}>{state.winner}</h2>}
-            <div className='flex justify-center' >
-              {state.items.map((l) => (
-                <div className='flex justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 w-50 h-50 md:w-90 md:h-90 absolute md:text-[18em] text-9xl font-bold rounded rainbow-border' key={l.value}>
-                  {l.value}
+              {state.items.length === 0 && (
+                <div
+                  className="lg:text-6xl md:text-4xl text-lg font-bold winner-grow"
+                  style={{ fontFamily: '"DynaPuff", system-ui' }}
+                >
+                  {state.winner}
                 </div>
-              ))}
-            </div>
-            <ul className='flex md:flex-wrap md:gap-50 justify-center flex-wrap md:mt-95 mt-60 md:p-1 md:w-full w-full '>
-              {state.buttons.map((items, index) => (
-                <li className='flex md:flex-1 md:justify-end md:-mb-50 md:-mr-1 md:pr-5' key={items} >
-                  <Button
-                    className=' flex items-center justify-center border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] md:text-8xl text-4xl font-bold md:w-40 md:h-40 w-23 h-23 m-0.5 cursor-pointer active:translate-y-0.5 rainbow-border'
-                    items={items.toUpperCase()}
-                    onClick={() => handleClick(items, index)}
-                    style={handleButtonStyle(items)}
-                    disabled={state.compLetters.length < 1}
-                  />
-                </li>
-              ))}
-            </ul>
-          </>
+              )}
+              {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
+              </section>
+
+              {/* Letter + Buttons wrapper */}
+              <div className="grid items-center w-full h-full ">
+                {/* Letter stack */}
+                <div className="relative flex justify-center items-center w-full h-60 md:h-96">
+                  {state.items.map((l) => (
+                    <div
+                      key={l.value}
+                      className="absolute flex justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 
+                       w-40 h-40 md:w-60 md:h-60 text-6xl md:text-[10em] font-bold rounded rainbow-border"
+                    >
+                      {l.value}
+                    </div>
+                  ))}
+                </div>
+                {/* Buttons under letters */}
+                <ul className="grid lg:grid-cols-5 md:grid-cols-5 sm::grid-cols-4 grid-cols-5 gap-2">
+                  {state.buttons.map((items, index) => (
+                    <li key={items}>
+                      <Button
+                        className="border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] 
+                         md:text-8xl text-4xl font-bold lg:w-50 lg:h-50 md:w-40 md:h-40 sm:w-50 sm:h-50 w-15 h-15 
+                         cursor-pointer active:translate-y-0.5 rainbow-border"
+                        items={items.toUpperCase()}
+                        onClick={() => handleClick(items, index)}
+                        style={handleButtonStyle(items)}
+                        disabled={state.compLetters.length < 1}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          </section>
+
       ) : state.getAlphabet ?(
         <Home
           onPlayClick={handlePlay}
