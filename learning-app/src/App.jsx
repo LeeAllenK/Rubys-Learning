@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef,useReducer} from 'react';
+import { handlePlay, handleHomeClick, handleRestartClick, handleNumberOneClick, handleNumberTwoClick, handleAlphabetClick, handleBackClick, handleNumberBackClick, handleNumberPlayClick } from './Handlers/gameHandlers';
 import { Button } from './components/Button';
 import { Home } from './components/Home';
 import { Homebtn } from './components/Home-Btn';
@@ -16,8 +17,6 @@ const speak = (text) => {
 };
 
 function App() {
-  const [getColor,setGetColor] = useState('green');
-  const [getBackgroundColor, setGetBackgroundColor] = useState('linear-gradient(180deg, black, black)');
   const [state, dispatch] = useReducer(appReducer, initialState);
   // Used a ref to persist the "nextIndex" value across renders and effects.
   const nextIndexRef = useRef(state.items.length);
@@ -87,137 +86,156 @@ function App() {
     });
   };
   // Reducer implemented to better optimize events used to start application and set arrays for letters and buttons
-  const handlePlay = () => {
-    dispatch({
-      type:'toggle-Play',
-      play: !state.play,
-      items: state.items,
-      buttons: state.buttons
-    })
-  };
-  // Event used to go back to home screen
-  const handleHomeClick = () => {
-    if(state.getNumbers){
-      dispatch({
-        type: 'Home',
-        getNumberPlay: false,
-        items: state.items,
-        buttons: state.buttons,
-        textNumber: state.textNumber,
-        compLetters: state.compLetters
-      })
-    }
-    if(state.getAlphabet){
-      dispatch({
-        type: 'Home',
-        play: !state.play,
-        compLetters: state.compLetters,
-        items: state.items,
-        buttons: state.buttons,
-        winner: state.winner,
-        text: state.text
-      })
-    }
-  };
-  // Event used to reset items and buttons arrays.
-  const handleRestartClick = () => {
-    if(state.getNumberCatOne.length > 0) {
-      dispatch({
-        type: 'restart-NumCatOne',
-        items:state.items,
-        buttons: state.buttons,
-        compLetters: state.compLetters,
-        winner: state.winner,
-      })
-    }
-    if(state.getNumberCatTwo.length > 0){
-      dispatch({
-        type: 'restart-NumCatTwo',
-        items: state.items,
-        buttons: state.buttons,
-        compLetters: state.compLetters
-      })
-    }
-    if(state.getAlphabet){
-      dispatch({
-        type: 'restart-Alphabet',
-        items: state.items,
-        buttons: state.buttons,
-        compLetters: state.compLetters
-      })
-    }
-  };
-  const handleNumberOneClick = () => {
-    dispatch({
-      type: 'select-NumbersCatOne',
-      getNumbers: !state.getNumbers,
-      getNumberCatOne: state.getNumberCatOne
+  // const handlePlay = () => {
+  //   dispatch({
+  //     type:'toggle-Play',
+  //     play: !state.play,
+  //     items: state.items,
+  //     buttons: state.buttons
+  //   })
+  // };
+  // // Event used to go back to home screen
+  // const handleHomeClick = () => {
+  //   if(state.getNumbers){
+  //     dispatch({
+  //       type: 'Home',
+  //       getNumberPlay: false,
+  //       items: state.items,
+  //       buttons: state.buttons,
+  //       textNumber: state.textNumber,
+  //       compLetters: state.compLetters
+  //     })
+  //   }
+  //   if(state.getAlphabet){
+  //     dispatch({
+  //       type: 'Home',
+  //       play: !state.play,
+  //       compLetters: state.compLetters,
+  //       items: state.items,
+  //       buttons: state.buttons,
+  //       winner: state.winner,
+  //       text: state.text
+  //     })
+  //   }
+  // };
+  // // Event used to reset items and buttons arrays.
+  // const handleRestartClick = () => {
+  //   if(state.getNumberCatOne.length > 0) {
+  //     dispatch({
+  //       type: 'restart-NumCatOne',
+  //       items:state.items,
+  //       buttons: state.buttons,
+  //       compLetters: state.compLetters,
+  //       winner: state.winner,
+  //     })
+  //   }
+  //   if(state.getNumberCatTwo.length > 0){
+  //     dispatch({
+  //       type: 'restart-NumCatTwo',
+  //       items: state.items,
+  //       buttons: state.buttons,
+  //       compLetters: state.compLetters
+  //     })
+  //   }
+  //   if(state.getAlphabet){
+  //     dispatch({
+  //       type: 'restart-Alphabet',
+  //       items: state.items,
+  //       buttons: state.buttons,
+  //       compLetters: state.compLetters
+  //     })
+  //   }
+  // };
+  // const handleNumberOneClick = () => {
+  //   dispatch({
+  //     type: 'select-NumbersCatOne',
+  //     getNumbers: !state.getNumbers,
+  //     getNumberCatOne: state.getNumberCatOne
 
-    })
-  };
-  const handleNumberTwoClick = ()=>{
-    dispatch({
-      type: 'select-NumbersCatTwo',
-      getNumbers: !state.getNumbers,
-      getNumberCatTwo: state.getNumberCatTwo
+  //   })
+  // };
+  // const handleNumberTwoClick = ()=>{
+  //   dispatch({
+  //     type: 'select-NumbersCatTwo',
+  //     getNumbers: !state.getNumbers,
+  //     getNumberCatTwo: state.getNumberCatTwo
 
-    })
-  }
-  const handleAlphabetClick = () => {
-    dispatch({
-      type: 'select-Alphabet',
-      getAlphabet: !state.getAlphabet
-    })
-  };
-  const handleBackClick = ()=>{
-    dispatch({
-      type: 'Menu',
-      getAlphabet: !state.getAlphabet
-    })
-  }
-  const handleNumberBackClick = ()=>{
-    dispatch({
-      type: 'Menu',
-      getNumbers: !state.getNumbers,
-      getNumberCatOne: state.getNumberCatOne,
-      getNumberCatTwo: state.getNumberCatTwo
-    })
-  }
-  const handleNumberPlayClick = ()=>{
-    if(state.getNumberCatOne[0]?.value.includes('10')) {
-      dispatch({
-        type: 'toggle-Numberplay',
-        getNumberPlay: !state.getNumberPlay,
-        items: state.getNumberCatOne,
-        buttons: state.buttons
-      })
-    }
-    if(state.getNumberCatTwo[0]?.value.includes('20')){
-      dispatch({
-        type: 'toggle-Numberplay',
-        getNumberPlay: !state.getNumberPlay,
-        items: state.getNumberCatTwo,
-        buttons: state.buttons
-      })
-    }
-  }
+  //   })
+  // }
+  // const handleAlphabetClick = () => {
+  //   dispatch({
+  //     type: 'select-Alphabet',
+  //     getAlphabet: !state.getAlphabet
+  //   })
+  // };
+  // const handleBackClick = ()=>{
+  //   dispatch({
+  //     type: 'Menu',
+  //     getAlphabet: !state.getAlphabet
+  //   })
+  // }
+  // const handleNumberBackClick = ()=>{
+  //   dispatch({
+  //     type: 'Menu',
+  //     getNumbers: !state.getNumbers,
+  //     getNumberCatOne: state.getNumberCatOne,
+  //     getNumberCatTwo: state.getNumberCatTwo
+  //   })
+  // }
+  // const handleNumberPlayClick = ()=>{
+  //   if(state.getNumberCatOne[0]?.value.includes('10')) {
+  //     dispatch({
+  //       type: 'toggle-Numberplay',
+  //       getNumberPlay: !state.getNumberPlay,
+  //       items: state.getNumberCatOne,
+  //       buttons: state.buttons
+  //     })
+  //   }
+  //   if(state.getNumberCatTwo[0]?.value.includes('20')){
+  //     dispatch({
+  //       type: 'toggle-Numberplay',
+  //       getNumberPlay: !state.getNumberPlay,
+  //       items: state.getNumberCatTwo,
+  //       buttons: state.buttons
+  //     })
+  //   }
+  // }
 const handleButtonStyle = (item) => {
   return state.compLetters.includes(item) ? { color: state.getColor, background: state.getBackgroundColor} : {};
 };
-  return (
-    <div className='grid md:w-screen w-screen ' >
-      {!(state.getNumbers || state.getAlphabet) && (
-        <Main onNumberOneClick={handleNumberOneClick} onAlphabetClick={handleAlphabetClick} onNumberTwoClick={handleNumberTwoClick}/>
-      )}
-      {(state.getNumbers && !state.getNumberPlay) &&(
-      <>
+
+    let content;
+    // Main screen
+    if(!(state.getNumbers || state.getAlphabet)) {
+      content = (
+        <Main
+          onNumberOneClick={handleNumberOneClick}
+          onAlphabetClick={handleAlphabetClick}
+          onNumberTwoClick={handleNumberTwoClick}
+        />
+      );
+    }
+
+    // Number selection screen
+    else if(state.getNumbers && !state.getNumberPlay) {
+      content = (
+        <>
           <Number
             onNumberPlayClick={handleNumberPlayClick}
             onBackNumberClick={handleNumberBackClick}
-            value={state.textNumber || ''}
-            onChange={(e) => dispatch({ type: 'updateTextNumber', textNumber: e.target.value || ''})}
+            value={state.textNumber || ""}
+            onChange={(e) =>
+              dispatch({
+                type: "updateTextNumber",
+                textNumber: e.target.value || "",
+              })
+            }
           />
-          <ul className='flex  md:justify-center justify-center flex-wrap r md:mt-10 mt-10 md:text-9xl text-5xl font-bold m-0 p-0 ' style={{ fontFamily: '"DynaPuff", system-ui' }}>
+          <ul
+            className="flex md:justify-center justify-center flex-wrap md:mt-10 mt-10 
+                     md:text-9xl text-5xl font-bold m-0 p-0"
+            style={{ fontFamily: '"DynaPuff", system-ui' }}
+          >
             {state.getNumberCatOne.length > 0 ? (
               <>
                 <li className="m-5 mb-10 home-One">1</li>
@@ -232,56 +250,80 @@ const handleButtonStyle = (item) => {
                 <li className="m-5 mt-10 home-Ten">10</li>
               </>
             ) : (
-            <>
-            <li className="m-5 mb-10 home-Eleven">11</li>
-            <li className="m-5 mt-10 home-Twelve">12</li>
-            <li className="m-5 mb-10 home-Thirteen">13</li>
-            <li className="m-5 mt-10 home-Fourteen">14</li>
-            <li className="m-5 mb-10 home-Fifteen">15</li>
-            <li className="m-5 mt-10 home-Sixteen">16</li>
-            <li className="m-5 mb-10 home-Seventeen">17</li>
-            <li className="m-5 mt-10 home-Eighteen">18</li>
-            <li className="m-5 mb-10 home-Nineteen">19</li>
-            <li className="m-5 mt-10 home-Twenty">20</li>
-            </>
+              <>
+                <li className="m-5 mb-10 home-Eleven">11</li>
+                <li className="m-5 mt-10 home-Twelve">12</li>
+                <li className="m-5 mb-10 home-Thirteen">13</li>
+                <li className="m-5 mt-10 home-Fourteen">14</li>
+                <li className="m-5 mb-10 home-Fifteen">15</li>
+                <li className="m-5 mt-10 home-Sixteen">16</li>
+                <li className="m-5 mb-10 home-Seventeen">17</li>
+                <li className="m-5 mt-10 home-Eighteen">18</li>
+                <li className="m-5 mb-10 home-Nineteen">19</li>
+                <li className="m-5 mt-10 home-Twenty">20</li>
+              </>
             )}
-            
           </ul>
-      </>
-      )}
-      {state.play ? (
+        </>
+      );
+    }
+
+    // Play screen
+    else if(state.play) {
+      content = (
         <section className="grid grid-rows-2 h-full">
-          <div className='lg:justify-between  md:justify-between justify-between m-1'>
+          <div className="lg:justify-between md:justify-between justify-between m-1">
             <Homebtn onHomeClick={handleHomeClick} />
-            {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
-            <div className='flex  justify-center ' >
+            {state.items.length === 0 && (
+              <Restartbtn onRestartClick={handleRestartClick} />
+            )}
+            <div className="flex justify-center">
               {state.items.map((l) => (
-                <div className='flex  md:justify-center md:items-center justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 lg:w-60 lg:h-60 md:w-45 md:h-45 w-45 h-45 absolute lg:text-[10em] md:text-9xl text-9xl font-bold rounded rainbow-border ' key={l.value}>
+                <div
+                  key={l.value}
+                  className="flex justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 
+                           lg:w-60 lg:h-60 md:w-45 md:h-45 w-45 h-45 absolute lg:text-[10em] md:text-9xl text-9xl 
+                           font-bold rounded rainbow-border"
+                >
                   {l.value.toUpperCase()}
                 </div>
               ))}
             </div>
           </div>
-          {state.items.length === 0 && <h2 className='flex lg:flex-col md:whitespace-normal md:break-words md:overflow-hidden flex-col whitespace-normal break-words overflow-hidden lg:ml-100 text-wrap lg:h-full lg:w-250  md:w-100 w-50 md:ml-50 ml-35 justify-center lg:justify-center md:justify-center   lg:text-6xl md:text-4xl text-lg font-bold winner-grow' style={{ fontFamily: '"DynaPuff", system-ui' }}>{state.winner}</h2>}
-          <ul className='flex justify-center flex-wrap md:justify-center  w-full'>
+          {state.items.length === 0 && (
+            <h2
+              className="flex flex-col whitespace-normal break-words overflow-hidden lg:ml-100 lg:h-full lg:w-250 
+                       md:w-100 w-50 md:ml-50 ml-35 justify-center lg:text-6xl md:text-4xl text-lg font-bold winner-grow"
+              style={{ fontFamily: '"DynaPuff", system-ui' }}
+            >
+              {state.winner}
+            </h2>
+          )}
+          <ul className="flex justify-center flex-wrap md:justify-center w-full">
             {state.buttons.map((items, index) => (
-              <li className='flex' key={items}>
+              <li className="flex" key={items}>
                 <Button
-                  className=' flex items-center justify-center border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] lg:text-8xl md:text-5xl text-2xl font-bold lg:w-38 lg:h-38 md:w-20 md:h-20 w-15 h-15 m-0.5 cursor-pointer active:translate-y-0.5 rainbow-border'
+                  className="flex items-center justify-center border-0.5 border-b-8 border-r-8 rounded border-black 
+                           bg-[#0000003c] lg:text-8xl md:text-5xl text-2xl font-bold lg:w-38 lg:h-38 md:w-20 md:h-20 
+                           w-15 h-15 m-0.5 cursor-pointer active:translate-y-0.5 rainbow-border"
                   items={items.toUpperCase()}
                   onClick={() => handleClick(items, index)}
                   style={handleButtonStyle(items)}
                   disabled={state.compLetters.length < 1}
-                ></Button>
+                />
               </li>
             ))}
           </ul>
         </section>
-      ) : state.getNumberPlay ? (
-          <section className="grid grid-rows-1 place-items-center w-screen h-fit gap-2">
-            <section className="flex flex-col lg:w-screen lg:h-full md:w-screen sm:w-screen h-full w-screen">
-              {/* Controls */}
-              <section className="flex justify-between w-screen h-fit">
+      );
+    }
+
+    // Number play screen
+    else if(state.getNumberPlay) {
+      content = (
+        <section className="grid grid-rows-1 place-items-center w-screen h-fit gap-2">
+          <section className="flex flex-col lg:w-screen lg:h-full md:w-screen sm:w-screen h-full w-screen">
+            <section className="flex justify-between w-screen h-fit">
               <Homebtn onHomeClick={handleHomeClick} />
               {state.items.length === 0 && (
                 <div
@@ -291,55 +333,63 @@ const handleButtonStyle = (item) => {
                   {state.winner}
                 </div>
               )}
-              {state.items.length === 0 && <Restartbtn onRestartClick={handleRestartClick} />}
-              </section>
-
-              {/* Letter + Buttons wrapper */}
-              <div className="grid items-center w-full h-full ">
-                {/* Letter stack */}
-                <div className="relative flex justify-center items-center w-full h-60 md:h-96">
-                  {state.items.map((l) => (
-                    <div
-                      key={l.value}
-                      className="absolute flex justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 
-                       w-40 h-40 md:w-60 md:h-60 text-6xl md:text-[10em] font-bold rounded rainbow-border"
-                    >
-                      {l.value}
-                    </div>
-                  ))}
-                </div>
-                {/* Buttons under letters */}
-                <ul className="grid lg:grid-cols-5 md:grid-cols-5 sm::grid-cols-4 grid-cols-5 gap-2">
-                  {state.buttons.map((items, index) => (
-                    <li key={items}>
-                      <Button
-                        className="border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] 
-                         md:text-8xl text-4xl font-bold lg:w-50 lg:h-50 md:w-40 md:h-40 sm:w-50 sm:h-50 w-15 h-15 
-                         cursor-pointer active:translate-y-0.5 rainbow-border"
-                        items={items.toUpperCase()}
-                        onClick={() => handleClick(items, index)}
-                        style={handleButtonStyle(items)}
-                        disabled={state.compLetters.length < 1}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {state.items.length === 0 && (
+                <Restartbtn onRestartClick={handleRestartClick} />
+              )}
             </section>
+            <div className="grid items-center w-full h-full">
+              <div className="relative flex justify-center items-center w-full h-60 md:h-96">
+                {state.items.map((l) => (
+                  <div
+                    key={l.value}
+                    className="absolute flex justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 
+                             w-40 h-40 md:w-60 md:h-60 text-6xl md:text-[10em] font-bold rounded rainbow-border"
+                  >
+                    {l.value}
+                  </div>
+                ))}
+              </div>
+              <ul className="grid lg:grid-cols-5 md:grid-cols-5 sm:grid-cols-4 grid-cols-5 gap-2">
+                {state.buttons.map((items, index) => (
+                  <li key={items}>
+                    <Button
+                      className="border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] 
+                               md:text-8xl text-4xl font-bold lg:w-50 lg:h-50 md:w-40 md:h-40 sm:w-50 sm:h-50 
+                               w-15 h-15 cursor-pointer active:translate-y-0.5 rainbow-border"
+                      items={items.toUpperCase()}
+                      onClick={() => handleClick(items, index)}
+                      style={handleButtonStyle(items)}
+                      disabled={state.compLetters.length < 1}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
           </section>
+        </section>
+      );
+    }
 
-      ) : state.getAlphabet ?(
+    // Alphabet screen
+    else if(state.getAlphabet) {
+      content = (
         <Home
           onPlayClick={handlePlay}
           onBackClick={handleBackClick}
           value={state.text}
-          onChange={(e) => dispatch({ type: 'updateText', text: e.target.value })}
+          onChange={(e) =>
+          dispatch({ type: "updateText", text: e.target.value })
+          }
         />
-      ):(
-        <></>
-      )}
-    </div>
-  );
+      );
+    }
+
+    // Default fallback
+    else {
+      content = null;
+    }
+
+    return <div className="grid md:w-screen w-screen">{content}</div>;
 }
 export default App;
 
