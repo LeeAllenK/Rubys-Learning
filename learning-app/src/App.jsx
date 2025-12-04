@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef,useReducer} from 'react';
-import { handlePlay, handleHomeClick, handleRestartClick, handleNumberOneClick, handleNumberTwoClick, handleAlphabetClick, handleBackClick, handleNumberBackClick, handleNumberPlayClick } from './Handlers/gameHandlers';
+import { handlePlay,handleClick, handleHomeClick, handleRestartClick, handleNumberOneClick, handleNumberTwoClick, handleAlphabetClick, handleBackClick, handleNumberBackClick, handleNumberPlayClick } from './Handlers/gameHandlers';
 import { Button } from './components/Button';
 import { Home } from './components/Home';
 import { Homebtn } from './components/Home-Btn';
@@ -74,17 +74,17 @@ function App() {
     }
   }, [state.compare, state.compLetters]);
   // Event to add to compLetters array to compare
-  const handleClick = (items, i) => {
-    console.log(items)
-    dispatch({
-      type: 'compare-Letters',
-        compLetters: [...state.compLetters, items],
-        compare: !state.compare,
-        getColor: 'green',
-        getBackgroundColor: 'black'
+  // const handleClick = (items, i,dispatch) => {
+  //   console.log(items)
+  //   dispatch({
+  //     type: 'compare-Letters',
+  //       compLetters: [...state.compLetters, items],
+  //       compare: !state.compare,
+  //       getColor: 'green',
+  //       getBackgroundColor: 'black'
 
-    });
-  };
+  //   });
+  // };
   // Reducer implemented to better optimize events used to start application and set arrays for letters and buttons
   // const handlePlay = () => {
   //   dispatch({
@@ -209,9 +209,9 @@ const handleButtonStyle = (item) => {
     if(!(state.getNumbers || state.getAlphabet)) {
       content = (
         <Main
-          onNumberOneClick={handleNumberOneClick}
-          onAlphabetClick={handleAlphabetClick}
-          onNumberTwoClick={handleNumberTwoClick}
+          onNumberOneClick={() => handleNumberOneClick(dispatch, state)}
+          onAlphabetClick={() => handleAlphabetClick(dispatch,state)}
+          onNumberTwoClick={() => handleNumberTwoClick(dispatch, state)}
         />
       );
     }
@@ -221,8 +221,8 @@ const handleButtonStyle = (item) => {
       content = (
         <>
           <Number
-            onNumberPlayClick={handleNumberPlayClick}
-            onBackNumberClick={handleNumberBackClick}
+            onNumberPlayClick={() => handleNumberPlayClick(dispatch,state)}
+            onBackNumberClick={() => handleNumberBackClick(dispatch,state)}
             value={state.textNumber || ""}
             onChange={(e) =>
               dispatch({
@@ -270,12 +270,14 @@ const handleButtonStyle = (item) => {
 
     // Play screen
     else if(state.play) {
+  console.log('Buttons:', state.buttons.map((button)=> button));
+  console.log(state.play)
       content = (
         <section className="grid grid-rows-2 h-full">
           <div className="lg:justify-between md:justify-between justify-between m-1">
-            <Homebtn onHomeClick={handleHomeClick} />
+            <Homebtn onHomeClick={handleHomeClick(dispatch,state)} />
             {state.items.length === 0 && (
-              <Restartbtn onRestartClick={handleRestartClick} />
+              <Restartbtn onRestartClick={() => handleRestartClick(dispatch,state)} />
             )}
             <div className="flex justify-center">
               {state.items.map((l) => (
@@ -300,15 +302,15 @@ const handleButtonStyle = (item) => {
             </h2>
           )}
           <ul className="flex justify-center flex-wrap md:justify-center w-full">
-            {state.buttons.map((items, index) => (
-              <li className="flex" key={items}>
+            {state.buttons.map((button, index) => (
+              <li className="flex" key={index}>
                 <Button
                   className="flex items-center justify-center border-0.5 border-b-8 border-r-8 rounded border-black 
                            bg-[#0000003c] lg:text-8xl md:text-5xl text-2xl font-bold lg:w-38 lg:h-38 md:w-20 md:h-20 
                            w-15 h-15 m-0.5 cursor-pointer active:translate-y-0.5 rainbow-border"
-                  items={items.toUpperCase()}
-                  onClick={() => handleClick(items, index)}
-                  style={handleButtonStyle(items)}
+                  items={button.value.toUpperCase()}
+                  onClick={() => handleClick(button,dispatch,state)}
+                  style={handleButtonStyle(button)}
                   disabled={state.compLetters.length < 1}
                 />
               </li>
@@ -324,7 +326,7 @@ const handleButtonStyle = (item) => {
         <section className="grid grid-rows-1 place-items-center w-screen h-fit gap-2">
           <section className="flex flex-col lg:w-screen lg:h-full md:w-screen sm:w-screen h-full w-screen">
             <section className="flex justify-between w-screen h-fit">
-              <Homebtn onHomeClick={handleHomeClick} />
+              <Homebtn onHomeClick={() => handleHomeClick(dispatch, state)} />
               {state.items.length === 0 && (
                 <div
                   className="lg:text-6xl md:text-4xl text-lg font-bold winner-grow"
@@ -334,7 +336,7 @@ const handleButtonStyle = (item) => {
                 </div>
               )}
               {state.items.length === 0 && (
-                <Restartbtn onRestartClick={handleRestartClick} />
+                <Restartbtn onRestartClick={() => handleRestartClick(dispatch,state)} />
               )}
             </section>
             <div className="grid items-center w-full h-full">
@@ -357,7 +359,7 @@ const handleButtonStyle = (item) => {
                                md:text-8xl text-4xl font-bold lg:w-50 lg:h-50 md:w-40 md:h-40 sm:w-50 sm:h-50 
                                w-15 h-15 cursor-pointer active:translate-y-0.5 rainbow-border"
                       items={items.toUpperCase()}
-                      onClick={() => handleClick(items, index)}
+                      onClick={() => handleClick(items,dispatch,state)}
                       style={handleButtonStyle(items)}
                       disabled={state.compLetters.length < 1}
                     />
@@ -369,22 +371,17 @@ const handleButtonStyle = (item) => {
         </section>
       );
     }
-
     // Alphabet screen
     else if(state.getAlphabet) {
       content = (
         <Home
-          onPlayClick={handlePlay}
-          onBackClick={handleBackClick}
+          onPlayClick={() => handlePlay(dispatch,state)}
+          onBackClick={() => handleBackClick(dispatch,state)}
           value={state.text}
-          onChange={(e) =>
-          dispatch({ type: "updateText", text: e.target.value })
-          }
+          onChange={(e) => dispatch({ type: "updateText", text: e.target.value })}
         />
       );
     }
-
-    // Default fallback
     else {
       content = null;
     }

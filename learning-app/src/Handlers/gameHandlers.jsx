@@ -1,19 +1,27 @@
-// import {useReducer} from 'react';
-// import {appReducer} from '../AppReducer/reducer';
-// import { initialState } from '../AppReducer/appInitialState';
+import { shuffleArray, ALPHABET, } from '../App';
 
+export const handleClick = (items, dispatch,state) => {
+   console.log("dsate")
+   dispatch({
+     type: 'compare-Letters',
+       compLetters: [...state.compLetters, items],
+       compare: !state.compare,
+       getColor: 'green',
+       getBackgroundColor: 'black'
 
-export const handlePlay = ({dispatch}) => {
-// const [state, dispatch] = useReducer(appReducer, initialState);
+   });
+ };
+export const handlePlay = (dispatch,state) => {
+	const shuffledAlphabet = shuffleArray(ALPHABET.map((l) => ({ value: l.value })));
 	dispatch({
 		type: 'toggle-Play',
 		play: !state.play,
-		items: state.items,
-		buttons: state.buttons
+		items: ALPHABET,
+		buttons: shuffledAlphabet
 	})
 };
 // Event used to go back to home screen
-export const handleHomeClick = () => {
+export const handleHomeClick = (dispatch,state) => {
 	if(state.getNumbers) {
 		dispatch({
 			type: 'Home',
@@ -37,7 +45,7 @@ export const handleHomeClick = () => {
 	}
 };
 // Event used to reset items and buttons arrays.
-export const handleRestartClick = () => {
+export const handleRestartClick = (dispatch,state) => {
 	if(state.getNumberCatOne.length > 0) {
 		dispatch({
 			type: 'restart-NumCatOne',
@@ -56,15 +64,17 @@ export const handleRestartClick = () => {
 		})
 	}
 	if(state.getAlphabet) {
+		const shuffledAlphabet = shuffleArray(ALPHABET.map((l) => ({ value: l.value })));
 		dispatch({
 			type: 'restart-Alphabet',
-			items: state.items,
-			buttons: state.buttons,
+			items: ALPHABET,
+			buttons: shuffledAlphabet,
 			compLetters: state.compLetters
 		})
 	}
 };
-export const handleNumberOneClick = () => {
+export const handleNumberOneClick = (dispatch,state) => {
+	console.log('NUm1Play')
 	dispatch({
 		type: 'select-NumbersCatOne',
 		getNumbers: !state.getNumbers,
@@ -72,7 +82,7 @@ export const handleNumberOneClick = () => {
 
 	})
 };
-export const handleNumberTwoClick = () => {
+export const handleNumberTwoClick = (dispatch,state) => {
 	dispatch({
 		type: 'select-NumbersCatTwo',
 		getNumbers: !state.getNumbers,
@@ -80,19 +90,19 @@ export const handleNumberTwoClick = () => {
 
 	})
 }
-export const handleAlphabetClick = () => {
+export const handleAlphabetClick = (dispatch,state) => {
 	dispatch({
 		type: 'select-Alphabet',
 		getAlphabet: !state.getAlphabet
 	})
 };
-export const handleBackClick = () => {
+export const handleBackClick = (dispatch, state) => {
 	dispatch({
-		type: 'Menu',
+		type: 'Menu', 
 		getAlphabet: !state.getAlphabet
 	})
 }
-export const handleNumberBackClick = () => {
+export const handleNumberBackClick = (dispatch, state) => {
 	dispatch({
 		type: 'Menu',
 		getNumbers: !state.getNumbers,
@@ -100,7 +110,8 @@ export const handleNumberBackClick = () => {
 		getNumberCatTwo: state.getNumberCatTwo
 	})
 }
-export const handleNumberPlayClick = () => {
+export const handleNumberPlayClick = (dispatch, state) => {
+		console.log(state)
 	if(state.getNumberCatOne[0]?.value.includes('10')) {
 		dispatch({
 			type: 'toggle-Numberplay',

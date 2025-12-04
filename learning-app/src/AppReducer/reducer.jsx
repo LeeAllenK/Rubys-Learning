@@ -7,15 +7,17 @@ const shuffledNumbersTwo = shuffleArray(numbersTwo.map((l) => l.value));
 
 	switch(action.type){
 		case 'select-Alphabet':
-		return{...state, getAlphabet: !state.getAlphabet}
+			console.log('selec')
+		return{...state, getAlphabet: action.getAlphabet}
 		case 'select-NumbersCatOne':
 		return{...state, getNumbers: !state.getNumbers, getNumberCatOne: numbersOne}
 		case 'select-NumbersCatTwo':
 		return{...state, getNumbers: !state.getNumbers, getNumberCatTwo: numbersTwo}
 		case 'toggle-Play':
-		return{	...state, play: !state.play, items: ALPHABET, buttons: shuffledAlphabet}
+			console.log('ACTIONB',action.buttons, 'and', action.items)
+		return{	...state, play: action.play, items: action.items, buttons: action.buttons}
 		case 'toggle-Numberplay':
-		return{...state, getNumberPlay: !state.getNumberPlay, items: state.getNumberCatOne.length > 0 ? numbersOne : numbersTwo, buttons: state.getNumberCatTwo.length > 0 ? shuffledNumbersTwo: shuffledNumbersOne}
+		return{...state, getNumberPlay: action.getNumberPlay, items: state.getNumberCatOne.length > 0 ? numbersOne : numbersTwo, buttons: state.getNumberCatTwo.length > 0 ? shuffledNumbersTwo: shuffledNumbersOne}
     	case 'update-State':
 			return {...state, letterValue: action.letterValue, compLetters: action.compLetters};
 		case 'set-Winner':
@@ -44,7 +46,7 @@ const shuffledNumbersTwo = shuffleArray(numbersTwo.map((l) => l.value));
 		case "Home":
 		return{...state, play: state.play ? !state.play : state.play, getNumberPlay: state.getNumberPlay ? !state.getNumberPlay : state.getNumberPlay, compLetters: [], items: [], buttons: [],	winner: '',	text: '',	textNumber: ''}
 		case 'restart-Alphabet':		
-		return{...state, items:  ALPHABET, buttons: shuffledAlphabet, compLetters: []}
+		return{...state, items:  action.items, buttons: action.buttons, compLetters: []}
 		case 'restart-NumCatOne':		
 		return{...state, items: numbersOne, buttons: shuffledNumbersOne, compLetters: [], winner:''}
 		case 'restart-NumCatTwo':		
