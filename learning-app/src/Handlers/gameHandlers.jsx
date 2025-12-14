@@ -4,7 +4,7 @@ export const handleClick = (items, dispatch,state) => {
     getColor: 'green', getBackgroundColor: 'black' });
  };
 export const handlePlay = (dispatch,state) => {
-	dispatch({ type: 'Play-Alphabet', play: true, items: state.items, buttons: state.buttons})
+	dispatch({ type: 'start-Learning', cat:"alphabet", play: true, items: state.items, buttons: state.buttons})
 };
 // Event used to go back to home screen
 export const handleHomeClick = (dispatch,state) => {
@@ -19,40 +19,56 @@ export const handleHomeClick = (dispatch,state) => {
 // Event used to reset items and buttons arrays.
 export const handleRestartClick = (dispatch,state) => {
 	if(state.getNumberCatOne.length > 0) {
-		dispatch({ type: 'restart-NumCatOne', items: state.items, buttons: state.buttons, compLetters: state.compLetters,
+		dispatch({ type: 'restart-Btn', cat:"number-One", items: state.items, buttons: state.buttons, compLetters: state.compLetters,
 			winner: state.winner})
 	}
 	if(state.getNumberCatTwo.length > 0) {
-		dispatch({ type: 'restart-NumCatTwo', items: state.items, buttons: state.buttons, compLetters: state.compLetters})
+		dispatch({ type: 'restart-Btn', cat: "number-Two", items: state.items, buttons: state.buttons, compLetters: state.compLetters})
 	}
 	if(state.getAlphabet) {
-		const shuffledAlphabet = shuffleArray(ALPHABET.map((l) => ({ value: l.value })));
-		dispatch({ type: 'restart-Alphabet', items: ALPHABET, buttons: shuffledAlphabet, compLetters: state.compLetters})
+		dispatch({ type: 'restart-Btn', cat:"alphabet", items: state.items, buttons: state.buttons, compLetters: state.compLetters})
 	}
 };
 export const handleNumberOneClick = (dispatch,state) => {
-	dispatch({ type: 'select-NumbersCatOne', getNumbers: !state.getNumbers, getNumberCatOne: state.getNumberCatOne})
+	dispatch({ type: "learning-Homepage", cat: "number-One", getNumbers: !state.getNumbers, getNumberCatOne: state.getNumberCatOne})
 };
 export const handleNumberTwoClick = (dispatch,state) => {
-	dispatch({ type: 'select-NumbersCatTwo', getNumbers: !state.getNumbers, getNumberCatTwo: state.getNumberCatTwo})
+	dispatch({ type: "learning-Homepage", cat: "number-Two", getNumbers: !state.getNumbers, getNumberCatTwo: state.getNumberCatTwo})
 }
 export const handleAlphabetClick = (dispatch,state) => {
-	dispatch({ type: 'select-Alphabet', getAlphabet: !state.getAlphabet})
+	dispatch({ type: "learning-Homepage", cat: "alphabet", getAlphabet: !state.getAlphabet})
 };
 export const handleBackClick = (dispatch, state) => {
-	dispatch({type: 'Menu', getAlphabet: !state.getAlphabet})
+	dispatch({type: 'learning-Menu-Btn', cat:"alphabet", getAlphabet: !state.getAlphabet})
 }
 export const handleNumberBackClick = (dispatch, state) => {
-	dispatch({ type: 'Menu', getNumbers: !state.getNumbers,getNumberCatOne: state.getNumberCatOne, 
-	getNumberCatTwo: state.getNumberCatTwo})
+	dispatch({ type: 'learning-Menu-Btn', cat:"numbers", 
+	getNumbers: !state.getNumbers, getNumberCatOne: state.getNumberCatOne, getNumberCatTwo: state.getNumberCatTwo})
 }
 export const handleNumberPlayClick = (dispatch, state) => {
 	if(state.getNumberCatOne[0]?.value.includes('10')) {
-		dispatch({ type: 'toggle-Numberplay', getNumberPlay: !state.getNumberPlay, items: state.getNumberCatOne, 
+		dispatch({ type: 'start-Learning', cat:"number-One", getNumberPlay: !state.getNumberPlay, items: state.getNumberCatOne, 
 		buttons: state.buttons})
 	}
 	if(state.getNumberCatTwo[0]?.value.includes('20')) {
-		dispatch({ type: 'toggle-Numberplay', getNumberPlay: !state.getNumberPlay, items: state.getNumberCatTwo,
+		dispatch({ type: 'start-Learning', cat:"number-Two", getNumberPlay: !state.getNumberPlay, items: state.getNumberCatTwo,
 		buttons: state.buttons})
 	}
 }
+export const handleShapeClick = (dispatch, state)=>{
+	dispatch({type: "learning-Homepage", cat:"shapes", shapeHome:state.shapeHome })
+}
+ 
+export const handleColorClick = (dispatch, state) =>{
+	dispatch({ type: "learning-Homepage", cat:"colors", colorMain: state.colorMain})
+}
+
+export const handleBackShapeClick = (dispatch, state) =>{
+	dispatch({type: "learning-Menu-Btn", cat: "shapes", shapeHome:state.shapeHome, text: state.text})
+}
+
+export const handleBackColorClick = (dispatch, state) => {
+	console.log('back')
+	dispatch({ type: "learning-Menu-Btn", cat: "colors",color:state.colorMain})
+}
+

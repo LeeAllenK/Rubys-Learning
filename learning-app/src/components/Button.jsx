@@ -1,7 +1,7 @@
 
-export function Button({items,onClick,disabled,style,className}){
+export function Button({value,onClick,disabled,style,className}){
 	return(
-		<button className={className} style={style} onClick={onClick} disabled={disabled}>{items}</button>
+		<button className={className} style={style} onClick={onClick} disabled={disabled}>{value}</button>
 	)
 }
 

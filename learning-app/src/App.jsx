@@ -1,23 +1,26 @@
 import { useEffect, useRef,useReducer} from 'react';
-import { handlePlay,handleClick, handleHomeClick, handleRestartClick, handleNumberOneClick, handleNumberTwoClick, handleAlphabetClick, handleBackClick, handleNumberBackClick, handleNumberPlayClick } from './Handlers/gameHandlers';
+import { handlePlay,handleClick, handleHomeClick, handleRestartClick, handleNumberOneClick, handleNumberTwoClick, handleAlphabetClick, handleBackClick, handleNumberBackClick, handleNumberPlayClick, handleShapeClick, handleColorClick, handleBackColorClick, handleBackShapeClick} from './Handlers/gameHandlers';
 import { Button } from './components/Button';
 import { Home } from './components/Home';
 import { Homebtn } from './components/Home-Btn';
 import { Restartbtn } from './components/Restart-Btn';
 import { Main } from './components/Main-page';
 import { Number } from './components/Number-Home';
+import { Color } from './components/Color-Homepage';
+import {Shape } from './components/Shape-Homepage';
 import { appReducer} from './AppReducer/reducer';
 import { initialState} from './AppReducer/appInitialState';
 
-const speak = (text) => {
-  if(!text) return;
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-US'; // adjust language if needed
-  window.speechSynthesis.speak(utterance);
-};
-
 function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);
+
+const speak = (text) => {
+  if(!text) return;
+  dispatch({type:"Speak", speaking:true})
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.lang = 'en-US'; // adjust language if needed
+  window.speechSynthesis.speak(speech);
+};
   // Used a ref to persist the "nextIndex" value across renders and effects.
   const nextIndexRef = useRef(state.items.length);
   // This effect automatically selects letters from the items array.
@@ -30,11 +33,7 @@ function App() {
         const value = state.items[nextIndexRef.current]?.value;
         if(value) {
           speak(value);
-          dispatch({
-            type: 'update-State',
-              letterValue: value,
-              compLetters: [...state.compLetters, value],
-          });
+          dispatch({ type: 'update-State', letterValue: value, compLetters: [...state.compLetters, value]});
         }
         if(nextIndexRef.current <= 0) {
           clearInterval(nextIntervalId);
@@ -43,13 +42,13 @@ function App() {
             payload: `Good Job ${state.text || state.textNumber || ''}!`,
           });
         }
-      }, 500);
-        if(state.winner.length > 0){
+      if(state.items.length <= 0 ){
           speak(state.winner)
         }
+      }, 500);
       return () => clearInterval(nextIntervalId);
     }
-  }, [state.compLetters, state.items, state.text,state.letterValue, state.textNumber, state.play, state.getNumberPlay]);
+  }, [state.compLetters, state.items, state.text,state.letterValue, state.textNumber, state.play, state.getNumberPlay,state.speaking]);
   // Effect compares the automatically picked items with the user’s pick.
   useEffect(() => {
     if(state.compare && state.compLetters.length > 1) {
@@ -70,23 +69,24 @@ function App() {
     }
   }, [state.compare, state.compLetters]);
   useEffect(() => {
-    if(state.items.length > 0 ||  state.buttons.length > 0 ){
-    console.log("Updated items:", state.items);
-    console.log("Updated buttons:", state.buttons);
+    if(state.colorMain){
+    console.log("Color Main Menu:", state.colorMain);
 }
-  }, [state.items, state.buttons]);
+  }, [state.colorMain]);
 //Handler change button color 
 const handleButtonStyle = (item) => {
   return state.compLetters.includes(item) ? { color: state.getColor, background: state.getBackgroundColor} : {};
 };
     let content;
     // Main screen
-    if(!(state.getNumbers || state.getAlphabet)) {
+    if(!(state.getAlphabet || state.getNumbers || state.colorMain || state.shapeHome)) {
       content = (
         <Main
           onNumberOneClick={() => handleNumberOneClick(dispatch, state)}
           onAlphabetClick={() => handleAlphabetClick(dispatch,state)}
           onNumberTwoClick={() => handleNumberTwoClick(dispatch, state)}
+          onShapeClick={() => handleShapeClick(dispatch, state)}
+          onColorClick={()=> handleColorClick(dispatch, state)}
         />
       );
     }
@@ -98,12 +98,7 @@ const handleButtonStyle = (item) => {
             onNumberPlayClick={() => handleNumberPlayClick(dispatch,state)}
             onBackNumberClick={() => handleNumberBackClick(dispatch,state)}
             value={state.textNumber || ""}
-            onChange={(e) =>
-              dispatch({
-                type: "updateTextNumber",
-                textNumber: e.target.value || "",
-              })
-            }
+            onChange={(e) => dispatch({ type: "text" ,cat: "number", textNumber: e.target.value || "",})}
           />
           <ul className="flex md:justify-center justify-center flex-wrap md:mt-10 mt-10 md:text-9xl text-5xl font-bold m-0 p-0"
             style={{ fontFamily: '"DynaPuff", system-ui' }}>
@@ -144,15 +139,15 @@ const handleButtonStyle = (item) => {
   console.log(state.play,state.items.length)
       content = (
         <section className="grid grid-rows-1 place-items-center w-screen h-fit gap-2">
-          <section className="flex flex-col lg:w-screen lg:h-full md:w-screen sm:w-screen h-full w-screen">
+          <section className="flex flex-col lg:w-screen lg:h-full md:w-screen md:h-full sm:w-screen sm:h-full h-full w-screen">
             <section className="flex justify-between w-screen h-fit">
               <Homebtn onHomeClick={() => handleHomeClick(dispatch, state)} />
               {state.items.length === 0 && (
                 <Restartbtn onRestartClick={() => handleRestartClick(dispatch, state)} />
               )}
             </section>
-            <div className="grid items-center w-full h-full">
-              <div className="relative flex justify-center items-center w-full h-60 md:h-96">
+            <div className="grid items-center lg:w-screen md:w-screen sm:w-screen  lg:h-full md:h-full sm:h-full w-screen h-full">
+              <div className="relative flex justify-center items-center lg:w-full lg:h-100 md:w-full md:h-100 sm:w-full sm:h-75 w-full h-75">
                 {state.items.length === 0 ? (
                   <div
                     className="lg:text-6xl md:text-4xl sm:text-lg text-lg font-bold winner-grow"
@@ -171,13 +166,13 @@ const handleButtonStyle = (item) => {
                   ))
                 )}
               </div>
-              <ul className="grid lg:grid-cols-5 md:grid-cols-5 sm:grid-cols-4 grid-cols-5 gap-2">
+              <ul className="grid lg:grid-cols-10 md:grid-cols-8 sm:grid-cols-4 grid-cols-5 gap-2">
                 {state.buttons.map((button,i) => (
-                  <li key={i}>
-                    <Button className="border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] md:text-8xl text-4xl font-bold lg:w-50 lg:h-50 md:w-40 md:h-40 sm:w-50 sm:h-50 w-15 h-15 cursor-pointer active:translate-y-0.5 rainbow-border"
-                      items={button.toUpperCase()}
+                  <li key={i} className="w-fit">
+                    <Button className="border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] lg:text-5xl md:text-4xl text-4xl font-bold lg:w-25 lg:h-25 md:w-20 md:h-20 sm:w-50 sm:h-50 w-20 h-20 cursor-pointer active:translate-y-0.5 rainbow-border"
+                      value={button.toUpperCase()}
                       onClick={() => handleClick(button, dispatch, state)}
-                      style={handleButtonStyle(button)} disabled={state.compLetters.length < 1}
+                      style={handleButtonStyle(button)} disabled={state.compLetters.length < 1 || state.speaking}
                     />
                   </li>
                 ))}
@@ -198,8 +193,8 @@ const handleButtonStyle = (item) => {
                 <Restartbtn onRestartClick={() => handleRestartClick(dispatch,state)} />
               )}
             </section>
-            <div className="grid items-center w-full h-full">
-              <div className="relative flex justify-center items-center w-full h-60 md:h-96">
+            <div className="grid items-center lg:w-screen md:w-screen sm:w-screen  lg:h-full md:h-full sm:h-full w-screen h-full">
+              <div className="relative flex justify-center items-center lg:w-full lg:h-100 md:w-full md:h-100 sm:w-full sm:h-75 w-full h-75">
                 {state.items.length === 0 ? (
                   <div
                     className="lg:text-6xl md:text-4xl sm:text-lg text-lg font-bold winner-grow"
@@ -218,13 +213,13 @@ const handleButtonStyle = (item) => {
                   ))
                 )}
               </div>
-              <ul className="grid lg:grid-cols-5 md:grid-cols-5 sm:grid-cols-4 grid-cols-5 gap-2">
+              <ul className="grid lg:place-items-center md:place-items-center sm:place-items-center place-items-center lg:grid-cols-5 md:grid-cols-5 sm:grid-cols-4 grid-cols-4 gap-2">
                 {state.buttons.map((items) => (
                   <li key={items}>
-                    <Button className="border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] md:text-8xl text-4xl font-bold lg:w-50 lg:h-50 md:w-40 md:h-40 sm:w-50 sm:h-50 w-15 h-15 cursor-pointer active:translate-y-0.5 rainbow-border" 
-                    items={items.toUpperCase()} 
+                    <Button className="border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] lg:text-5xl md:text-4xl text-4xl font-bold  lg:w-50 lg:h-50 md:w-40 md:h-40 sm:w-50 sm:h-50 w-20 h-20 cursor-pointer active:translate-y-0.5 rainbow-border" 
+                    value={items.toUpperCase()} 
                     onClick={() => handleClick(items,dispatch,state)} 
-                    style={handleButtonStyle(items)} disabled={state.compLetters.length < 1}
+                    style={handleButtonStyle(items)} disabled={state.compLetters.length < 1 || state.speaking}
                     />
                   </li>
                 ))}
@@ -241,9 +236,29 @@ const handleButtonStyle = (item) => {
           onPlayClick={() => handlePlay(dispatch,state)}
           onBackClick={() => handleBackClick(dispatch,state)}
           value={state.text}
-          onChange={(e) => dispatch({ type: "updateText", text: e.target.value })}
+          onChange={(e) => dispatch({ type: "text",cat:"alphabet", text: e.target.value })}
         />
       );
+    }
+    else if(state.colorMain){
+      content = (
+        <Color
+          onColorClick={()=> handleColorClick(colorDispatch, colorState)}
+          onBackColorClick={() => handleBackColorClick(dispatch, state)}  
+          value={state.text}
+          onChange={(e) => dispatch({ type: "text", cat: "color", text: e.target.value})}
+        />
+      )
+    }
+    else if(state.shapeHome){
+      content = (
+        <Shape
+        onShapeClick={() => handleShapeClick(dispatch, state)}
+        onBackShapeClick={() => handleBackShapeClick(dispatch, state)}
+        value={state.text}
+          onChange={(e) => dispatch({ type: "text", cat: "shape", text: e.target.value})}
+        />
+      )
     }
     else {
       content = null;

@@ -5,18 +5,29 @@ const shuffledAlphabet = shuffleArray(ALPHABET.map((l) => l.value));
 const shuffledNumbersOne = shuffleArray(numbersOne.map((l) => l.value));
 const shuffledNumbersTwo = shuffleArray(numbersTwo.map((l) => l.value));
 	switch(action.type){
-		case 'select-Alphabet':
-			return{...state, getAlphabet: action.getAlphabet}
-		case 'Play-Alphabet':
-			return{...state, play: true, items:[...ALPHABET], buttons: [...shuffledAlphabet]}
-		case 'select-NumbersCatOne':
-			return{...state, getNumbers: !state.getNumbers, getNumberCatOne: numbersOne}
-		case 'select-NumbersCatTwo':
-		return{...state, getNumbers: !state.getNumbers, getNumberCatTwo: numbersTwo}
-		case 'toggle-Numberplay':
-			return{...state, getNumberPlay: action.getNumberPlay, 
-			items: state.getNumberCatOne.length > 0 ? numbersOne : numbersTwo, 
-			buttons: state.getNumberCatTwo.length > 0 ? shuffledNumbersTwo: shuffledNumbersOne}
+		case 'Speak':
+		 return{...state, speak:action.speak}
+		case "learning-Homepage":{
+			if(action.cat === "alphabet"){
+				return{...state, getAlphabet: action.getAlphabet}
+			}else if(action.cat === "number-One"){
+				return{...state, getNumbers: !state.getNumbers, getNumberCatOne: numbersOne}
+			}else if(action.cat === "number-Two"){
+				return{...state, getNumbers: !state.getNumbers, getNumberCatTwo: numbersTwo}
+			}else if(action.cat === "shapes"){
+				return{...state, shapeHome:true}
+			}else if(action.cat === "colors"){
+				return { ...state, colorMain: true }
+			}
+		}
+		case 'start-Learning':
+			if(action.cat === "alphabet"){
+				return{...state, play: true, items:[...ALPHABET], buttons: [...shuffledAlphabet]}
+			}else if(action.cat === "number-One"){
+				return{...state, getNumberPlay: action.getNumberPlay, items: numbersOne, buttons: shuffledNumbersOne}
+			}else if(action.cat === "number-Two"){
+				return{...state, getNumberPlay: action.getNumberPlay, items: numbersTwo, buttons: shuffledNumbersTwo}
+			}
     	case 'update-State':
 			return {...state, letterValue: action.letterValue, compLetters: action.compLetters};
 		case 'set-Winner':
@@ -29,25 +40,39 @@ const shuffledNumbersTwo = shuffleArray(numbersTwo.map((l) => l.value));
 			return {...state, compLetters: [], compare: false, color: 'color-btns'};
 		case 'compare-Letters':
 			return {...state, compLetters: action.compLetters, compare: action.compare, getColor: action.getColor, getBackgroundColor: action.getBackgroundColor};
-		case 'updateText':
-			return {...state, text: action.text};
-		case 'updateTextNumber':
-			return {...state, textNumber: action.textNumber};
-		case 'Menu':
-			return{...state,
-				getAlphabet: state.getAlphabet ? !state.getAlphabet : state.getAlphabet,	
-				getNumbers: state.getNumbers ? !state.getNumbers : state.getNumbers,
-				getNumberCatOne: state.getNumbers ? [] : state.getNumberCatOne,
-				getNumberCatTwo: state.getNumbers ? [] : state.getNumberCatTwo
+		case 'text':
+			if(action.cat === 'alphabet'){
+				return {...state, text: action.text};
+			}else if(action.cat === 'number'){
+				return {...state, textNumber: action.textNumber};
 			}
 		case "Home":
 		return{...state, play: state.play ? !state.play : state.play, getNumberPlay: state.getNumberPlay ? !state.getNumberPlay : state.getNumberPlay, compLetters: [], items: [], buttons: [],	winner: '',	text: '',	textNumber: ''}
-		case 'restart-Alphabet':		
-		return{...state, items:  action.items, buttons: action.buttons, compLetters: []}
-		case 'restart-NumCatOne':		
-		return{...state, items: numbersOne, buttons: shuffledNumbersOne, compLetters: [], winner:''}
-		case 'restart-NumCatTwo':		
-		return{...state, items: numbersTwo, buttons: shuffledNumbersTwo, compLetters: []}
+		case 'restart-Btn':
+			if(action.cat === 'alphabet'){
+				return{...state, items:  ALPHABET, buttons: shuffledAlphabet, compLetters: []}
+			}else if(action.cat === 'number-One'){
+				return{...state, items: numbersOne, buttons: shuffledNumbersOne, compLetters: [], winner:''}
+			}else if(action.cat === 'number-Two'){
+				return{...state, items: numbersTwo, buttons: shuffledNumbersTwo, compLetters: []}
+			}		
+		case "learning-Menu-Btn":{
+			if(action.cat === "alphabet"){
+				console.log('learning-Alpahbet')
+				return { ...state, getAlphabet: state.getAlphabet ? !state.getAlphabet : state.getAlphabet }
+			}else if(action.cat === 'numbers'){
+				return{...state,
+				getNumbers: state.getNumbers ? !state.getNumbers : state.getNumbers,
+				getNumberCatOne: state.getNumbers ? [] : state.getNumberCatOne,
+				getNumberCatTwo: state.getNumbers ? [] : state.getNumberCatTwo
+				}
+			}
+			else if(action.cat === "shapes"){
+				return{...state, shapeHome:false, text: ''}
+			}else if(action.cat === "colors"){
+				return { ...state, colorMain:false }
+			}
+		}
 		default: return state;
 	}
 }
