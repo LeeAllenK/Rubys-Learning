@@ -1,5 +1,5 @@
 import { useEffect, useRef,useReducer} from 'react';
-import { handlePlay,handleClick, handleHomeClick, handleRestartClick, handleNumberOneClick, handleNumberTwoClick, handleAlphabetClick, handleBackClick, handleNumberBackClick, handleNumberPlayClick, handleShapeClick, handleColorClick, handleBackColorClick, handleBackShapeClick} from './Handlers/gameHandlers';
+import { handlePlay,handleClick, handleHomeClick, handleRestartClick, handleNumberOneClick, handleNumberTwoClick, handleAlphabetClick, handleBackClick, handleNumberBackClick, handleNumberPlayClick, handleShapeClick, handleColorClick, handleBackColorClick, handleBackShapeClick, handleColorPlayClick, handleColorGameClick} from './Handlers/gameHandlers';
 import { Button } from './components/Button';
 import { Home } from './components/Home';
 import { Homebtn } from './components/Home-Btn';
@@ -53,11 +53,10 @@ const speak = (text) => {
   useEffect(() => {
     if(state.compare && state.compLetters.length > 1) {
       if(state.compLetters[0] === state.compLetters[1]) {
-        console.log('MATCH');
-        dispatch({ type: 'set-Match', match: !state.match });
+        dispatch({ type: 'match-Items', match: !state.match });
         // Remove the items from the items array using the index stored in the ref.
         dispatch({
-          type: 'update-Items',
+          type: 'remove-Items',
           items: state.items.filter((_, index) => index !== nextIndexRef.current),
         });
       }
@@ -228,6 +227,51 @@ const handleButtonStyle = (item) => {
           </section>
         </section>
       );
+    }else if(state.colorPlay){
+      content = (
+        <section className="grid grid-rows-1 place-items-center w-screen h-fit gap-2">
+          <section className="flex flex-col lg:w-screen lg:h-full md:w-screen sm:w-screen h-full w-screen">
+            <section className="flex justify-between w-screen h-fit">
+              <Homebtn onHomeClick={() => handleHomeClick(dispatch, state)} />
+              {state.colors.length === 0 && (
+                <Restartbtn onRestartClick={() => handleRestartClick(dispatch, state)} />
+              )}
+            </section>
+            <div className="grid items-center lg:w-screen md:w-screen sm:w-screen  lg:h-full md:h-full sm:h-full w-screen h-full">
+              <div className="relative flex justify-center items-center lg:w-full lg:h-100 md:w-full md:h-100 sm:w-full sm:h-75 w-full h-75">
+                {state.colors.length === 0 ? (
+                  <div
+                    className="lg:text-6xl md:text-4xl sm:text-lg text-lg font-bold winner-grow"
+                    style={{ fontFamily: '"DynaPuff", system-ui' }}
+                  >
+                    {state.winner}
+                  </div>
+                ) : (
+                  state.colors.map((color) => (
+                    <div
+                      key={color.value}
+                      className="absolute flex justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 
+                    w-40 h-40 md:w-60 md:h-60 lg:text-6xl md:text-3xl sm:text-2xl text-2xl md:text-[10em] font-bold rounded ">
+                      {color.value}
+                    </div>
+                  ))
+                )}
+              </div>
+              <ul className="grid lg:place-items-center md:place-items-center sm:place-items-center place-items-center lg:grid-cols-5 md:grid-cols-5 sm:grid-cols-4 grid-cols-4 gap-2">
+                {state.buttons.map((button) => (
+                  <li key={button}>
+                    <Button className="border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] lg:text-5xl md:text-4xl text-4xl font-bold  lg:w-50 lg:h-50 md:w-40 md:h-40 sm:w-50 sm:h-50 w-20 h-20 cursor-pointer active:translate-y-0.5"
+                      value={button.toUpperCase()}
+                      onClick={() => handleColorGameClick(button, dispatch, state)}
+                      style={handleButtonStyle(button)} disabled={state.compLetters.length < 1 || state.speaking}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        </section>
+      );
     }
     // Alphabet screen
     else if(state.getAlphabet) {
@@ -236,14 +280,14 @@ const handleButtonStyle = (item) => {
           onPlayClick={() => handlePlay(dispatch,state)}
           onBackClick={() => handleBackClick(dispatch,state)}
           value={state.text}
-          onChange={(e) => dispatch({ type: "text",cat:"alphabet", text: e.target.value })}
+          onChange={(e) => dispatch({ type: "text", cat:"alphabet", text: e.target.value })}
         />
       );
     }
     else if(state.colorMain){
       content = (
         <Color
-          onColorClick={()=> handleColorClick(colorDispatch, colorState)}
+          onColorClick={()=> handleColorPlayClick(dispatch, state)}
           onBackColorClick={() => handleBackColorClick(dispatch, state)}  
           value={state.text}
           onChange={(e) => dispatch({ type: "text", cat: "color", text: e.target.value})}
@@ -256,7 +300,7 @@ const handleButtonStyle = (item) => {
         onShapeClick={() => handleShapeClick(dispatch, state)}
         onBackShapeClick={() => handleBackShapeClick(dispatch, state)}
         value={state.text}
-          onChange={(e) => dispatch({ type: "text", cat: "shape", text: e.target.value})}
+        onChange={(e) => dispatch({ type: "text", cat: "shape", text: e.target.value})}
         />
       )
     }
@@ -273,6 +317,8 @@ export const numbersTwo = [ { value: '11' }, { value: '12' }, { value: '13' }, {
 
 export const ALPHABET = [{ value: 'a' }, { value: 'b' }, { value: 'c' }, { value: 'd' }, { value: 'e' }, { value: 'f' }, { value: 'g' }, { value: 'h' }, { value: 'i' }, { value: 'j' }, { value: 'k' }, { value: 'l' }, { value: 'm' }, { value: 'n' }, { value: 'o' }, { value: 'p' }, { value: 'q' }, { value: 'r' }, { value: 's' }, { value: 't' }, { value: 'u' }, { value: 'v' }, { value: 'w' }, { value: 'x' }, { value: 'y' }, { value: 'z' } 
 ].reverse();
+
+export const COLORS = [{ value: 'red' }, { value: 'orange' },  { value: 'yellow' },{ value: 'green' }, { value: 'blue' }, { value: 'indigo' }, { value: 'violet' },].reverse();
 
 export function shuffleArray(array) {
   for(let i = array.length - 1; i >= 1; i--) {

@@ -3,17 +3,33 @@ export const handleClick = (items, dispatch,state) => {
    dispatch({ type: 'compare-Letters', compLetters: [...state.compLetters, items], compare: !state.compare,
     getColor: 'green', getBackgroundColor: 'black' });
  };
+export const handleColorGameClick = (items, dispatch,state) => {
+	conosle.log(items)
+   dispatch({ type: 'compare-Letters', compLetters: [...state.compLetters, items], compare: !state.compare,
+    getColor: 'green', getBackgroundColor: 'black' });
+ };
 export const handlePlay = (dispatch,state) => {
 	dispatch({ type: 'start-Learning', cat:"alphabet", play: true, items: state.items, buttons: state.buttons})
 };
+
+export const handleColorPlayClick = (dispatch, state) =>{
+console.log('dslk')
+	dispatch({ type: "start-Learning", cat: "colors", colorPlay: true, getColors:true, colors: state.colors, buttons: state.buttons })
+}
 // Event used to go back to home screen
 export const handleHomeClick = (dispatch,state) => {
 	if(state.getNumbers) {
+		console.log('nums')
 		dispatch({ type: 'Home', getNumberPlay: false, items: state.items, buttons: state.buttons, textNumber: state.textNumber, compLetters: state.compLetters })
 	}
 	if(state.getAlphabet) {
+		console.log('al')
 		dispatch({ type: 'Home', play: !state.play, compLetters: state.compLetters, items: state.items, buttons: state.buttons,
 		winner: state.winner, text: state.text})
+	}
+	if(state.getColor){
+			console.log('go home color')
+		dispatch({ type: "Home", colorPlay: !state.colorPlay, colors: state.colors, buttons: state.buttons, compLetters:state.compLetters, winner: state.winner, text: state.text })
 	}
 };
 // Event used to reset items and buttons arrays.
@@ -60,6 +76,7 @@ export const handleShapeClick = (dispatch, state)=>{
 }
  
 export const handleColorClick = (dispatch, state) =>{
+console.log('main')
 	dispatch({ type: "learning-Homepage", cat:"colors", colorMain: state.colorMain})
 }
 
