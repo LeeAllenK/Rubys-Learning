@@ -4,7 +4,7 @@ export const handleClick = (items, dispatch,state) => {
     getColor: 'green', getBackgroundColor: 'black' });
  };
 export const handleColorGameClick = (items, dispatch,state) => {
-	conosle.log(items)
+	console.log(items)
    dispatch({ type: 'compare-Letters', compLetters: [...state.compLetters, items], compare: !state.compare,
     getColor: 'green', getBackgroundColor: 'black' });
  };

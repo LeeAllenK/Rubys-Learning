@@ -1,4 +1,4 @@
-import { shuffleArray, ALPHABET,numbersOne, numbersTwo,COLORS} from '../App';
+import { shuffleArray, ALPHABET,numbersOne, numbersTwo,COLORS} from '../Data/app';
 
 export function appReducer(state,action){
 const shuffledAlphabet = shuffleArray(ALPHABET.map((l) => l.value));
@@ -69,7 +69,7 @@ const shuffledColors = shuffleArray(COLORS.map((c) => c.value));
 		case 'match-Items':
 			return {...state, match: !state.match};
 		case 'remove-Items':
-			return {...state, items: action.items,};
+			return {...state, items: action.items, colors: action.colors};
 		case 'clear-Comparison':
 			return {...state, compLetters: [], compare: false, color: 'color-btns'};
 		case 'compare-Letters':
