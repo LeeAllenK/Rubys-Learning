@@ -37,10 +37,12 @@ const speak = (text) => {
         nextIndexRef.current--;
         const value = state.items[nextIndexRef.current]?.value || state.colors[nextIndexRef.current]?.value;
         if(value) {
+      console.log(state.colors[2],'length')
+      // console.log(value)
           speak(value);
           dispatch({ type: 'update-State', letterValue: value, compLetters: [...state.compLetters, value]});
         }
-        if(nextIndexRef.current <= 0) {
+        if(nextIndexRef.current <= 0 ) {
           clearInterval(nextIntervalId);
           dispatch({
             type: 'set-Winner',
@@ -82,6 +84,7 @@ const speak = (text) => {
 const handleButtonStyle = (item) => {
   return state.compLetters.includes(item) ? { color: state.getColor, background: state.getBackgroundColor} : {};
 };
+
     let content;
     // Main screen
     if(!(state.getAlphabet || state.getNumbers || state.colorMain || state.shapeHome)) {
@@ -105,7 +108,7 @@ const handleButtonStyle = (item) => {
             value={state.textNumber || ""}
             onChange={(e) => dispatch({ type: "text" ,cat: "number", textNumber: e.target.value || "",})}
           />
-          <ul className="flex md:justify-center justify-center flex-wrap md:mt-10 mt-10 md:text-9xl text-5xl font-bold m-0 p-0"
+          <ul className="flex md:justify-center justify-center flex-wrap md:mt-10 mt-10 lg:text-9xl md:text-7xl sm:text-4xl text-3xl font-bold m-0 p-0"
             style={{ fontFamily: '"DynaPuff", system-ui' }}>
             {state.getNumberCatOne.length > 0 ? (
               <>
@@ -144,7 +147,7 @@ const handleButtonStyle = (item) => {
   console.log(state.play,state.items.length)
       content = (
         <section className="grid grid-rows-1 place-items-center w-screen h-fit gap-2">
-          <section className="flex flex-col lg:w-screen lg:h-full md:w-screen md:h-full sm:w-screen sm:h-full h-full w-screen">
+          {/* <section className="flex flex-col lg:w-screen lg:h-full md:w-screen md:h-full sm:w-screen sm:h-full h-full w-screen"> */}
             <section className="flex justify-between w-screen h-fit">
               <Homebtn onHomeClick={() => handleHomeClick(dispatch, state)} />
               {state.items.length === 0 && (
@@ -184,14 +187,14 @@ const handleButtonStyle = (item) => {
               </ul>
             </div>
           </section>
-        </section>
+        // </section>
       );
     }
     // Number play screen
     else if(state.getNumberPlay) {
       content = (
-        <section className="grid grid-rows-1 place-items-center w-screen h-fit gap-2">
-          <section className="flex flex-col lg:w-screen lg:h-full md:w-screen sm:w-screen h-full w-screen">
+        <section className="flex flex-col place-content-center lg:w-screen md:w-screen sm:w-screen lg:h-fit md:h-fit sm:h-fit h-fit gap-2">
+          {/* <section className="flex flex-col lg:w-screen lg:h-full md:w-screen sm:w-screen h-full w-screen"> */}
             <section className="flex justify-between w-screen h-fit">
               <Homebtn onHomeClick={() => handleHomeClick(dispatch, state)} />
               {state.items.length === 0 && (
@@ -199,7 +202,7 @@ const handleButtonStyle = (item) => {
               )}
             </section>
             <div className="grid items-center lg:w-screen md:w-screen sm:w-screen  lg:h-full md:h-full sm:h-full w-screen h-full">
-              <div className="relative flex justify-center items-center lg:w-full lg:h-100 md:w-full md:h-100 sm:w-full sm:h-75 w-full h-75">
+              <div className="relative flex justify-center items-center lg:w-full lg:h-100 md:w-full md:h-50 sm:w-full sm:h-75 w-full h-50">
                 {state.items.length === 0 ? (
                   <div
                     className="lg:text-6xl md:text-4xl sm:text-lg text-lg font-bold winner-grow"
@@ -212,16 +215,16 @@ const handleButtonStyle = (item) => {
                     <div
                       key={l.value}
                       className="absolute flex justify-center items-center bg-[#74a3c9] border-7 border-b-20 border-r-20 
-                    w-40 h-40 md:w-60 md:h-60 text-6xl md:text-[10em] font-bold rounded rainbow-border">
+                    w-40 h-40 md:w-40 md:h-40 text-6xl md:text-6xl font-bold rounded rainbow-border">
                       {l.value}
                     </div>
                   ))
                 )}
               </div>
-              <ul className="grid lg:place-items-center md:place-items-center sm:place-items-center place-items-center lg:grid-cols-5 md:grid-cols-5 sm:grid-cols-4 grid-cols-4 gap-2">
+              <ul className="grid lg:place-items-center md:place-items-center sm:place-items-center place-items-center lg:grid-cols-5 md:grid-cols-5 sm:grid-cols-4 grid-cols-5 gap-2">
                 {state.buttons.map((items) => (
                   <li key={items}>
-                    <Button className="border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] lg:text-5xl md:text-4xl text-4xl font-bold  lg:w-50 lg:h-50 md:w-40 md:h-40 sm:w-50 sm:h-50 w-20 h-20 cursor-pointer active:translate-y-0.5 rainbow-border" 
+                    <Button className="border-0.5 border-b-8 border-r-8 rounded border-black bg-[#0000003c] lg:text-5xl md:text-4xl text-4xl font-bold  lg:w-50 lg:h-50 md:w-30 md:h-30 sm:w-50 sm:h-50 w-20 h-20 cursor-pointer active:translate-y-0.5 rainbow-border" 
                     value={items.toUpperCase()} 
                     onClick={() => handleClick(items,dispatch,state)} 
                     style={handleButtonStyle(items)} disabled={state.compLetters.length < 1 || state.speaking}
@@ -231,20 +234,20 @@ const handleButtonStyle = (item) => {
               </ul>
             </div>
           </section>
-        </section>
+        // </section>
       );
     }else if(state.colorPlay){
       content = (
-        <section className="grid grid-rows-1 place-items-center w-screen h-fit gap-2">
-          <section className="flex flex-col lg:w-screen lg:h-full md:w-screen sm:w-screen h-full w-screen">
-            <section className="flex justify-between w-screen h-fit">
+        <section className="flex flex-col place-content-center lg:w-screen md:w-screen sm:w-screen lg:h-fit md:h-fit sm:h-fit h-fit gap-2">
+          {/* <section className=""> */}
+            <section className="flex flex-row">
               <Homebtn onHomeClick={() => handleHomeClick(dispatch, state)} />
               {state.colors.length === 0 && (
                 <Restartbtn onRestartClick={() => handleRestartClick(dispatch, state)} />
               )}
             </section>
-            <div className="grid items-center lg:w-screen md:w-screen sm:w-screen  lg:h-full md:h-full sm:h-full w-screen h-full">
-              <div className="relative flex justify-center items-center lg:w-full lg:h-100 md:w-full md:h-100 sm:w-full sm:h-75 w-full h-75">
+            <div className="grid lg:w-screen md:w-screen sm:w-screen lg:h-full md:h-full sm:h-full w-screen h-full">
+              <div className="relative flex justify-center items-center lg:w-screen lg:h-100 md:w-screen md:h-100 sm:w-screen sm:h-75 w-screen h-75">
                 {state.colors.length === 0 ? (
                   <div
                     className="lg:text-6xl md:text-4xl sm:text-lg text-lg font-bold winner-grow"
@@ -253,29 +256,29 @@ const handleButtonStyle = (item) => {
                     {state.winner}
                   </div>
                 ) : (
-                  state.colors.map((color) => (
+                  state.colors.map((color,i) => (
                     <div
-                      key={color.value}
+                      key={i}
                       className={`${btnValueClassName} ${colorClasses[color.value]}`}>
                       {color.value}
                     </div>
                   ))
                 )}
               </div>
-              <ul className="grid lg:place-items-center md:place-items-center sm:place-items-center place-items-center lg:grid-cols-5 md:grid-cols-5 sm:grid-cols-4 grid-cols-4 gap-2">
+              <ul className="flex flex-row flex-wrap lg:place-content-center md:place-content-center sm:place-content-center place-content-center lg:w-full md:w-full sm:w-full w-full lg:h-fit md:h-fit sm:h-fit max-h-fit gap-2">
                 {state.buttons.map((button) => (
-                  <li key={button}>
+                  <li key={button} className="">
                     <Button className={`${btnClassName} ${colorClasses[button]}`}
                       value={button.toUpperCase()}
                       onClick={() => handleColorGameClick(button, dispatch, state)}
-                      style={handleButtonStyle(button)} disabled={state.compLetters.length < 1 || state.speaking}
+                      disabled={state.compLetters.length < 1 || state.speaking}
                     />
                   </li>
                 ))}
               </ul>
             </div>
           </section>
-        </section>
+        // </section>
       );
     }
     // Alphabet screen
@@ -296,6 +299,7 @@ const handleButtonStyle = (item) => {
           onBackColorClick={() => handleBackColorClick(dispatch, state)}  
           value={state.text}
           onChange={(e) => dispatch({ type: "text", cat: "color", text: e.target.value})}
+          speak={speak}
         />
       )
     }
@@ -312,6 +316,6 @@ const handleButtonStyle = (item) => {
     else {
       content = null;
     }
-    return <div className="grid md:w-screen w-screen">{content}</div>;
+    return <div className="  lg:w-screen md:w-screen sm:w-10 w-screen h-20 sm:h-3 ">{content}</div>;
 }
 export default App;

@@ -18,5 +18,6 @@ export const initialState = {
 	winner: '',
 	text: '',
 	getColor: 'green',
-	getBackgroundColor: 'black'
+	getBackgroundColor: 'black',
+	getBgColor: 'white',
 }

@@ -35,14 +35,16 @@ export const handleHomeClick = (dispatch,state) => {
 // Event used to reset items and buttons arrays.
 export const handleRestartClick = (dispatch,state) => {
 	if(state.getNumberCatOne.length > 0) {
-		dispatch({ type: 'restart-Btn', cat:"number-One", items: state.items, buttons: state.buttons, compLetters: state.compLetters,
-			winner: state.winner})
+		dispatch({ type: 'restart-Btn', cat:"number-One", items: state.items, buttons: state.buttons, compLetters: state.compLetters, winner: state.winner})
 	}
 	if(state.getNumberCatTwo.length > 0) {
-		dispatch({ type: 'restart-Btn', cat: "number-Two", items: state.items, buttons: state.buttons, compLetters: state.compLetters})
+		dispatch({ type: 'restart-Btn', cat: "number-Two", items: state.items, buttons: state.buttons, compLetters: state.compLetters, winner: state.winner})
 	}
 	if(state.getAlphabet) {
-		dispatch({ type: 'restart-Btn', cat:"alphabet", items: state.items, buttons: state.buttons, compLetters: state.compLetters})
+		dispatch({ type: 'restart-Btn', cat:"alphabet", items: state.items, buttons: state.buttons, compLetters: state.compLetters, winner: state.winner})
+	}
+	if(state.getColors){
+		dispatch({type:'restart-Btn', cat:"colors", colors:state.colors, buttons: state.buttons, compLetters:state.compLetters, winnner: state.winner})
 	}
 };
 export const handleNumberOneClick = (dispatch,state) => {

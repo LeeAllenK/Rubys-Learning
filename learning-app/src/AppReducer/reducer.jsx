@@ -18,7 +18,8 @@ const shuffledColors = shuffleArray(COLORS.map((c) => c.value));
 			}else if(action.cat === "number-Two"){
 				return{...state, getNumbers: !state.getNumbers, getNumberCatTwo: numbersTwo}
 			}else if(action.cat === "shapes"){
-				return{...state, shapeHome:true}
+				alert('Update Coming Soon...!');
+				return{...state, shapeHome:false}
 			}else if(action.cat === "colors"){
 				return { ...state, colorMain: true }
 			}
@@ -52,6 +53,8 @@ const shuffledColors = shuffleArray(COLORS.map((c) => c.value));
 				return {...state, text: action.text};
 			}else if(action.cat === 'number'){
 				return {...state, textNumber: action.textNumber};
+			}else if(action.cat === 'color'){
+				return{...state, text:action.text}
 			}
 		case 'start-Learning':
 			if(action.cat === "alphabet"){
@@ -78,11 +81,13 @@ const shuffledColors = shuffleArray(COLORS.map((c) => c.value));
 			return {...state, winner: action.payload};
 		case 'restart-Btn':
 			if(action.cat === 'alphabet'){
-				return{...state, items:  ALPHABET, buttons: shuffledAlphabet, compLetters: []}
+				return{...state, items:  ALPHABET, buttons: shuffledAlphabet, compLetters: [],winner:''}
 			}else if(action.cat === 'number-One'){
 				return{...state, items: numbersOne, buttons: shuffledNumbersOne, compLetters: [], winner:''}
 			}else if(action.cat === 'number-Two'){
-				return{...state, items: numbersTwo, buttons: shuffledNumbersTwo, compLetters: []}
+				return{...state, items: numbersTwo, buttons: shuffledNumbersTwo, compLetters: [],winner: ''}
+			}else if(action.cat === 'colors'){
+				return{...state, colors:COLORS, buttons: shuffledColors, compLetters: [],winner: ''}
 			}		
 		default: return state;
 	}
