@@ -18,8 +18,8 @@ const shuffledColors = shuffleArray(COLORS.map((c) => c.value));
 			}else if(action.cat === "number-Two"){
 				return{...state, getNumbers: !state.getNumbers, getNumberCatTwo: numbersTwo}
 			}else if(action.cat === "shapes"){
-				alert('Update Coming Soon...!');
-				return{...state, shapeHome:false}
+				// alert('Update Coming Soon...!');
+				return{...state, shapeHome:true}
 			}else if(action.cat === "colors"){
 				return { ...state, colorMain: true }
 			}
