@@ -5,9 +5,9 @@ export function Shape({ onShapeClick, onBackShapeClick,onChange,value}){
 		<div className='flex flex-col lg:items-center md:items-center sm:items-center place-items-center m-0 p-0 lg:w-screen md:w-screen sm:screen max-w-screen'>
 				<MenuBtn onClick={onBackShapeClick}/>
 				<div className='flex md:text-6xl text-3xl font-bold m-10 ' style={{ fontFamily: '"DynaPuff", system-ui' }}>
-					<span className='flex m-1.5'><p className='text-red-600'>L</p><p className='text-orange-400'>E</p><p className='text-[#ffff00]'>A</p><p className='text-green-700'>R</p><p className='text-blue-700'>N</p></span>
-					<span className='flex m-1.5'> <p className='text-[#4b0082]'>M </p> <p className='text-violet-500'>Y</p> </span>
-					<span className='flex m-1.5'>S<p className='text-red-600'>H</p><p className='text-orange-400'>A</p><p className='text-[#ffff00]'>P</p><p className='text-green-700'>E</p><p className='text-viloet-500'>S</p></span>
+				<span className='flex m-1.5'><p className='text-red-600'>L</p><p className='text-orange-400'>E</p><p className='text-yellow-300'>A</p><p className='text-green-700'>R</p><p className='text-blue-700'>N</p></span>
+					<span className='flex m-1.5'> <p className='text-indigo-500'>M </p> <p className='text-violet-500'>Y</p> </span>
+				<span className='flex m-1.5'><p className="text-yellow-300">S</p><p className='text-red-600'>H</p><p className='text-orange-400'>A</p><p className='text-blue-700'>P</p><p className='text-green-700'>E</p><p className='text-violet-500'>S</p></span>
 				</div>
 					<div className='flex flex-col md:text-6xl text-3xl font-bold '>
 					<input 

@@ -6,6 +6,34 @@ export const ALPHABET = [{ value: 'a' }, { value: 'b' }, { value: 'c' }, { value
 
 export const COLORS = [{ value: 'RED' }, { value: 'ORANGE' }, { value: 'YELLOW' }, { value: 'GREEN' }, { value: 'BLUE' }, { value: 'PURPLE' }, { value: 'PINK' }].reverse();
 
+export const SHAPES = [
+	{
+		name: "square",
+		value: "SQUARE",
+		className: "  w-50 h-50 bg-black text-white flex items-center justify-center"
+	},
+	{
+		name: "circle",
+		value: "CIRCLE",
+		className: "w-45 h-45 bg-black text-white rounded-full flex items-center justify-center"
+	},
+	{
+		name: "triangle",
+		value: "TRIANGLE",
+		className: " w-0 h-0 border-l-[90px] border-r-[90px] border-b-[160px] border-transparent border-b-black text-white flex items-center "
+	},
+	{
+		name: "rectangle",
+		value: "RECTANGLE",
+		className: "w-70 h-34 bg-black text-white flex justify-center items-center"
+	},
+	{
+		name: "oval",
+		value: "OVAL",
+		className: "w-100 h-40 bg-black text-white rounded-full flex items-center justify-center"
+	},
+];
+
 export function shuffleArray(array) {
 	for(let i = array.length - 1; i >= 1; i--) {
 		const j = Math.floor(Math.random() * (i + 1));

@@ -10,7 +10,7 @@ export function Home({onPlayClick,onBackClick,onChange,value}){
 						<span className='flex m-1.5'><p className='text-red-600'>L</p><p className='text-orange-400'>E</p><p className='text-[#ffff00]'>A</p><p className='text-green-700'>R</p><p className='text-blue-700'>N</p></span>
 						<span className='flex m-1.5'> <p className='text-[#4b0082]'>M </p> <p className='text-violet-500'>Y</p> </span>
 						<span className='flex m-1.5'><p className='text-red-600'>A</p><p className='text-orange-400'>L</p><p className='text-[#ffff00]'>P</p><p className='text-green-700'>H</p><p className='text-green-700'>A</p><p className='text-blue-700'>B</p><p className='text-[#4b0082]'>E</p><p className='text-violet-500'>T</p></span>
-					</div>
+				</div>
 				<div className='flex flex-col w-screen mt-10 '>
 					<input className='flex  lg:text-5xl md:text-4xl sm:3xl text-2xl lg:font-extrabold md:font-extra-bold sm:font-extra-bold font-extrabold place-items-center lg:bg-white md:bg-white sm:bg-white bg-white lg:text-black md:text-black sm:text-black text-black border-2 border-black-700 lg:h-20 md:h-15 h-10 w-screen md:mb-1 mb-1 hover:bg-gray-400'
 						type='text'

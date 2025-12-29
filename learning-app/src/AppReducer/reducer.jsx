@@ -1,10 +1,11 @@
-import { shuffleArray, ALPHABET,numbersOne, numbersTwo,COLORS} from '../Data/app';
+import { shuffleArray, ALPHABET,numbersOne, numbersTwo,COLORS, SHAPES} from '../Data/app';
 
 export function appReducer(state,action){
 const shuffledAlphabet = shuffleArray(ALPHABET.map((l) => l.value));
 const shuffledNumbersOne = shuffleArray(numbersOne.map((l) => l.value));
 const shuffledNumbersTwo = shuffleArray(numbersTwo.map((l) => l.value));
 const shuffledColors = shuffleArray(COLORS.map((c) => c.value));
+const shuffledButtons = shuffleArray(SHAPES.map((s) => s.value))
 
 	switch(action.type){
 //USED TO UPDATE STATE TO SPEAK 
@@ -26,7 +27,6 @@ const shuffledColors = shuffleArray(COLORS.map((c) => c.value));
 		}
 		case "learning-Menu-Btn":{
 			if(action.cat === "alphabet"){
-				console.log('learning-Alpahbet')
 				return { ...state, getAlphabet: state.getAlphabet ? !state.getAlphabet : state.getAlphabet }
 			}else if(action.cat === 'numbers'){
 				return{...state,
@@ -38,7 +38,6 @@ const shuffledColors = shuffleArray(COLORS.map((c) => c.value));
 			else if(action.cat === "shapes"){
 				return{...state, shapeHome:false, text: ''}
 			}else if(action.cat === "colors"){
-				console.log(COLORS)
 				return { ...state, colorMain:false }
 			}
 		}
@@ -47,13 +46,16 @@ const shuffledColors = shuffleArray(COLORS.map((c) => c.value));
 				play: state.play ? !state.play : state.play, 
 				getNumberPlay: state.getNumberPlay ? action.getNumberPlay : state.getNumberPlay,
 				colorPlay: state.colorPlay ? !state.colorPlay : state.colorPlay,
-				colors: [], compLetters: [], items: [], buttons: [], winner: '', text: '',	textNumber: ''}
+				shapePlay: state.shapePlay ? !state.shapePlay : state.shapePlay,
+				colors: [], compLetters: [], items: [], buttons: [], winner: '', text: '',	textNumber: '', shapeIndex:0}
 		case 'text':
 			if(action.cat === 'alphabet'){
 				return {...state, text: action.text};
 			}else if(action.cat === 'number'){
 				return {...state, textNumber: action.textNumber};
 			}else if(action.cat === 'color'){
+				return{...state, text:action.text}
+			}else if(action.cat === 'shape'){
 				return{...state, text:action.text}
 			}
 		case 'start-Learning':
@@ -64,8 +66,9 @@ const shuffledColors = shuffleArray(COLORS.map((c) => c.value));
 			}else if(action.cat === "number-Two"){
 				return{...state, getNumberPlay: action.getNumberPlay, items: numbersTwo, buttons: shuffledNumbersTwo}
 			}else if(action.cat === "colors"){
-					console.log('Play') //BUG
-				return{...state, colorPlay:action.colorPlay, getColors:action.getColors, colors:COLORS, buttons: shuffledColors}
+				return{...state, colorPlay:action.colorPlay, colors:COLORS, buttons: shuffledColors}
+			}else if(action.cat === "shapes"){
+				return{...state, shapePlay: action.shapePlay, getShape:action.getShape, shapes: SHAPES,buttons:SHAPES}
 			}
     	case 'update-State':
 			return {...state, letterValue: action.letterValue, compLetters: action.compLetters};
@@ -77,6 +80,8 @@ const shuffledColors = shuffleArray(COLORS.map((c) => c.value));
 			return {...state, compLetters: [], compare: false, color: 'color-btns'};
 		case 'compare-Letters':
 			return {...state, compLetters: action.compLetters, compare: action.compare, getColor: action.getColor, getBackgroundColor: action.getBackgroundColor};
+		case 'compare-Shapes':
+			return{...state,shapeIndex:action.shapeIndex}
 		case 'set-Winner':
 			return {...state, winner: action.payload};
 		case 'restart-Btn':
@@ -88,7 +93,9 @@ const shuffledColors = shuffleArray(COLORS.map((c) => c.value));
 				return{...state, items: numbersTwo, buttons: shuffledNumbersTwo, compLetters: [],winner: ''}
 			}else if(action.cat === 'colors'){
 				return{...state, colors:COLORS, buttons: shuffledColors, compLetters: [],winner: ''}
-			}		
+			}else if(action.cat === 'shapes'){
+				return{...state, shapes:SHAPES, button:shuffledButtons, shapeIndex: 0, winner: '',}
+			}	
 		default: return state;
 	}
 }

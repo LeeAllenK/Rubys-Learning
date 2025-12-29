@@ -1,6 +1,6 @@
 import { useEffect, useRef,useReducer} from 'react';
 import {btnClassName, colorClasses,btnValueClassName} from './Data/app'
-import { handlePlay,handleClick, handleHomeClick, handleRestartClick, handleNumberOneClick, handleNumberTwoClick, handleAlphabetClick, handleBackClick, handleNumberBackClick, handleNumberPlayClick, handleShapeClick, handleColorClick, handleBackColorClick, handleBackShapeClick, handleColorPlayClick, handleColorGameClick} from './Handlers/gameHandlers';
+import { handlePlay,handleClick, handleHomeClick, handleRestartClick, handleNumberOneClick, handleNumberTwoClick, handleAlphabetClick, handleBackClick, handleNumberBackClick, handleNumberPlayClick, handleShapeClick, handleColorClick, handleBackColorClick, handleBackShapeClick, handleColorPlayClick,handleShapePlayClick, handleColorGameClick,handleShapeGameClick, handleShapeChange} from './Handlers/gameHandlers';
 import { Button } from './components/Button';
 import { Home } from './components/Home';
 import { Homebtn } from './components/Home-Btn';
@@ -14,6 +14,8 @@ import { initialState} from './AppReducer/appInitialState';
 
 function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);
+
+  const currentShape = state.shapes[state.shapeIndex];
 
 const speak = (text) => {
   if(!text) return;
@@ -31,14 +33,13 @@ const speak = (text) => {
       (state.compLetters.length === 0 && state.getNumberPlay) ||
       (state.compLetters.length === 0 && state.colorPlay)
       ){
-      nextIndexRef.current = state.items.length || state.colors.length;
+      nextIndexRef.current = state.items.length || state.colors.length 
       const nextIntervalId = setInterval(() => {
         // Decrement the value stored in the ref.
         nextIndexRef.current--;
-        const value = state.items[nextIndexRef.current]?.value || state.colors[nextIndexRef.current]?.value;
+        const value = state.items[nextIndexRef.current]?.value || state.colors[nextIndexRef.current]?.value 
+      
         if(value) {
-      console.log(state.colors[2],'length')
-      // console.log(value)
           speak(value);
           dispatch({ type: 'update-State', letterValue: value, compLetters: [...state.compLetters, value]});
         }
@@ -56,6 +57,20 @@ const speak = (text) => {
       return () => clearInterval(nextIntervalId);
     }
   }, [state.compLetters, state.items, state.colors, state.text,state.letterValue, state.textNumber, state.play, state.getNumberPlay,state.colorPlay, state.speaking]);
+
+
+useEffect(() => {
+      const nextIndex = state.shapeIndex;
+    if(nextIndex === 5){
+    
+      dispatch({
+        type: 'set-Winner',
+        payload: `Good Job ${state.text || ''}!`,
+      });
+      }
+
+},[state.shapes,state.shapeIndex,state.winner])
+
   // Effect compares the automatically picked items with the user’s pick.
   useEffect(() => {
     if(state.compare && state.compLetters.length > 1) {
@@ -75,14 +90,9 @@ const speak = (text) => {
        });
     }
   }, [state.compare, state.compLetters]);
-  useEffect(() => {
-    if(state.colorMain){
-    console.log("Color Main Menu:", state.colorMain);
-}
-  }, [state.colorMain]);
 //Handler change button color 
 const handleButtonStyle = (item) => {
-  // return state.compLetters.includes(item) ? { color: state.getColor,} : {};
+  return state.compLetters.includes(item) ? { color: state.getColor,} : {};
 };
 
     let content;
@@ -143,8 +153,6 @@ const handleButtonStyle = (item) => {
     }
     // Play screen
     else if(state.play) {
-  // console.log('Buttons:', state.items.map((button)=> button));
-  console.log(state.play,state.items.length)
       content = (
         <section className="grid grid-rows-1 place-items-center w-screen h-fit ">
           {/* <section className="flex flex-col lg:w-screen lg:h-full md:w-screen md:h-full sm:w-screen sm:h-full h-full w-screen"> */}
@@ -283,13 +291,13 @@ const handleButtonStyle = (item) => {
         <section className="flex flex-col place-content-center lg:w-screen md:w-screen sm:w-screen lg:h-fit md:h-fit sm:h-fit h-fit gap-2">
           <section className="flex flex-row">
             <Homebtn onHomeClick={() => handleHomeClick(dispatch, state)} />
-            {state.colors.length === 0 && (
+            {state.winner.length > 0 && (
               <Restartbtn onRestartClick={() => handleRestartClick(dispatch, state)} />
             )}
           </section>
           <div className="grid lg:w-screen md:w-screen sm:w-screen lg:h-full md:h-full sm:h-full w-screen h-full">
-            <div className="relative flex justify-center items-center lg:w-screen lg:h-100 md:w-screen md:h-100 sm:w-screen sm:h-75 w-screen h-75">
-              {state.colors.length === 0 ? (
+            <div className="relative flex  items-center justify-center lg:w-screen lg:h-100 md:w-screen md:h-100 sm:w-screen sm:h-75 w-screen h-75 ">
+              {state.winner.length > 0 ? (
                 <div
                   className="lg:text-6xl md:text-4xl sm:text-lg text-lg font-bold winner-grow"
                   style={{ fontFamily: '"DynaPuff", system-ui' }}
@@ -297,22 +305,17 @@ const handleButtonStyle = (item) => {
                   {state.winner}
                 </div>
               ) : (
-                state.colors.map((color, i) => (
-                  <div
-                    key={i}
-                    className={`${btnValueClassName} ${colorClasses[color.value]}`}>
-                    {color.value}
-                  </div>
-                ))
+                <section className="flex flex-col place-items-center">
+                  <section className={currentShape?.className}></section>
+                  <div className="text-3xl text-white font-extrabold">{currentShape?.value} </div>
+                </section>
               )}
             </div>
-            <ul className="flex flex-row flex-wrap lg:place-content-center md:place-content-center sm:place-content-center place-content-center lg:w-full md:w-full sm:w-full w-full lg:h-fit md:h-fit sm:h-fit max-h-fit gap-2">
+            <ul className="flex flex-row flex-wrap lg:place-content-center md:place-content-center sm:place-content-center place-content-center lg:w-full md:w-full sm:w-full w-full lg:h-fit md:h-fit sm:h-fit max-h-fit gap-7">
               {state.buttons.map((button) => (
-                <li key={button} className="">
-                  <Button className={`${btnClassName} ${colorClasses[button]}`}
-                    value={button.toUpperCase()}
-                    onClick={() => handleColorGameClick(button, dispatch, state)}
-                    disabled={state.compLetters.length < 1 || state.speaking}
+                <li key={button.value} className="flex ">
+                  <Button className={`${button.className} cursor-pointer`}
+                  onClick={() => handleShapeGameClick(button.value, dispatch, state)}
                   />
                 </li>
               ))}
@@ -346,7 +349,7 @@ const handleButtonStyle = (item) => {
     else if(state.shapeHome){
       content = (
         <Shape
-        onShapeClick={() => handleShapeClick(dispatch, state)}
+        onShapeClick={() => handleShapePlayClick(dispatch, state)}
         onBackShapeClick={() => handleBackShapeClick(dispatch, state)}
         value={state.text}
         onChange={(e) => dispatch({ type: "text", cat: "shape", text: e.target.value})}

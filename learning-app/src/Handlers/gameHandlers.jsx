@@ -1,35 +1,45 @@
 
+export const handleShapeChange = () => {
+}
 export const handleClick = (items, dispatch,state) => {
    dispatch({ type: 'compare-Letters', compLetters: [...state.compLetters, items], compare: !state.compare,
-    getColor: 'green', getBackgroundColor: 'black' });
+    getBtnColor: 'green', getBackgroundColor: 'black' });
  };
 export const handleColorGameClick = (items, dispatch,state) => {
-	console.log(items)
    dispatch({ type: 'compare-Letters', compLetters: [...state.compLetters, items], compare: !state.compare,
-    getColor: 'green', getBackgroundColor: 'black' });
+    getBtnColor: 'green', getBackgroundColor: 'black' });
  };
+export const handleShapeGameClick = (button,dispatch,state ) => {
+	const currentShape = state.shapes[state.shapeIndex]?.value;
+	if(button === currentShape){
+		dispatch({type: "compare-Shapes", shapeIndex: state.shapeIndex + 1})
+	}	
+}
 export const handlePlay = (dispatch,state) => {
 	dispatch({ type: 'start-Learning', cat:"alphabet", play: true, items: state.items, buttons: state.buttons})
 };
 
 export const handleColorPlayClick = (dispatch, state) =>{
-console.log('dslk')
-	dispatch({ type: "start-Learning", cat: "colors", colorPlay: true, getColors:true, colors: state.colors, buttons: state.buttons })
+	dispatch({ type: "start-Learning", cat: "colors", colorPlay: true, colors: state.colors, buttons: state.buttons })
+}
+
+export const handleShapePlayClick = (dispatch, state) =>{
+	dispatch({type: "start-Learning", cat: "shapes", shapePlay: true, getShape:true , shapes: state.shapes, buttons:state.buttons})
 }
 // Event used to go back to home screen
 export const handleHomeClick = (dispatch,state) => {
 	if(state.getNumbers) {
-		console.log('nums')
 		dispatch({ type: 'Home', getNumberPlay: false, items: state.items, buttons: state.buttons, textNumber: state.textNumber, compLetters: state.compLetters })
 	}
 	if(state.getAlphabet) {
-		console.log('al')
 		dispatch({ type: 'Home', play: !state.play, compLetters: state.compLetters, items: state.items, buttons: state.buttons,
 		winner: state.winner, text: state.text})
 	}
-	if(state.getColor){
-			console.log('go home color')
+	if(state.colorMain){
 		dispatch({ type: "Home", colorPlay: !state.colorPlay, colors: state.colors, buttons: state.buttons, compLetters:state.compLetters, winner: state.winner, text: state.text })
+	}
+	if(state.getShape){
+		dispatch({ type: "Home", shapePlay: !state.shapePlay, shapes: state.shapes, buttons: state.buttons, shapeIndex: state.shapeIndex,  winner: '', text: state.text })
 	}
 };
 // Event used to reset items and buttons arrays.
@@ -44,7 +54,10 @@ export const handleRestartClick = (dispatch,state) => {
 		dispatch({ type: 'restart-Btn', cat:"alphabet", items: state.items, buttons: state.buttons, compLetters: state.compLetters, winner: state.winner})
 	}
 	if(state.getColors){
-		dispatch({type:'restart-Btn', cat:"colors", colors:state.colors, buttons: state.buttons, compLetters:state.compLetters, winnner: state.winner})
+		dispatch({type:'restart-Btn', cat:"colors", shapes:state.shapes, buttons: state.buttons, compLetters:state.compLetters, winnner: state.winner})
+	}
+	if(state.getShape){
+		dispatch({ type: 'restart-Btn', cat: "shapes", shapes: state.shapes, shapeIndex:state.shapeIndex, buttons: state.buttons,  winnner: state.winner })
 	}
 };
 export const handleNumberOneClick = (dispatch,state) => {
@@ -65,8 +78,7 @@ export const handleNumberBackClick = (dispatch, state) => {
 }
 export const handleNumberPlayClick = (dispatch, state) => {
 	if(state.getNumberCatOne[0]?.value.includes('10')) {
-		dispatch({ type: 'start-Learning', cat:"number-One", getNumberPlay: !state.getNumberPlay, items: state.getNumberCatOne, 
-		buttons: state.buttons})
+		dispatch({ type: 'start-Learning', cat:"number-One", getNumberPlay: !state.getNumberPlay, items: state.getNumberCatOne,buttons: state.buttons})
 	}
 	if(state.getNumberCatTwo[0]?.value.includes('20')) {
 		dispatch({ type: 'start-Learning', cat:"number-Two", getNumberPlay: !state.getNumberPlay, items: state.getNumberCatTwo,
@@ -78,7 +90,6 @@ export const handleShapeClick = (dispatch, state)=>{
 }
  
 export const handleColorClick = (dispatch, state) =>{
-console.log('main')
 	dispatch({ type: "learning-Homepage", cat:"colors", colorMain: state.colorMain})
 }
 
@@ -87,7 +98,6 @@ export const handleBackShapeClick = (dispatch, state) =>{
 }
 
 export const handleBackColorClick = (dispatch, state) => {
-	console.log('back')
 	dispatch({ type: "learning-Menu-Btn", cat: "colors",color:state.colorMain})
 }
 

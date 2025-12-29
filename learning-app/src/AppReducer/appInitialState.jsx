@@ -20,7 +20,8 @@ export const initialState = {
 	speaking: false,
 	winner: '',
 	text: '',
-	getColor: 'green',
+	shapeIndex: 0,
+	getBtnColor: 'green',
 	getBackgroundColor: 'black',
 	getBgColor: 'white',
 }
