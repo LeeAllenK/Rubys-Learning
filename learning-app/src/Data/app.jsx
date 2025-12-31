@@ -10,27 +10,27 @@ export const SHAPES = [
 	{
 		name: "square",
 		value: "SQUARE",
-		className: "  w-50 h-50 bg-black text-white flex items-center justify-center"
+		className: "  lg:w-40 lg:h-40 md:w-25 md:h-25 w-15 h-15  bg-black text-white "
 	},
 	{
 		name: "circle",
 		value: "CIRCLE",
-		className: "w-45 h-45 bg-black text-white rounded-full flex items-center justify-center"
+		className: "lg:w-45 lg:h-45 md:w-25 md:h-25 w-15 h-15 bg-black text-white rounded-full "
 	},
 	{
 		name: "triangle",
 		value: "TRIANGLE",
-		className: " w-0 h-0 border-l-[90px] border-r-[90px] border-b-[160px] border-transparent border-b-black text-white flex items-center "
+		className: " w-0 h-0 lg:border-l-[90px] md:border-l-[45px] border-l-[25px] lg:border-r-[90px]  md:border-r-[45px] border-r-[25px] lg:border-b-[160px]   md:border-b-[80px] border-b-[50px] border-transparent border-b-black text-white  "
 	},
 	{
 		name: "rectangle",
 		value: "RECTANGLE",
-		className: "w-70 h-34 bg-black text-white flex justify-center items-center"
+		className: "lg:w-70 lg:h-34 md:w-30 md:h-15 w-25 h-12 bg-black text-white"
 	},
 	{
 		name: "oval",
 		value: "OVAL",
-		className: "w-100 h-40 bg-black text-white rounded-full flex items-center justify-center"
+		className: "lg:w-70 lg:h-30 md:w-50 md:h-20 w-30 h-15 bg-black text-white rounded-full"
 	},
 ];
 
@@ -42,11 +42,11 @@ export function shuffleArray(array) {
 	return array;
 };
 
-export const btnClassName = `border-0.5 border-b-6 border-r-5 lg:rounded-xl md:rounded-xl sm:rounded-full rounded-full border-black lg:text-4xl md:text-xl sm:text-lg text-lg font-bold lg:w-50 lg:h-20 md:w-28 md:h-12 sm:w-50 sm:h-20 w-30 h-15 cursor-pointer active:translate-y-0.5 `;
+export const btnClassName = `border-0.5 flex place-items-center place-content-center border-b-6 border-r-5 lg:rounded-xl md:rounded-xl  rounded-full border-black lg:text-4xl md:text-xl sm:text-lg text-md font-bold lg:w-50 lg:h-20 md:w-28 md:h-12 sm:w-50 sm:h-20 w-20 h-14 cursor-pointer active:translate-y-0.5 `;
 
 export const colorClassName =`grid grid-cols-3 place-items-center h-30 text-xl`;
 
-export const btnValueClassName = `absolute flex justify-center flex-wrap items-center bg-[#74a3c9] border-1 lg:w-60 lg:h-60 w-40 h-40 md:w-50 md:h-50 lg:text-5xl md:text-5xl sm:text-2xl text-2xl font-bold rounded-full `;
+export const btnValueClassName = `absolute flex justify-center flex-wrap items-center bg-[#74a3c9] border-3 lg:w-60 lg:h-60 w-40 h-40 md:w-50 md:h-50 lg:text-5xl md:text-5xl sm:text-2xl text-2xl font-bold rounded-full `;
 
 export const colorClasses = {
 	RED: "bg-red-600",

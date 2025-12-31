@@ -254,7 +254,7 @@ const handleButtonStyle = (item) => {
               )}
             </section>
             <div className="grid lg:w-screen md:w-screen sm:w-screen lg:h-full md:h-full sm:h-full w-screen h-full">
-              <div className="relative flex justify-center items-center lg:w-screen lg:h-100 md:w-screen md:h-100 sm:w-screen sm:h-75 w-screen h-75">
+              <div className="relative flex justify-center items-center lg:w-screen lg:h-100 md:w-screen md:h-100 sm:w-screen sm:h-75 w-screen h-50">
                 {state.colors.length === 0 ? (
                   <div
                     className="lg:text-6xl md:text-4xl sm:text-lg text-lg font-bold winner-grow"
@@ -272,7 +272,7 @@ const handleButtonStyle = (item) => {
                   ))
                 )}
               </div>
-              <ul className="flex flex-row flex-wrap lg:place-content-center md:place-content-center sm:place-content-center place-content-center lg:w-full md:w-full sm:w-full w-full lg:h-fit md:h-fit sm:h-fit max-h-fit gap-2">
+              <ul className="flex flex-row flex-wrap place-content-center  w-screen h-fit max-h-fit gap-2">
                 {state.buttons.map((button) => (
                   <li key={button} className="">
                     <Button className={`${btnClassName} ${colorClasses[button]}`}
@@ -296,7 +296,7 @@ const handleButtonStyle = (item) => {
             )}
           </section>
           <div className="grid lg:w-screen md:w-screen sm:w-screen lg:h-full md:h-full sm:h-full w-screen h-full">
-            <div className="relative flex  items-center justify-center lg:w-screen lg:h-100 md:w-screen md:h-100 sm:w-screen sm:h-75 w-screen h-75 ">
+            <div className="relative flex  items-center justify-center lg:w-screen lg:h-fit md:w-screen md:h-60 sm:w-screen sm:h-75 w-screen h-70 ">
               {state.winner.length > 0 ? (
                 <div
                   className="lg:text-6xl md:text-4xl sm:text-lg text-lg font-bold winner-grow"
@@ -306,12 +306,12 @@ const handleButtonStyle = (item) => {
                 </div>
               ) : (
                 <section className="flex flex-col place-items-center">
-                  <section className={currentShape?.className}></section>
-                  <div className="text-3xl text-white font-extrabold">{currentShape?.value} </div>
+                  <section className={`flex ${currentShape?.className}`}></section>
+                  <div className="flex place-content-center h-10 w-full text-2xl text-white font-extrabold">{currentShape?.value} </div>
                 </section>
               )}
             </div>
-            <ul className="flex flex-row flex-wrap lg:place-content-center md:place-content-center sm:place-content-center place-content-center lg:w-full md:w-full sm:w-full w-full lg:h-fit md:h-fit sm:h-fit max-h-fit gap-7">
+            <ul className="flex flex-row flex-wrap  place-items-end place-content-center lg:w-full md:w-full sm:w-full w-full lg:h-fit md:h-fit sm:h-fit max-h-fit gap-5">
               {state.buttons.map((button) => (
                 <li key={button.value} className="flex ">
                   <Button className={`${button.className} cursor-pointer`}

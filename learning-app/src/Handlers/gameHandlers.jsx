@@ -53,8 +53,8 @@ export const handleRestartClick = (dispatch,state) => {
 	if(state.getAlphabet) {
 		dispatch({ type: 'restart-Btn', cat:"alphabet", items: state.items, buttons: state.buttons, compLetters: state.compLetters, winner: state.winner})
 	}
-	if(state.getColors){
-		dispatch({type:'restart-Btn', cat:"colors", shapes:state.shapes, buttons: state.buttons, compLetters:state.compLetters, winnner: state.winner})
+	if(state.colorPlay){
+		dispatch({type:'restart-Btn', cat:"colors", colors:state.colors, buttons: state.buttons, compLetters:state.compLetters, winnner: state.winner})
 	}
 	if(state.getShape){
 		dispatch({ type: 'restart-Btn', cat: "shapes", shapes: state.shapes, shapeIndex:state.shapeIndex, buttons: state.buttons,  winnner: state.winner })

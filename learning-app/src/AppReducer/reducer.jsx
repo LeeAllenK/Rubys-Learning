@@ -92,6 +92,7 @@ const shuffledButtons = shuffleArray(SHAPES.map((s) => s.value))
 			}else if(action.cat === 'number-Two'){
 				return{...state, items: numbersTwo, buttons: shuffledNumbersTwo, compLetters: [],winner: ''}
 			}else if(action.cat === 'colors'){
+					console.log('restart')
 				return{...state, colors:COLORS, buttons: shuffledColors, compLetters: [],winner: ''}
 			}else if(action.cat === 'shapes'){
 				return{...state, shapes:SHAPES, button:shuffledButtons, shapeIndex: 0, winner: '',}
