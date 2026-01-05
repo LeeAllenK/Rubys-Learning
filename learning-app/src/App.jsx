@@ -155,7 +155,6 @@ const handleButtonStyle = (item) => {
     else if(state.play) {
       content = (
         <section className="grid grid-rows-1 place-items-center w-screen h-fit ">
-          {/* <section className="flex flex-col lg:w-screen lg:h-full md:w-screen md:h-full sm:w-screen sm:h-full h-full w-screen"> */}
             <section className="flex justify-between w-screen h-fit">
               <Homebtn onHomeClick={() => handleHomeClick(dispatch, state)} />
               {state.items.length === 0 && (
@@ -195,14 +194,12 @@ const handleButtonStyle = (item) => {
               </ul>
             </div>
           </section>
-        // </section>
       );
     }
     // Number play screen
     else if(state.getNumberPlay) {
       content = (
         <section className="flex flex-col place-content-center lg:w-screen md:w-screen sm:w-screen lg:h-fit md:h-fit sm:h-fit h-fit gap-2">
-          {/* <section className="flex flex-col lg:w-screen lg:h-full md:w-screen sm:w-screen h-full w-screen"> */}
             <section className="flex justify-between w-screen h-fit">
               <Homebtn onHomeClick={() => handleHomeClick(dispatch, state)} />
               {state.items.length === 0 && (
@@ -242,7 +239,6 @@ const handleButtonStyle = (item) => {
               </ul>
             </div>
           </section>
-        // </section>
       );
     }else if(state.colorPlay){
       content = (
