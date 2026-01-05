@@ -2,7 +2,7 @@
 
 /* h2 winner */
 @keyframes rainbow-winner-grow{
-  0% { color: green;transform: scale(.5) }
+  0% { color : green;transform: scale(.5) } 
   16% { color: blue; }
   32% { color: indigo; }
   48% { color: violet; }
@@ -253,12 +253,10 @@
   64% { transition: transform 0.2s ease; border-right-color: blue;border-bottom-color: blue}
   80% { transition: transform 0.2s ease;  border-right-color: indigo;border-bottom-color: indigo}
   100% {transition: transform 0.2s ease;border-right-color: violet;border-bottom-color: violet}
-  
 }
 
 .rainbow-border{
   animation: rainbow-border 20s infinite;
- 
 }
 .winner-grow{
   animation:rainbow-winner-grow 3s infinite;
