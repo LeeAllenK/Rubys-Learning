@@ -12,18 +12,18 @@ import {Shape } from './components/Shape-Homepage';
 import { appReducer} from './AppReducer/reducer';
 import { initialState} from './AppReducer/appInitialState';
 
-function App() {
-  const [state, dispatch] = useReducer(appReducer, initialState);
-
-  const currentShape = state.shapes[state.shapeIndex];
-
-const speak = (text) => {
+export const speak = (text ,dispatch) => {
   if(!text) return;
   dispatch({type:"Speak", speaking:true})
   const speech = new SpeechSynthesisUtterance(text);
   speech.lang = 'en-US'; // adjust language if needed
   window.speechSynthesis.speak(speech);
 };
+function App() {
+  const [state, dispatch] = useReducer(appReducer, initialState);
+
+  const currentShape = state.shapes[state.shapeIndex];
+
   // Used a ref to persist the "nextIndex" value across renders and effects.
   const nextIndexRef = useRef(state.items.length);
   // This effect automatically selects letters from the items array.
@@ -47,7 +47,7 @@ const speak = (text) => {
           clearInterval(nextIntervalId);
           dispatch({
             type: 'set-Winner',
-            payload: `Good Job ${state.text || state.textNumber || ''}!`,
+            winner: `Good Job ${state.text || state.textNumber || ''}!`,
           });
         }
       if(state.items.length <= 0 || state.colors.length <= 0){
@@ -57,19 +57,19 @@ const speak = (text) => {
       return () => clearInterval(nextIntervalId);
     }
   }, [state.compLetters, state.items, state.colors, state.text,state.letterValue, state.textNumber, state.play, state.getNumberPlay,state.colorPlay, state.speaking]);
-
-
-useEffect(() => {
-      const nextIndex = state.shapeIndex;
-    if(nextIndex === 5){
-    
-      dispatch({
-        type: 'set-Winner',
-        payload: `Good Job ${state.text || ''}!`,
-      });
-      }
-
-},[state.shapes,state.shapeIndex,state.winner])
+  // Speak the shape
+  useEffect(() => {
+    const shapeValue = state.shapes[state.shapeIndex]?.value;
+    if(!shapeValue) return;
+    speak(`Pick the ${shapeValue} ${state.text}`, dispatch);
+  }, [state.shapeIndex, state.shapes]);
+  // Handle winner
+  useEffect(() => {
+    if(state.shapeIndex !== 5) return;
+    const message = `Good Job ${state.text || ''}!`;
+    dispatch({ type: 'set-Winner', winner: message });
+    speak(message);
+  }, [state.shapeIndex]);
 
   // Effect compares the automatically picked items with the user’s pick.
   useEffect(() => {
@@ -298,12 +298,7 @@ const handleButtonStyle = (item) => {
           <div className="grid lg:w-screen md:w-screen sm:w-screen lg:h-full md:h-full sm:h-full w-screen h-full">
             <div className="relative flex  items-center justify-center lg:w-screen lg:h-fit md:w-screen md:h-60 sm:w-screen sm:h-75 w-screen h-70 ">
               {state.winner.length > 0 ? (
-                <div
-                  className="lg:text-6xl md:text-4xl sm:text-lg text-lg font-bold winner-grow"
-                  style={{ fontFamily: '"DynaPuff", system-ui' }}
-                >
-                  {state.winner}
-                </div>
+                <div className="lg:text-6xl md:text-4xl sm:text-lg text-lg font-bold winner-grow" style={{ fontFamily: '"DynaPuff", system-ui' }}> {state.winner} </div>
               ) : (
                 <section className="flex flex-col place-items-center">
                   <section className={`flex ${currentShape?.className}`}></section>

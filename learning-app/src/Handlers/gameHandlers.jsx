@@ -1,4 +1,4 @@
-
+import {speak} from '../App'
 export const handleShapeChange = () => {
 }
 export const handleClick = (items, dispatch,state) => {
@@ -13,7 +13,11 @@ export const handleShapeGameClick = (button,dispatch,state ) => {
 	const currentShape = state.shapes[state.shapeIndex]?.value;
 	if(button === currentShape){
 		dispatch({type: "compare-Shapes", shapeIndex: state.shapeIndex + 1})
-	}	
+	}else {
+		dispatch({type:"Speak",cat:'shapes', speaking:true})
+		dispatch({type: "compare-Shapes", cat:'error', shapeIndex: state.shapeIndex})
+		speak(`Nope that's a ${button} pick the ${currentShape} ${state.text}`,dispatch)
+	}
 }
 export const handlePlay = (dispatch,state) => {
 	dispatch({ type: 'start-Learning', cat:"alphabet", play: true, items: state.items, buttons: state.buttons})

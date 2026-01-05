@@ -9,8 +9,14 @@ const shuffledButtons = shuffleArray(SHAPES.map((s) => s.value))
 
 	switch(action.type){
 //USED TO UPDATE STATE TO SPEAK 
-		case 'Speak':
-		 return{...state, speak:action.speak}
+		case 'Speak':{
+			if(action.cat === 'shapes'){
+			console.log('speak Error')
+				return{...state,speaking:action.speaking}
+			}else{
+		 		return{...state, speaking:true}
+			}
+		}
 		case "learning-Homepage":{
 			if(action.cat === "alphabet"){
 				return{...state, getAlphabet: action.getAlphabet}
@@ -47,7 +53,7 @@ const shuffledButtons = shuffleArray(SHAPES.map((s) => s.value))
 				getNumberPlay: state.getNumberPlay ? action.getNumberPlay : state.getNumberPlay,
 				colorPlay: state.colorPlay ? !state.colorPlay : state.colorPlay,
 				shapePlay: state.shapePlay ? !state.shapePlay : state.shapePlay,
-				colors: [], compLetters: [], items: [], buttons: [], winner: '', text: '',	textNumber: '', shapeIndex:0}
+				colors: [], compLetters: [],shapes:[], items: [], buttons: [], winner: '', text: '',	textNumber: '', shapeIndex:0}
 		case 'text':
 			if(action.cat === 'alphabet'){
 				return {...state, text: action.text};
@@ -80,10 +86,15 @@ const shuffledButtons = shuffleArray(SHAPES.map((s) => s.value))
 			return {...state, compLetters: [], compare: false, color: 'color-btns'};
 		case 'compare-Letters':
 			return {...state, compLetters: action.compLetters, compare: action.compare, getColor: action.getColor, getBackgroundColor: action.getBackgroundColor};
-		case 'compare-Shapes':
+		case 'compare-Shapes':{
+			if(action.cat === 'error'){
+				return{...state, shapeIndex:action.shapeIndex}
+			}else{
 			return{...state,shapeIndex:action.shapeIndex}
+			}
+		}
 		case 'set-Winner':
-			return {...state, winner: action.payload};
+			return {...state, winner: action.winner};
 		case 'restart-Btn':
 			if(action.cat === 'alphabet'){
 				return{...state, items:  ALPHABET, buttons: shuffledAlphabet, compLetters: [],winner:''}
