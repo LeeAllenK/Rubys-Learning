@@ -12,16 +12,15 @@ import {Shape } from './components/Shape-Homepage';
 import { appReducer} from './AppReducer/reducer';
 import { initialState} from './AppReducer/appInitialState';
 
-export const speak = (text ,dispatch) => {
+export const speak = (text ,dispatch,state) => {
   if(!text) return;
-  dispatch({type:"Speak", speaking:true})
+  dispatch({type:"Speak", speaking:state?.speaking})
   const speech = new SpeechSynthesisUtterance(text);
   speech.lang = 'en-US'; // adjust language if needed
   window.speechSynthesis.speak(speech);
 };
 function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);
-
   const currentShape = state.shapes[state.shapeIndex];
 
   // Used a ref to persist the "nextIndex" value across renders and effects.
@@ -40,7 +39,8 @@ function App() {
         const value = state.items[nextIndexRef.current]?.value || state.colors[nextIndexRef.current]?.value 
       
         if(value) {
-          speak(value);
+          console.log(value)
+          speak(value,dispatch);
           dispatch({ type: 'update-State', letterValue: value, compLetters: [...state.compLetters, value]});
         }
         if(nextIndexRef.current <= 0 ) {
@@ -51,7 +51,7 @@ function App() {
           });
         }
       if(state.items.length <= 0 || state.colors.length <= 0){
-          speak(state.winner)
+          speak(state.winner,dispatch)
         }
       }, 500);
       return () => clearInterval(nextIntervalId);

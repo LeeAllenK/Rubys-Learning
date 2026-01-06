@@ -21,11 +21,7 @@ export function Home({onPlayClick,onBackClick,onChange,value}){
 			<Playbtn onPlayClick={onPlayClick}/>
 					</div>
 		</div>
-<<<<<<< HEAD
-			<ul className='flex md:flex-wrap md:justify-center justify-center flex-wrap md:mt-10 mt-20 lg:text-9xl md:text-6xl text-5xl font-bold m-0 p-0 ' style={{ fontFamily: '"DynaPuff", system-ui' }}>
-=======
 			<ul className='flex place-content-center flex-wrap gap-3 lg:text-9xl md:text-6xl text-4xl font-bold m-0 p-0 ' style={{ fontFamily: '"DynaPuff", system-ui' }}>
->>>>>>> Updates
 				<li  className="m-1 home-A">A</li>
 				<li  className="m-1 home-B">B</li>
 				<li  className="m-1 home-C">C</li>

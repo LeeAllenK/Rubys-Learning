@@ -2,6 +2,7 @@ import {speak} from '../App'
 export const handleShapeChange = () => {
 }
 export const handleClick = (items, dispatch,state) => {
+		console.log('click')
    dispatch({ type: 'compare-Letters', compLetters: [...state.compLetters, items], compare: !state.compare,
     getBtnColor: 'green', getBackgroundColor: 'black' });
  };

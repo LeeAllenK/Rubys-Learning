@@ -14,7 +14,7 @@ const shuffledButtons = shuffleArray(SHAPES.map((s) => s.value))
 			console.log('speak Error')
 				return{...state,speaking:action.speaking}
 			}else{
-		 		return{...state, speaking:true}
+		 		return{...state, speaking:action.speaking}
 			}
 		}
 		case "learning-Homepage":{
@@ -85,6 +85,7 @@ const shuffledButtons = shuffleArray(SHAPES.map((s) => s.value))
 		case 'clear-Comparison':
 			return {...state, compLetters: [], compare: false, color: 'color-btns'};
 		case 'compare-Letters':
+				console.log('compare')
 			return {...state, compLetters: action.compLetters, compare: action.compare, getColor: action.getColor, getBackgroundColor: action.getBackgroundColor};
 		case 'compare-Shapes':{
 			if(action.cat === 'error'){
