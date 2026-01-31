@@ -14,6 +14,7 @@ import { initialState} from './AppReducer/appInitialState';
 
 export const speak = (text ,dispatch,state) => {
   if(!text) return;
+  if(!dispatch) return;
   dispatch({type:"Speak", speaking:state?.speaking})
   const speech = new SpeechSynthesisUtterance(text);
   speech.lang = 'en-US'; // adjust language if needed
@@ -40,7 +41,7 @@ function App() {
       
         if(value) {
           console.log(value)
-          speak(value,dispatch);
+          speak(value,dispatch,state);
           dispatch({ type: 'update-State', letterValue: value, compLetters: [...state.compLetters, value]});
         }
         if(nextIndexRef.current <= 0 ) {
@@ -51,7 +52,7 @@ function App() {
           });
         }
       if(state.items.length <= 0 || state.colors.length <= 0){
-          speak(state.winner,dispatch)
+          speak(state.winner,dispatch,state)
         }
       }, 500);
       return () => clearInterval(nextIntervalId);
@@ -200,7 +201,7 @@ const handleButtonStyle = (item) => {
     else if(state.getNumberPlay) {
       content = (
         <section className="flex flex-col place-content-center lg:w-screen md:w-screen sm:w-screen lg:h-fit md:h-fit sm:h-fit h-fit gap-2">
-            <section className="flex justify-between w-screen h-fit">
+            <section className="flex justify-between w-screen h-fit ">
               <Homebtn onHomeClick={() => handleHomeClick(dispatch, state)} />
               {state.items.length === 0 && (
                 <Restartbtn onRestartClick={() => handleRestartClick(dispatch,state)} />
@@ -220,7 +221,7 @@ const handleButtonStyle = (item) => {
                     <div
                       key={l.value}
                       className="absolute flex justify-center items-center bg-[#74a3c9] 
-                      w-full h-full lg:text-[25em] text-[10em] border-red-500 font-bold ">
+                      w-full h-full lg:text-[18em] text-[10em] border-red-500 font-bold ">
                       {l.value}
                     </div>
                   ))
@@ -229,7 +230,7 @@ const handleButtonStyle = (item) => {
             <ul className="flex flex-row flex-wrap lg:place-content-center md:place-content-center sm:place-content-center place-content-center lg:w-full md:w-full sm:w-full w-full lg:h-fit md:h-fit sm:h-fit max-h-fit gap-2 lg:grid lg:place-items-center md:place-items-center sm:place-items-center place-items-center lg:grid-cols-5 md:grid-cols-5 sm:grid-cols-4 grid-cols-4">
                 {state.buttons.map((items) => (
                   <li key={items}>
-                    <Button className="border-0.5 lg:border-b-8 lg:border-r-8 md:border-b-8 md:border-r-8 border-b-5 border-r-5 lg:rounded  rounded-full border-black bg-[#0000003c] lg:text-5xl md:text-4xl text-4xl font-bold  lg:w-50 lg:h-50 md:w-30 md:h-30 sm:w-50 sm:h-50 w-20 h-20 cursor-pointer active:translate-y-0.5 rainbow-border" 
+                    <Button className="border-0.5 lg:border-b-8 lg:border-r-8 md:border-b-8 md:border-r-8 border-b-5 border-r-5 lg:rounded  rounded-full border-black bg-[#0000003c] lg:text-8xl md:text-4xl text-4xl font-bold lg:w-50 lg:h-50 md:w-30 md:h-30 sm:w-50 sm:h-50 w-20 h-20 cursor-pointer active:translate-y-0.5 rainbow-border" 
                     value={items.toUpperCase()} 
                     onClick={() => handleClick(items,dispatch,state)} 
                     style={handleButtonStyle(items)} disabled={state.compLetters.length < 1 || state.speaking}
@@ -307,6 +308,7 @@ const handleButtonStyle = (item) => {
                 <li key={button.value} className="flex ">
                   <Button className={`${button.className} cursor-pointer`}
                   onClick={() => handleShapeGameClick(button.value, dispatch, state)}
+                  disabled={state.spekaing}
                   />
                 </li>
               ))}
@@ -334,6 +336,8 @@ const handleButtonStyle = (item) => {
           value={state.text}
           onChange={(e) => dispatch({ type: "text", cat: "color", text: e.target.value})}
           speak={speak}
+          dispatch={dispatch}
+          state={state}
         />
       )
     }

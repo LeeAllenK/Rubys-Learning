@@ -34,7 +34,7 @@ export const handleShapePlayClick = (dispatch, state) =>{
 // Event used to go back to home screen
 export const handleHomeClick = (dispatch,state) => {
 	if(state.getNumbers) {
-		dispatch({ type: 'Home', getNumberPlay: false, items: state.items, buttons: state.buttons, textNumber: state.textNumber, compLetters: state.compLetters })
+		dispatch({ type: 'Home', getNumberPlay: !state.getNumberPlay, items: state.items, buttons: state.buttons, textNumber: state.textNumber, compLetters: state.compLetters })
 	}
 	if(state.getAlphabet) {
 		dispatch({ type: 'Home', play: !state.play, compLetters: state.compLetters, items: state.items, buttons: state.buttons,

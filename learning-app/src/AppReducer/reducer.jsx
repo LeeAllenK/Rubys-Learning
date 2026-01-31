@@ -11,9 +11,9 @@ const shuffledButtons = shuffleArray(SHAPES.map((s) => s.value))
 //USED TO UPDATE STATE TO SPEAK 
 		case 'Speak':{
 			if(action.cat === 'shapes'){
-			console.log('speak Error')
 				return{...state,speaking:action.speaking}
 			}else{
+			console.log('speaking now.....')
 		 		return{...state, speaking:action.speaking}
 			}
 		}
